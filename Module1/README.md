@@ -60,14 +60,14 @@
     <td align="center"><strong>Пул-адресов</strong></td>
   </tr>
   <tr>
-    <td align="center">SRV-Net (VLAN 100)</td>
-    <td align="center">192.168.100.0/26</td>
-    <td align="center">192.168.100.1 - 62</td>
+    <td align="center">SRV-Net (VLAN 200)</td>
+    <td align="center">192.168.200.0/26</td>
+    <td align="center">192.168.200.1 - 62</td>
   </tr>
   <tr>
-    <td align="center">CLI-Net (VLAN 200)</td>
-    <td align="center">192.168.200.0/28</td>
-    <td align="center">192.168.200.1 - 14</td>
+    <td align="center">CLI-Net (VLAN 100)</td>
+    <td align="center">192.168.100.0/28</td>
+    <td align="center">192.168.100.1 - 14</td>
   </tr>
   <tr>
     <td align="center">BR-Net</td>
@@ -136,14 +136,14 @@
   <tr>
     <td align="center">vlan200/ens224</td>
     <td align="center">192.168.200.1</td>
-    <td align="center">/26</td>
+    <td align="center">/28</td>
     <td align="center"></td>
     <td align="center">HQ-RTR-CLI</td>
   </tr>
   <tr>
-    <td align="center">vlan200/ens161</td>
+    <td align="center">vlan100/ens161</td>
     <td align="center">192.168.100.1</td>
-    <td align="center">/28</td>
+    <td align="center">/26</td>
     <td align="center"></td>
     <td align="center">HQ-RTR-SRV</td>
   </tr>

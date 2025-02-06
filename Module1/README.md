@@ -3,7 +3,7 @@
 <br/>
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo09.02.06_2025/blob/main/module1/Диаграмма%20без%20названия.jpg?raw=true" alt="Топология" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/asd.jpg" alt="Топология" />
 </p>
 
 ### <p align="center"><strong>Топология</strong></p>

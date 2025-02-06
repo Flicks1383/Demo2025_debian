@@ -201,96 +201,110 @@
 </table>
 <p align="center"><strong>Таблица адресации</strong></p>
 
+</br>
 
-## > Настройка адрессации <
+## <p align="center">> Настройка адрессации <</p>
+
+</br>
+
+### ISP
+- ### **`ISP`** - Настройка в сторону **`провайдера`**
 
 
-**ISP - Настройка в сторону `провайдера`**
+1. **Имя профиля:** задаётся произвольно, для удобства назовём **`INTERNET`**
 
-Создать папку по пути `/etc/net/ifaces/enp6s18`
+2. **Устройство:** ставим интерфейс смотрящий **В ПРОВАЙДЕР**, то есть **`ens192`**  - (В **ПРИМЕРЕ** неправильно!!!)
 
-  ```
-  mkdir /etc/net/ifaces/enp6s18
-  ```
+3. **Конфигурация IPv4:** Оставляем **`Автоматически`** - она же **DHCP/Auto**"
 
-- Далее требуется создать файл: `options`
-  
-  ```
-  touch /etc/net/ifaces/enp6s18/options
-  ```
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/адресация1.png" alt="" />
+</p>
 
-- После чего привести файл `options` к следующему виду:
-```
-DISABLED=no
-TYPE=eth
-BOOTPROTO=dhcp
-CONFIG_IPV4=yes
-```  
 </br>
 
 #
+### ISP
+- ### Настройка интерфейса `ISP` в сторону `HQ-RTR`
 
-**Настройка интерфейса `ISP` в сторону `HQ-RTR`**
-- Создать папку по пути `/etc/net/ifaces/enp6s19`
-  ```
-  mkdir /etc/net/ifaces/enp6s19
-  ```  
-- Далее требуется создать файлы: `options`, `ipv4address`
-  ```
-  touch /etc/net/ifaces/enp6s19/options
-    
-  touch /etc/net/ifaces/enp6s19/ipv4address
-  ```  
-- После чего привести файл `options` к следующему виду:
-```
-DISABLED=no
-TYPE=eth
-BOOTPROTO=static
-CONFIG_IPV4=yes
-```
-- После чего привести файл `ipv4address` к следующему виду:
-```
-172.16.4.1/28
-```
+1. **Имя профиля** задаётся произвольно, для удобства назовём **`ISP_HQ-RTR`**
+
+2. **Устройство:** ставим интерфейс смотрящий **В ОФИС HQ**, то есть **`ens161`**  - (В **ПРИМЕРЕ** неправильно!!!)
+
+3. **Конфигурация IPv4:** Ставим **`ВРУЧНУЮ`** - она же **Manual**"
+
+     + **Адреса:** `172.16.4.1/28`
+
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/примерАдресацияВhq.png" alt="" />
+</p>
+
+</br>
+
 #
+### ISP
+- ### Настройка интерфейса `ISP` в сторону `BR-RTR` 
 
-**Настройка интерфейса `ISP` в сторону `BR-RTR`**
-- Создать папку по пути `/etc/net/ifaces/enp6s20`  
-- Далее требуется создать файлы: `options`, `ipv4address`  
-- После чего привести файл `options` к следующему виду:
-```
-DISABLED=no
-TYPE=eth
-BOOTPROTO=static
-CONFIG_IPV4=yes
-```
-- После чего привести файл `ipv4address` к следующему виду:
-```
-172.16.5.1/28
-```
 
-**Настройка адресации на `HQ-RTR` проиcходит в режиме `configure terminal`** 
-```
-interface ISP  
-  ip address 172.16.4.2/28  
-port te0
-  service-instance toISP
-  encapsulation untagged
-  connect ip interface ISP
-wr mem
-```
+1. **Имя профиля** задаётся произвольно, для удобства назовём **`ISP_BR-RTR`**
+
+2. **Устройство:** ставим интерфейс смотрящий **В ОФИС BR**, то есть **`ens224`**  - (В **ПРИМЕРЕ** неправильно!!!)
+
+3. **Конфигурация IPv4:** Ставим **`ВРУЧНУЮ`** - она же **Manual**"
+
+     + **Адреса:** `172.16.5.1/28`
+
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_BR.png" alt="" />
+</p>
+
+</br>
+
 #
+### HQ-RTR
+- ### Настройка адресации на `HQ-RTR` в сторону `ISP`
 
-**Настройка адресации на `BR-RTR` происходит в режиме `configure terminal`** 
-```
-interface ISP  
-  ip address 172.16.5.2/28  
-port te0
-  service-instance toISP
-  encapsulation untagged
-  connect ip interface ISP
-wr mem
-```
+
+1. **Имя профиля** задаётся произвольно, для удобства назовём **`HQ-RTR_ISP`**
+
+2. **Устройство:** ставим интерфейс смотрящий **В ISP**, то есть **`ens256`**  - (В **ПРИМЕРЕ** неправильно!!!)
+
+3. **Конфигурация IPv4:** Ставим **`ВРУЧНУЮ`** - она же **Manual**"
+
+     + **Адреса:** `172.16.4.2/28`
+     + **Шлюз:** `172.16.4.1`
+     + **Серверы DNS:** `77.88.8.8`
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ_isp.png" alt="" />
+</p>
+
+</br>
+
+
+
+#
+### BR-RTR
+- ### Настройка адресации на `BR-RTR` в сторону `ISP`
+
+
+
+1. **Имя профиля** задаётся произвольно, для удобства назовём **`BR-RTR_ISP`**
+
+2. **Устройство:** ставим интерфейс смотрящий **В ISP**, то есть **`ens224`**  - (В **ПРИМЕРЕ** неправильно!!!)
+
+3. **Конфигурация IPv4:** Ставим **`ВРУЧНУЮ`** - она же **Manual**"
+
+     + **Адреса:** `172.16.5.2/28`
+     + **Шлюз:** `172.16.5.1`
+     + **Серверы DNS:** `77.88.8.8`
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR_ISP.png" alt="" />
+</p>
+
+</br>
+
+
+
 
 </details>
 

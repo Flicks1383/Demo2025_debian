@@ -13,7 +13,7 @@
 
 ## Модули и их решения: 
 
-+ **[⚙️МОДУЛЬ 1]()** 
++ **[⚙️МОДУЛЬ 1](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md)** 
 <details>
   <summary><ins>Содержание</ins></summary> 
   

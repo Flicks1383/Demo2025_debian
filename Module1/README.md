@@ -200,6 +200,98 @@
   </tr>
 </table>
 <p align="center"><strong>Таблица адресации</strong></p>
+
+
+## > Настройка адрессации <
+
+
+**ISP - Настройка в сторону `провайдера`**
+
+Создать папку по пути `/etc/net/ifaces/enp6s18`
+
+  ```
+  mkdir /etc/net/ifaces/enp6s18
+  ```
+
+- Далее требуется создать файл: `options`
+  
+  ```
+  touch /etc/net/ifaces/enp6s18/options
+  ```
+
+- После чего привести файл `options` к следующему виду:
+```
+DISABLED=no
+TYPE=eth
+BOOTPROTO=dhcp
+CONFIG_IPV4=yes
+```  
+</br>
+
+#
+
+**Настройка интерфейса `ISP` в сторону `HQ-RTR`**
+- Создать папку по пути `/etc/net/ifaces/enp6s19`
+  ```
+  mkdir /etc/net/ifaces/enp6s19
+  ```  
+- Далее требуется создать файлы: `options`, `ipv4address`
+  ```
+  touch /etc/net/ifaces/enp6s19/options
+    
+  touch /etc/net/ifaces/enp6s19/ipv4address
+  ```  
+- После чего привести файл `options` к следующему виду:
+```
+DISABLED=no
+TYPE=eth
+BOOTPROTO=static
+CONFIG_IPV4=yes
+```
+- После чего привести файл `ipv4address` к следующему виду:
+```
+172.16.4.1/28
+```
+#
+
+**Настройка интерфейса `ISP` в сторону `BR-RTR`**
+- Создать папку по пути `/etc/net/ifaces/enp6s20`  
+- Далее требуется создать файлы: `options`, `ipv4address`  
+- После чего привести файл `options` к следующему виду:
+```
+DISABLED=no
+TYPE=eth
+BOOTPROTO=static
+CONFIG_IPV4=yes
+```
+- После чего привести файл `ipv4address` к следующему виду:
+```
+172.16.5.1/28
+```
+
+**Настройка адресации на `HQ-RTR` проиcходит в режиме `configure terminal`** 
+```
+interface ISP  
+  ip address 172.16.4.2/28  
+port te0
+  service-instance toISP
+  encapsulation untagged
+  connect ip interface ISP
+wr mem
+```
+#
+
+**Настройка адресации на `BR-RTR` происходит в режиме `configure terminal`** 
+```
+interface ISP  
+  ip address 172.16.5.2/28  
+port te0
+  service-instance toISP
+  encapsulation untagged
+  connect ip interface ISP
+wr mem
+```
+
 </details>
 
 <br/>

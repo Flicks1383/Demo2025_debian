@@ -496,6 +496,8 @@ Authorized access only
 
 # > Конфигурация GRE туннеля <
 
+</br>
+
 - ### Настройка производится на **HQ-RTR** и **BR-RTR**
 > Адреса назначаются из одной подсети - **`это важно!`**
 
@@ -521,13 +523,13 @@ Authorized access only
     
   **Конфигурация IPv4: `Manual/Вручную`**
    
-  **10.** задаём `адрес IPv4` для туннеля **`10.10.0.1/30`**
+  **10.** задаём `адрес IPv4` для туннеля **`172.16.0.1/30`**
   
   ❗ ❗ ❗ **Для корректной работы протокола динамической маршрутизации требуется увеличить параметр `TTL` на интерфейсе туннеля**:
 
       nmcli connection modify tun1 ip-tunnel.ttl 64
       
-      systemctl restart networking
+      systemctl restart networking **или** NetworkManager
       
 <p align="center">
   <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/iptunnel.gif" alt="" />
@@ -557,13 +559,13 @@ Authorized access only
     
   **Конфигурация IPv4: `Manual/Вручную`**
    
-  **10.** задаём `адрес IPv4` для туннеля **`10.10.0.2/30`**
+  **10.** задаём `адрес IPv4` для туннеля **`172.16.0.2/30`**
   
   ❗ ❗ ❗ **Для корректной работы протокола динамической маршрутизации требуется увеличить параметр `TTL` на интерфейсе туннеля**:
 
       nmcli connection modify tun1 ip-tunnel.ttl 64
       
-      systemctl restart networking
+      systemctl restart networking **или** NetworkManager
       
 </details>
 
@@ -586,21 +588,108 @@ Authorized access only
 
 # > Настройка динамической маршрутизации <
 
-<br/>
 
-## Устанавливаем утилиту `frr` - аналог **cisco**. После чего переходим в настройку параметров командой `vtysh`, входим в режим конфигурации и прописываем по порядку команды:
-- Настройка для HQ-RTR:
+### Настройка производится HQ-RTR и BR-RTR:
+
+</br>
+
+### HQ-RTR
+
+**1.** Устанавливаем пакет `FRR`
+
 ```
+sudo apt install -y frr
+```
+
+**2.** В конфигурационном файле `/etc/frr/daemons` необходимо активировать выбранный протокол `OSPF` для дальнейшей реализации его настройки:
+
+```
+nano /etc/frr/daemons
+
+!!! Ищем следующую строку и меняем с (no) на (yes)
+ospfd = yes
+
+```
+
+**3.** Далее включаем и добавляем в автозагрузку службу **`FRR`**
+
+```
+systemctl enable --now frr
+```
+
+**4.** Переходим в интерфейс управления симуляцией **`FRR`** командой:
+```
+vtysh
+```
+
+**5.** Пишем команды для настройки **маршрутизации:**
+ 
+```
+conf t
 router ospf 1
+  passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
-  network 172.16.4.0/28 area 0
-  network 192.168.100.0/26 area 1
-  network 192.168.200.0/28 area 2
-  passive-interface default
-  no passive-interface tunnel.0
+  network 192.168.100.0/26 area 0
+  network 192.168.200.0/28 area 0
+  area 0 authentication
+exit
+
+int tun1
+  no ip ospf network broadcast
+  no ip ospf passive
+  ip ospf authentication
+  ip ospf authentication-key password
+(config-if)exit
+(config)exit
+#write
 ```
-- Настройка для **BR-RTR** идентичная, изеняется только **`router-id`**, **`area 3`**
+
+### BR-RTR
+
+**1. - 4.** пункты такие же как и в HQ-RTR
+
+**5.** Пишем команды для настройки **маршрутизации:**
+
+**Меняется:** 
+
+- `id-router: 2.2.2.2`
+
+- `network 192.168.0.0/27 area 0`
+
+- `network 172.0.0.0/30 area 0`
+
+```
+conf t
+router ospf 1
+  passive-interface default
+  router-id 2.2.2.2
+  network 192.168.0.0/27 area 0
+  network 172.0.0.0/30 area 0
+  area 0 authentication
+exit
+
+int tun1
+  no ip ospf network broadcast
+  no ip ospf passive
+  ip ospf authentication
+  ip ospf authentication-key password
+(config-if)exit
+(config)exit
+#write
+```
+
+### ПРОВЕРКА
+
+Пингуем: **`BR-SRV - > HQ-SRV`** и **`BR-SRV - > HQ-CLI`**
+
+Проверка в **FRR**:
+
+```
+vtysh
+  show ip ospf neighbor
+  show ip route ospf
+```
 
 </details>
 

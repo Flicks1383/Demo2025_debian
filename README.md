@@ -70,7 +70,10 @@
 
 ## Решения проблем
 
-- ### Не пингуются машины между разными **подсетями** / при исп. systemctl restart networking выдаёт ошибку
+</br>
+
+- Не пингуются машины между разными **подсетями** / при исп. **systemctl restart networking** выдаёт ошибку
+
 <details>
   <summary><ins><strong>[Решение]</strong></ins></summary> 
   </br>

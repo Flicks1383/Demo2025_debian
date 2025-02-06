@@ -313,3 +313,52 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 </details>
 
 <br/>
+
+## ✔️ Задание 5
+
+### Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV
+
+- Для подключения используйте порт 2024
+- Разрешите подключения только пользователю sshuser
+- Ограничьте количество попыток входа до двух
+- Настройте баннер «Authorized access only»
+
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+# > Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV <
+
+#
+
+## Для настройки SSH необходимо его установить коммандой 
+`apt-get install ssh-server`
+
+#
+
+- После чего необходимо добавить строчки в файл `/etc/openssh/sshd_config`
+```
+Port 2024
+MaxAuthTries 2
+PasswordAuthentication yes
+Banner /etc/openssh/bannermotd
+AllowUsers  sshuser
+           ^ - это TAB
+```
+- После чего требуется создать файл `/etc/openssh/bannermotd`
+```
+----------------------
+Authorized access only
+----------------------
+```
+- Далее необходимо перезапустить SSH коммандой
+  
+`systemctl restart sshd`
+
+#
+
+</details>
+
+<br/>

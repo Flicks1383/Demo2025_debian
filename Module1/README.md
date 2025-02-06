@@ -451,15 +451,14 @@ router ospf 1
 
 <br/>
 
-## ✔️ Задание 8
+## ❌/✔️ Задание 8
 
 ### Настройка динамической трансляции адресов
 
 > [!NOTE]
 > Пул адрессов можно посмотреть в таблице <strong>[Задания 1](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module1#задание-1)</strong> или же отталкиваться от вашей адрессации.
 
-- Настройте динамическую трансляцию адресов для обоих офисов.
-
+- Настройте динамическую трансляцию адресов для обоих офисов.  
 - Все устройства в офисах должны иметь доступ к сети Интернет
 
 <br/>
@@ -472,48 +471,20 @@ router ospf 1
 
 <br/>
 
-> ### Настройка на `ISP выполнена` в [Задании 2](https://github.com/Flicks1383/Demo09.02.06_2025/tree/main/module1#%EF%B8%8F-задание-2)
+> ### Настройка на `ISP выполнена` в [Задании 2](https://github.com/Flicks1383/Demo09.02.06_2025/tree/main/module1#задание-2)
 
 <br/>
 
 - Настройка на **`HQ-RTR`** выглядит следующим образом:
 
-```
-int te1
-  ip nat inside
-!
-int te2
-  ip nat inside
-!
-int ISP
-  ip nat outside
-!
-ip nat pool NAT_POOL 192.168.100.1-192.168.100.62,192.168.200.1-192.168.200.14
-!
-ip nat source dynamic inside-to-outside pool NAT_POOL overload interface te0
-```
-> `int te0`  - Порт от которого приходит инет
-> 
-> `int te1` - Порт которому идёт инет
->
-> **`int te2`**
-
 </br>
 
 - Настройка на **`BR-RTR`** выглядит следующим образом:
 
-```
- int te1
-  ip nat inside
-!
-int te0
-  ip nat outside
-!
-ip nat pool NAT_POOL 192.168.0.1-192.168.0.30
-!
-ip nat source dynamic inside-to-outside pool NAT_POOL overload interface int0
-```  
 > **`ОБЯЗАТЕЛЬНО`** смотрите на адреса пула и вашей сети, если пул адресов методички отличается от вашей, то делайте на основе вашей адресации сети!!!
+
+----------**В процессе**----------
+
 </br>
 
 </details>

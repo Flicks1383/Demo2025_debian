@@ -176,14 +176,14 @@
   <tr>
     <td align="center">BR-SRV</td>
     <td align="center">ens224</td>
-    <td align="center">192.168.0.30</td>
+    <td align="center">192.168.0.2</td>
     <td align="center">/27</td>
     <td align="center">192.168.0.1</td>
     <td align="center">BR-RTR-SRV</td>
   </tr>
   <tr>
     <td align="center">HQ-CLI</td>
-    <td align="center">enp6s##</td>
+    <td align="center">ens224</td>
     <td align="center">192.168.200.##(DHCP)</td>
     <td align="center">/28</td>
     <td align="center">192.168.200.1</td>

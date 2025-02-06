@@ -184,7 +184,7 @@
   <tr>
     <td align="center">HQ-CLI</td>
     <td align="center">enp6s##</td>
-    <td align="center">192.168.200.14</td>
+    <td align="center">192.168.200.##(DHCP)</td>
     <td align="center">/28</td>
     <td align="center">192.168.200.1</td>
     <td align="center">HQ-RTR-CLI</td>

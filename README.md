@@ -1,13 +1,10 @@
-# <div align="center"><strong>Демонстрационный экзамен (Debian+EcoRouter)</strong></div>
+# <div align="center"><strong>Демонстрационный экзамен (Debian)</strong></div>
 ### <div align="center"><strong>Описание</strong> </div>
 <div align="center">Инструкция для написания демонстрационного экзамена 2025 года для специальности</div> <div align="center"><strong>СЕТЕВОЕ И СИСТЕМНОЕ АДМИНИСТРИРОВАНИЕ 09.02.06</strong></div>
 </br>
 
 >[!WARNING]
 >Убедительная просьба, перед тем как начинать настраивать машины, **ДЕЛАЙТЕ СНАПШОТИКИ**, для отката после каждого выполненного задания !!!
-
->[!WARNING]
->Так же не забывайте про **`wr mem`** на **EcoRouter**!!!
 
 
 </br>

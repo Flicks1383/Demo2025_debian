@@ -290,3 +290,50 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 </details>
 
 <br/>
+
+## ❌/✔️ Задание 4
+
+### Настройте на интерфейсе HQ-RTR в сторону офиса HQ виртуальный коммутатор
+
+- Сервер HQ-SRV должен находиться в ID VLAN 100
+- Клиент HQ-CLI в ID VLAN 200
+- Создайте подсеть управления с ID VLAN 999
+- Основные сведения о настройке коммутатора и выбора реализации разделения на VLAN занесите в отчёт
+
+<br/>
+
+<details>
+<summary>[В процессе]</summary>
+<br/>
+
+### Конфигурация VLAN на HQ-RTR
+
+Создание интерфейсов и привязка с физ.портом на **`HQ-RTR`**
+```
+interface CLI
+  ip address 192.168.200.1/28
+!
+port te1
+  service-instance toCLI
+  encapsulation dot1Q 200
+  rewrite pop 1
+  connect ip interface CLI
+!
+interface SRV
+  ip address 192.168.100.1/26
+!
+port te1
+  service-instance toSRV
+  encapsulation dot1Q 100
+  rewrite pop 1
+  connect ip interface SRV
+wr mem
+```
+>`wr mem` - сохранение конфигурации роутера после изменения настроек
+
+
+----------**В процессе**----------
+
+</details>
+
+<br/>

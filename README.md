@@ -39,6 +39,8 @@
     
   </details>
 
+</br>
+
 + **[⚙️МОДУЛЬ 2]()**
 <details>
   <summary><ins>Содержание</ins></summary>

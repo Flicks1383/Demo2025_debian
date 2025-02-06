@@ -134,15 +134,15 @@
     <td align="center">ISP-HQ-RTR</td>
   </tr>
   <tr>
-    <td align="center">vlan100/int1</td>
-    <td align="center">192.168.100.1</td>
+    <td align="center">vlan200/ens224</td>
+    <td align="center">192.168.200.1</td>
     <td align="center">/26</td>
     <td align="center"></td>
     <td align="center">HQ-RTR-CLI</td>
   </tr>
   <tr>
-    <td align="center">vlan200/ens224</td>
-    <td align="center">192.168.200.1</td>
+    <td align="center">vlan200/ens161</td>
+    <td align="center">192.168.100.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
     <td align="center">HQ-RTR-SRV</td>

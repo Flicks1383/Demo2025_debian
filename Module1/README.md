@@ -335,11 +335,11 @@
 
 ```
 echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
-apt-get install iptables –y   
+apt-get install iptables iptables-persistent –y  
 iptables –t nat –A POSTROUTING –s 172.16.4.0/28 –o ens192 –j MASQUERADE  
-iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE  
-iptables-save > /etc/sysconfig/iptables  
-systemctl restart iptables  
+iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE
+netfilter-persistent save
+systemctl restart netfilter-persistent  
 ```
 
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети

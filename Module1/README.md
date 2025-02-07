@@ -695,7 +695,7 @@ vtysh
 
 <br/>
 
-## ❌/✔️ Задание 8
+## ❌ Задание 8
 
 ### Настройка динамической трансляции адресов
 
@@ -734,3 +734,276 @@ vtysh
 </details>
 
 </br>
+
+## ❌ Задание 9
+
+### Настройка протокола динамической конфигурации хостов
+
+- Настройте нужную подсеть  
+- Для офиса HQ в качестве сервера DHCP выступает маршрутизатор HQ-RTR.  
+- Клиентом является машина HQ-CLI.  
+- Исключите из выдачи адрес маршрутизатора  
+- Адрес шлюза по умолчанию – адрес маршрутизатора HQ-RTR.  
+- Адрес DNS-сервера для машины HQ-CLI – адрес сервера HQ-SRV.  
+- DNS-суффикс для офисов HQ – au-team.irpo  
+- Сведения о настройке протокола занесите в отчёт
+
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+# > Настройка динамической конфигурации хостов <
+
+<br/>
+
+<br/>
+
+Настраиваем сам **DHCP-сервер**:  
+----------**В процессе**----------
+
+<br/>
+
+</details>
+
+</br>
+
+## ✔️ Задание 10
+
+### Настройка DNS для офисов HQ и BR  
+- Основной DNS-сервер реализован на HQ-SRV.  
+- Сервер должен обеспечивать разрешение имён в сетевые адреса устройств и обратно в соответствии с таблицей 2  
+- В качестве DNS сервера пересылки используйте любой общедоступный DNS сервер  
+
+<br/>
+
+<table align="center">
+  <tr>
+    <td align="center">Устройство</td>
+    <td align="center">Запись</td>
+    <td align="center">Тип</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-RTR</td>
+    <td align="center">hq-rtr.au-team.irpo</td>
+    <td align="center">A,PTR</td>
+  </tr>
+  <tr>
+    <td align="center">BR-RTR</td>
+    <td align="center">br-rtr.au-team.irpo</td>
+    <td align="center">A</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-SRV</td>
+    <td align="center">hq-srv.au-team.irpo</td>
+    <td align="center">A,PTR</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-CLI</td>
+    <td align="center">hq-cli.au-team.irpo</td>
+    <td align="center">A,PTR</td>
+  </tr>
+  <tr>
+    <td align="center">BR-SRV</td>
+    <td align="center">br-srv.au-team.irpo</td>
+    <td align="center">A</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-RTR</td>
+    <td align="center">moodle.au-team.irpo</td>
+    <td align="center">CNAME</td>
+  </tr>
+  <tr>
+    <td align="center">BR-RTR</td>
+    <td align="center">wiki.au-team.irpo</td>
+    <td align="center">CNAME</td>
+  </tr>
+</table>
+
+<p align="center"><strong>Таблица 2</strong></p>
+
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+
+  <br/>
+
+# > Настройка DNS <
+## Основной DNS-сервер реализован на HQ-SRV
+### Для работы с DNS требуется установить "bind" командой `apt-get install bind9`  
+- Далее необходимо сконфигурировать файл `/etc/bind/options.conf` таким образом:
+```
+listen-on { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
+forwarders { 77.88.8.8; };
+recursion yes;
+allow-query { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
+allow-query-cache { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
+allow-recursion { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
+```  
+- Конфигурация ключей rndc: `rndc-confgen > /etc/rndckey`  
+- После чего требуется привести файл `/etc/bind/rndc.key` к следующему виду:
+```
+//key "rndc-key" {
+//  secret "@RNDC_KEY@";
+//};
+key "rndc-key" {
+  algorithm hmac-sha256;
+  secret "VTmhjyXFDo0QpaBl3UQWx1e0g9HElS2MiFDtNQzDylo=";
+};
+```
+- После чего, для проверки, можно использовать комманду `named-checkconf`  
+- Далее необходимо запустить утилиту коммандой `systemctl enable --now bind`  
+- Далее требуется изменить конфигурацию файла `resolv.conf`  
+```
+search au-team.irpo
+nameserver 127.0.0.1
+nameserver 192.168.100.62
+nameserver 77.88.8.8
+search yandex.ru
+```
+- После чего требуется прописать в `/etc/bind/local/conf`:
+```
+zone "au-team.irpo" {
+  type master;
+  file "au-team.irpo.db";
+};
+```
+- Командой `cp /etc/bind/zone/localdomain /etc/bind/zone/au-team.irpo.db` создается копия файла  
+Которому присваиваются права: 
+```
+chown named. /etc/bind/zone/au-team.irpo.db
+chmod 600 /etc/bind/zone/au-team.irpo.db
+```
+- После чего приводим файл к следующему виду:
+```
+$TTL    1D
+@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+                                2024102200      ; serial
+                                12H             ; refresh
+                                1H              ; retry
+                                1W              ; expire
+                                1H              ; ncache
+                        )
+        IN      NS      au-team.irpo.
+        IN      A       192.168.100.62
+hq-rtr  IN      A       192.168.100.1
+br-rtr  IN      A       192.168.0.1
+hq-srv  IN      A       192.168.100.62
+hq-cli  IN      A       192.168.200.14
+br-srv  IN      A       192.168.0.30
+moodle  IN      CNAME   hq-rtr
+wiki    IN      CNAME   hq-rtr
+```
+- Далее файл `/etc/bind/local.conf` приводим к следующему виду:
+```
+zone "100.168.192.in-addr.arpa" {
+  type master;
+  file "100.168.192.in-addr.arpa";
+};
+
+zone "200.168.192.in-addr.arpa" {
+  type master;
+  file "200.168.192.in-addr.arpa";
+};
+
+zone "0.168.192.in-addr.arpa" {
+  type master;
+  file "0.168.192.in-addr.arpa";
+};
+```
+- После чего создаем файлы командами
+```
+cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/100.168.192.in-addr.arpa
+cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/200.168.192.in-addr.arpa
+cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/0.168.192.in-addr.arpa
+```
+- После этого задаем права файлам командами:
+```
+chown named. /etc/bind/zone/100.168.192.in-addr.arpa
+chmod 600 /etc/bind/zone/100.168.192.in-addr.arpa
+chown named. /etc/bind/zone/200.168.192.in-addr.arpa
+chmod 600 /etc/bind/zone/200.168.192.in-addr.arpa
+chown named. /etc/bind/zone/0.168.192.in-addr.arpa
+chmod 600 /etc/bind/zone/0.168.192.in-addr.arpa
+```
+- После изменений файл `100.168.192.in-addr.arpa` выглядит так:
+```
+$TTL    1D
+@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+                                2024102200      ; Serial
+                                12H             ; Refresh
+                                1H              ; Retry
+                                1W              ; Expire
+                                1H              ; Ncache
+                        )
+        IN      NS      localhost.
+1       IN      PTR     hq-rtr.au-team.irpo.
+62      IN      PTR     hq-srv.au-team.irpo.
+```
+- После изменений файл `200.168.192.in-addr.arpa` выглядит так:
+```
+$TTL    1D
+@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+                                2024102200      ; Serial
+                                12H             ; Refresh
+                                1H              ; Retry
+                                1W              ; Expire
+                                1H              ; Ncache
+                        )
+        IN      NS      localhost.
+14      IN      PTR     hq-cli.au-team.irpo.
+```
+- После изменений файл `0.168.192.in-addr.arpa` выглядит так:
+```
+$TTL    1D
+@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+                                2024102200      ; Serial
+                                12H             ; Refresh
+                                1H              ; Retry
+                                1W              ; Expire
+                                1H              ; Ncache
+                        )
+        IN      NS      localhost.
+1       IN      PTR     br-rtr.au-team.irpo.
+30      IN      PTR     br-srv.au-team.irpo.
+```
+Все пробелы выше ^ ставятся TAB'ом
+- После чего можно проверить ошибки командой
+```
+named-checkconf -z
+```
+- А также перезапускаем `bind` командой
+```
+systemctl restart bind
+```
+- Проверить работоспособность можно командой
+```
+nslookup **IP-адрес/DNS-имя**
+```
+</details>
+
+<br/>
+
+## ✔️ Задание 11
+
+### Настройте часовой пояс на всех устройствах, согласно месту проведения экзамена
+
+<br/>
+
+<details>
+<summary>[Решение]</summary>
+<br/>
+
+# > Настройте часовой пояс на всех устройствах <
+- На Linux настраивается часовой пояс командой
+```
+timedatectl set-timezone Asia/Tomsk
+```  
+- На EcoRouter настраивается часовой пояс командой
+```
+ntp timezone utc+7
+```
+
+</details>

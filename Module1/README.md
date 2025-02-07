@@ -379,7 +379,8 @@ systemctl restart netfilter-persistent
 - ### Создание учёток на Linux `КРОМЕ ISP`:
 ```
 useradd sshuser -u 1010
-passwd P@ssw0rd
+passwd sshuser
+P@ssw0rd
 ```
 
 Добавляем в группу **wheel**:

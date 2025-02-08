@@ -466,16 +466,16 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 #
 
 ## Для настройки SSH необходимо его установить коммандой 
-`apt-get install ssh-server`
+`apt-get install openssh-server`
 
 #
 
-- После чего необходимо добавить строчки в файл `/etc/openssh/sshd_config`
+- После чего необходимо добавить строчки в файл `/etc/ssh/sshd_config`
 ```
 Port 2024
 MaxAuthTries 2
 PasswordAuthentication yes
-Banner /etc/openssh/bannermotd
+Banner /etc/ssh/bannermotd
 AllowUsers  sshuser
            ^ - это TAB
 ```

@@ -342,6 +342,25 @@ netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
 
+### Настройка динамической сетевой трансляции на `HQ-RTR`
+
+```
+apt-get install iptables iptables-persistent –y
+iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens256 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens256 –j MASQUERADE
+netfilter-persistent save
+systemctl restart netfilter-persistent  
+```
+
+### Настройка динамической сетевой трансляции на `BR-RTR`
+
+```
+apt-get install iptables iptables-persistent –y
+iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens224 –j MASQUERADE
+netfilter-persistent save
+systemctl restart netfilter-persistent  
+```
+
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети
 
 #

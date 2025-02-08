@@ -650,8 +650,8 @@ router ospf 1
   passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
-  network 192.168.100.0/26 area 0
-  network 192.168.200.0/28 area 0
+  network 192.168.100.0/26 area 1
+  network 192.168.200.0/28 area 2
   area 0 authentication
 exit
 
@@ -675,7 +675,7 @@ int tun1
 
 - `id-router: 2.2.2.2`
 
-- `network 192.168.0.0/27 area 0`
+- `network 192.168.0.0/27 area 3`
 
 - `network 172.16.0.0/30 area 0`
 

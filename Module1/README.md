@@ -893,7 +893,7 @@ zone "au-team.irpo" {
   file "au-team.irpo.db";
 };
 ```
-- Командой `cp /etc/bind/zone/localdomain /etc/bind/zone/au-team.irpo.db` создается копия файла  
+- Командой `cp /etc/bind/zone/localdomain /etc/bind/au-team.irpo.db` создается копия файла  
 Которому присваиваются права: 
 ```
 chown named. /etc/bind/zone/au-team.irpo.db

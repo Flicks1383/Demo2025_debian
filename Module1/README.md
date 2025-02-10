@@ -342,25 +342,6 @@ netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
 
-### Настройка динамической сетевой трансляции на `HQ-RTR`
-
-```
-apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens256 –j MASQUERADE
-iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens256 –j MASQUERADE
-netfilter-persistent save
-systemctl restart netfilter-persistent  
-```
-
-### Настройка динамической сетевой трансляции на `BR-RTR`
-
-```
-apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens224 –j MASQUERADE
-netfilter-persistent save
-systemctl restart netfilter-persistent  
-```
-
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети
 
 #
@@ -715,7 +696,7 @@ vtysh
 
 <br/>
 
-## ❌ Задание 8
+## ✔️ Задание 8
 
 ### Настройка динамической трансляции адресов
 
@@ -737,17 +718,22 @@ vtysh
 
 > ### Настройка на `ISP выполнена` в [Задании 2](https://github.com/Flicks1383/Demo09.02.06_2025/tree/main/module1#задание-2)
 
-<br/>
+### Настройка динамической сетевой трансляции на `HQ-RTR`
+```
+apt-get install iptables iptables-persistent –y
+iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens256 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens256 –j MASQUERADE
+netfilter-persistent save
+systemctl restart netfilter-persistent  
+```
+### Настройка динамической сетевой трансляции на `BR-RTR`
 
-- Настройка на **`HQ-RTR`** выглядит следующим образом:
-
-</br>
-
-- Настройка на **`BR-RTR`** выглядит следующим образом:
-
-> **`ОБЯЗАТЕЛЬНО`** смотрите на адреса пула и вашей сети, если пул адресов методички отличается от вашей, то делайте на основе вашей адресации сети!!!
-
-----------**В процессе**----------
+```
+apt-get install iptables iptables-persistent –y
+iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens224 –j MASQUERADE
+netfilter-persistent save
+systemctl restart netfilter-persistent  
+```
 
 </br>
 

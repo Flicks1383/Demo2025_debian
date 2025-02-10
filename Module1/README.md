@@ -855,8 +855,8 @@ INTERFACESv4="ens224"
 
 # > Настройка DNS <
 ## Основной DNS-сервер реализован на HQ-SRV
-### Для работы с DNS требуется установить "bind" командой `apt-get install bind9`  
-- Далее необходимо сконфигурировать файл `/etc/bind/options.conf` таким образом:
+### Для работы с DNS требуется установить "bind" и доп. пакет командой `apt-get install bind9 bind9-utils`  
+- Далее необходимо сконфигурировать файл `/etc/bind/named.conf.option` таким образом:
 ```
 listen-on { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 forwarders { 77.88.8.8; };
@@ -878,7 +878,7 @@ key "rndc-key" {
 ```
 - После чего, для проверки, можно использовать комманду `named-checkconf`  
 - Далее необходимо запустить утилиту коммандой `systemctl enable --now bind`  
-- Далее требуется изменить конфигурацию файла `resolv.conf`  
+- Далее требуется изменить конфигурацию файла `/etc/resolv.conf`  
 ```
 search au-team.irpo
 nameserver 127.0.0.1
@@ -915,7 +915,7 @@ hq-rtr  IN      A       192.168.100.1
 br-rtr  IN      A       192.168.0.1
 hq-srv  IN      A       192.168.100.62
 hq-cli  IN      A       192.168.200.14
-br-srv  IN      A       192.168.0.30
+br-srv  IN      A       192.168.0.2
 moodle  IN      CNAME   hq-rtr
 wiki    IN      CNAME   hq-rtr
 ```
@@ -990,7 +990,7 @@ $TTL    1D
                         )
         IN      NS      localhost.
 1       IN      PTR     br-rtr.au-team.irpo.
-30      IN      PTR     br-srv.au-team.irpo.
+2       IN      PTR     br-srv.au-team.irpo.
 ```
 Все пробелы выше ^ ставятся TAB'ом
 - После чего можно проверить ошибки командой

@@ -886,7 +886,7 @@ nameserver 192.168.100.62
 nameserver 77.88.8.8
 search yandex.ru
 ```
-- После чего требуется прописать в `/etc/bind/local/conf`:
+- После чего требуется прописать в `/etc/bind/named.conf.local`:
 ```
 zone "au-team.irpo" {
   type master;
@@ -919,7 +919,7 @@ br-srv  IN      A       192.168.0.2
 moodle  IN      CNAME   hq-rtr
 wiki    IN      CNAME   hq-rtr
 ```
-- Далее файл `/etc/bind/local.conf` приводим к следующему виду:
+- Далее файл `/etc/bind/named.conf.local` приводим к следующему виду:
 ```
 zone "100.168.192.in-addr.arpa" {
   type master;

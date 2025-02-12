@@ -324,7 +324,7 @@ mount -a
 
 **1.** Устанавливаем `chrony` на **HQ-RTR** командой:
 ```
-sudo apt update
+sudo apt install chrony
 ```
 </br>
 

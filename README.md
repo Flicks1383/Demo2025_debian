@@ -23,7 +23,7 @@
   
   3. **[Создание _ЛОКАЛЬНЫХ_ учетных записей](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-3)**
   
-  4. **[Настройте на интерфейсе _HQ-RTR_ в сторону офиса _HQ_ виртуальный коммутатор](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)**
+  4. **[Настройте на интерфейсе _HQ-RTR_ в сторону офиса _HQ_ виртуальный коммутатор](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)** (В процессе)
    
   5. **[Настройка безопасного удаленного доступа на серверах _HQ-SRV_ и _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5)**
   

@@ -643,8 +643,8 @@ router ospf
   passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
-  network 192.168.100.0/26 area 1
-  network 192.168.200.0/28 area 2
+  network 192.168.100.0/28 area 1
+  network 192.168.200.0/26 area 2
   area 0 authentication
 exit
 
@@ -776,13 +776,13 @@ systemctl restart netfilter-persistent
 
 <br/>
 
-Устанавливаем сам **DHCP-сервер**:  
+**1.** Устанавливаем сам **DHCP-сервер**:  
 ```
 apt install isc-dhcp-server
 ```
 <br/>
 
-После чего переходим в конфигурацию файла `/etc/dhcp/dhcpd.conf` и добавляем следующие строчки:
+**2.** После чего переходим в конфигурацию файла `/etc/dhcp/dhcpd.conf` и добавляем следующие строчки:
 ```
 subnet 192.168.200.0 netmask 255.255.255.240 {
   range 192.168.200.2 192.168.200.14;
@@ -793,11 +793,22 @@ subnet 192.168.200.0 netmask 255.255.255.240 {
   max-lease-time 7200;
 }
 ```
-После чего переходим в конфигурацию файла `/etc/default/isc-dhcp-server` и меняем ее добалвяя данный текст:
+<br/>
+
+**3.** После чего переходим в конфигурацию файла `/etc/default/isc-dhcp-server` и меняем ее добалвяя данный текст:
 ```
 INTERFACESv4="ens161" - порт смотрящий в сторону CLI
 ```
-Далее на клиенсткой машине необходимо в настройках адаптера выбрать **DHCP** и проверить работоспособность
+
+<br/>
+
+**4.** Включаем сервиc **`DHCP`** и добавим в автозагрузку на **`HQ-RTR`**:
+```
+systemctl start isc-dhcp-server
+systemctl enable isc-dhcp-server
+```
+
+**5.** Далее на клиенсткой машине необходимо в настройках адаптера выбрать **DHCP** и проверить работоспособность
 <br/>
 
 </details>
@@ -866,9 +877,22 @@ INTERFACESv4="ens161" - порт смотрящий в сторону CLI
   <br/>
 
 # > Настройка DNS <
-## Основной DNS-сервер реализован на HQ-SRV
-### Для работы с DNS требуется установить "bind" и доп. пакет командой `apt-get install bind9 bind9-utils`  
-- Далее необходимо сконфигурировать файл `/etc/bind/named.conf.option` таким образом:
+### Основной DNS-сервер реализован на `HQ-SRV`
+<br/>
+
+### HQ-SRV
+
+ <br/>
+
+**1.** Для работы с **DNS** требуется установить **`bind`** и доп. пакет командой:
+
+```
+apt-get install bind9 bind9-utils
+```
+<br/>
+
+**2.** Далее необходимо сконфигурировать файл **`/etc/bind/named.conf.option`** таким образом:
+
 ```
 listen-on { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 forwarders { 77.88.8.8; };
@@ -876,9 +900,17 @@ recursion yes;
 allow-query { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 allow-query-cache { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 allow-recursion { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
-```  
-- Конфигурация ключей rndc: `rndc-confgen > /etc/rndckey`  
-- После чего требуется привести файл `/etc/bind/rndc.key` к следующему виду:
+```
+  <br/>
+
+**3.** Конфигурация ключей **`rndc`**:
+```
+rndc-confgen > /etc/rndckey 
+```
+</br>
+
+**4.** После чего требуется привести файл **`/etc/bind/rndc.key`** к следующему виду:
+
 ```
 //key "rndc-key" {
 //  secret "@RNDC_KEY@";
@@ -888,9 +920,23 @@ key "rndc-key" {
   secret "VTmhjyXFDo0QpaBl3UQWx1e0g9HElS2MiFDtNQzDylo=";
 };
 ```
-- После чего, для проверки, можно использовать комманду `named-checkconf`  
-- Далее необходимо запустить утилиту коммандой `systemctl enable --now bind`  
-- Далее требуется изменить конфигурацию файла `/etc/resolv.conf`  
+</br>
+
+**❗ Для проверки, можно использовать комманду:** 
+
+```
+named-checkconf
+```
+</br>
+
+**5.** Далее необходимо запустить **утилиту** коммандой:
+```
+systemctl enable --now bind
+```
+</br>
+
+**6.** Далее требуется изменить конфигурацию файла **`/etc/resolv.conf`**:
+
 ```
 search au-team.irpo
 nameserver 127.0.0.1
@@ -898,20 +944,32 @@ nameserver 192.168.100.62
 nameserver 77.88.8.8
 search yandex.ru
 ```
-- После чего требуется прописать в `/etc/bind/named.conf.local`:
+</br>
+
+**7.** После чего требуется прописать в **`/etc/bind/named.conf.local`**:
+
 ```
 zone "au-team.irpo" {
   type master;
   file "au-team.irpo.db";
 };
 ```
-- Командой `cp /etc/bind/zone/localdomain /etc/bind/au-team.irpo.db` создается копия файла  
-Которому присваиваются права: 
+</br>
+
+**8.** Далее следующими командами **создаём копию** файла и присваиваем права:
+
+```
+cp /etc/bind/zone/localdomain /etc/bind/au-team.irpo.db
+```
+
 ```
 chown named. /etc/bind/zone/au-team.irpo.db
 chmod 600 /etc/bind/zone/au-team.irpo.db
 ```
-- После чего приводим файл к следующему виду:
+</br>
+
+**9.** После чего приводим **файл `/etc/bind/zone/au-team.irpo.db`** к следующему виду:
+
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -926,12 +984,15 @@ $TTL    1D
 hq-rtr  IN      A       192.168.100.1
 br-rtr  IN      A       192.168.0.1
 hq-srv  IN      A       192.168.100.62
-hq-cli  IN      A       192.168.200.14
+hq-cli  IN      A       192.168.200.2
 br-srv  IN      A       192.168.0.2
 moodle  IN      CNAME   hq-rtr
 wiki    IN      CNAME   hq-rtr
 ```
-- Далее файл `/etc/bind/named.conf.local` приводим к следующему виду:
+</br>
+
+**10.** Далее файл **`/etc/bind/named.conf.local`** приводим к следующему виду:
+
 ```
 zone "100.168.192.in-addr.arpa" {
   type master;
@@ -948,13 +1009,19 @@ zone "0.168.192.in-addr.arpa" {
   file "0.168.192.in-addr.arpa";
 };
 ```
-- После чего создаем файлы командами
+
+</br>
+
+**11.** После чего **создаем файлы** командами:
 ```
 cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/100.168.192.in-addr.arpa
 cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/200.168.192.in-addr.arpa
 cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/0.168.192.in-addr.arpa
 ```
-- После этого задаем права файлам командами:
+
+</br>
+
+**12.** После этого задаем **права** файлам командами:
 ```
 chown named. /etc/bind/zone/100.168.192.in-addr.arpa
 chmod 600 /etc/bind/zone/100.168.192.in-addr.arpa
@@ -963,7 +1030,10 @@ chmod 600 /etc/bind/zone/200.168.192.in-addr.arpa
 chown named. /etc/bind/zone/0.168.192.in-addr.arpa
 chmod 600 /etc/bind/zone/0.168.192.in-addr.arpa
 ```
-- После изменений файл `100.168.192.in-addr.arpa` выглядит так:
+
+</br>
+
+**13.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -977,7 +1047,10 @@ $TTL    1D
 1       IN      PTR     hq-rtr.au-team.irpo.
 62      IN      PTR     hq-srv.au-team.irpo.
 ```
-- После изменений файл `200.168.192.in-addr.arpa` выглядит так:
+
+</br>
+
+**14.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -990,7 +1063,10 @@ $TTL    1D
         IN      NS      localhost.
 14      IN      PTR     hq-cli.au-team.irpo.
 ```
-- После изменений файл `0.168.192.in-addr.arpa` выглядит так:
+
+</br>
+
+**15.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1004,19 +1080,36 @@ $TTL    1D
 1       IN      PTR     br-rtr.au-team.irpo.
 2       IN      PTR     br-srv.au-team.irpo.
 ```
-Все пробелы выше ^ ставятся TAB'ом
-- После чего можно проверить ошибки командой
+
+### ❗ ❗ ❗ Все пробелы выше ^ ставятся TAB'ом
+
+</br>
+
+**16.** В файле **`/etc/resolv.conf`** необходимо дописать следующую строчку:
+```
+nameserver 192.168.100.62
+```
+</br>
+
+**17.** После чего можно проверить **ошибки** командой:
 ```
 named-checkconf -z
 ```
-- А также перезапускаем `bind` командой
+</br>
+
+**18.** А также перезапускаем **`bind`** командой:
+
 ```
 systemctl restart bind
 ```
-- Проверить работоспособность можно командой
+</br>
+
+**19.** Проверить работоспособность можно **командой**:
 ```
 nslookup **IP-адрес/DNS-имя**
 ```
+</br>
+
 </details>
 
 <br/>

@@ -13,7 +13,7 @@
 
 ## Модули и их решения: 
 
-+ **[⚙️МОДУЛЬ 1](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md)** 
+**[⚙️МОДУЛЬ 1](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md)** 
 <details>
   <summary><ins>Содержание</ins></summary> 
   
@@ -43,7 +43,7 @@
 
 </br>
 
-+ **[⚙️МОДУЛЬ 2](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#модуль-2)**
+**[⚙️МОДУЛЬ 2](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#модуль-2)**
 <details>
   <summary><ins>Содержание</ins></summary>
 

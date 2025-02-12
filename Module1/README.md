@@ -376,7 +376,9 @@ systemctl restart netfilter-persistent
 <summary><strong>[Решение]</strong></summary>
 <br/>
 
-- ### Создание учёток на HQ-SRV и BR-SRV:
+### Создание учёток `sshuser` производится на HQ-SRV и BR-SRV
+
+**1.** Создаём sshuser следующими командами:
 ```
 useradd sshuser -u 1010
 password sshuser
@@ -384,14 +386,23 @@ P@ssw0rd
 ```
 <br/>
 
-Добавляем строку в **`/etc/sudoers`**:
+**2.** Добавляем следующую строку в **`/etc/sudoers`**:
 ```yml
 sshuser ALL=(ALL) NOPASSWD:ALL
 ```
 > Позволяет запускать **sudo** без аутентификации 
 
-- ### Пользователь на *HQ-RTR и BR-RTR*
-  - Добавляется и конфигурируется аналогично, но уже с именем *net_admin* и без `-u 1010`
+<br/>
+
+### Пользователь `net_admin` на *HQ-RTR и BR-RTR*
+
+  1. Создаём **`net_admin`**, следующими командами, но уже без `-u 1010` и с новым паролем
+```
+useradd net_admin
+password net_admin
+P@$$word
+```
+
 <br/>
 
 </details>

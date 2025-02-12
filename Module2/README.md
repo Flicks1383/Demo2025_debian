@@ -405,7 +405,7 @@ chronyc sources
 > ```yml
 > MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
 > =============================================================================
-> ^/ localhost.localdomain  0        8     377    -       +0ns[  +0ns] +/-  0ns
+> ^/ localhost.localdomain     5      8     377     -     +0ns  [+0ns] +/-  0ns
 > ```
 
 <br/>
@@ -424,41 +424,148 @@ chronyc tracking | grep Stratum
 
 </br>
 
-# ✔️/❌ Задание 4
-## Сконфигурируйте ansible на сервере BR-SRV
-- Для начала устранавливаем "Ansible" командой
+## ✔️ Задание 4 - Требуется проверка (Возможно требуется установка Pyt3)
+
+### Сконфигурируйте ansible на сервере BR-SRV
+
+- Сформируйте файл инвентаря, в инвентарь должны входить HQ-SRV, HQ-CLI, HQ-RTR и BR-RTR
+
+- Рабочий каталог ansible должен располагаться в /etc/ansible
+
+- Все указанные машины должны без предупреждений и ошибок отвечать pong на команду ping в ansible посланную с BR-SRV
+
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+## Настройка ansible производится на `BR-SRV`
+
+<br/>
+
+**1.** Для начала устанавливаем "Ansible" командой:
 ```
 apt-get install ansible -y
 ```
-- В файл `/etc/ansible/hosts.yml` требуется поместить все хосты (пока не знаю каким образом(___разобраться___)):
-- Файл `/etc/ansible/inventory.yml` изменить следующим образом:
+
+<br/>
+
+
+**2.** Создаём пары SSH-ключей следующей командой:
+
 ```
-clients:
-  hosts:
-    hq-cli.au-team.irpo:
-servers:
-  hosts:
-    hq-srv.au-team.irpo:
-routers:  
-  hosts:
-    hq-rtr.au-team.irpo:
-    br-rtr.au-team.irpo:  
+ssh-keygen -t rsa
 ```
--  Генерация ключа осуществляется командой:
+- По итогу создания ключей в каталоге пользователя под которым сидим `sshuser` или же `root`, появятся ключи:
+  
+  - `/home/sshuser/.ssh` - Если зашли за **sshuser**
+
+  - `/root/.ssh` - Если зашли за **root**
+
+>Смотрим каталог с ключами:
+>```
+>ls -l ~/.ssh
+>
+>id_rsa  # закрытый ключ
+>id_rsa.pub # открытый ключ
+>
+
+<br/>
+
+**3.** Заходим под пользователя **`sshuser`**:
 ```
-ssh-keygen -C "$(whoami)@$(hostname)-$(date -I)"
+su sshuser
 ```
--  Далее требуется распространить ключи на хосты, используя SSH:
+
+<br/>
+
+**4.** Копируем открытый **`SSH-ключ`** на удаленные устройства под пользователем **`sshuser`**:
+
+- Копируем ключ для пользователя **sshuser** на **`HQ-SRV`**
+  - На HQ-SRV ssh порт изменен, указываем его:
 ```
-ssh-copy-id root@server  
+ssh-copy-id -p 2024 sshuser@192.168.100.62
 ```
-где:
-root - имя пользователя устройства;
-server - IP адрес устройства
--  Проверка производится командой:
+
+<br/>
+
+- Копируем ключ для пользователя **user** на **`HQ-CLI`**
 ```
-ansible test -m ping
+ssh-copy-id user@192.168.200.2
 ```
+
+<br/>
+
+- Копируем ключ для пользователя **net_admin** на **`HQ-RTR`**
+```
+ssh-copy-id net_admin@172.16.4.2
+```
+
+<br/>
+
+- Копируем ключ для пользователя **net_admin** на **`BR-RTR`**
+```
+ssh-copy-id net_admin@172.16.5.2
+```
+
+<br/>
+
+### Готовим файл инвентаря (hosts)
+
+**1.** Создаем файл инвентаря **`/etc/ansible/demo`**
+```
+nano /etc/ansible/demo
+```
+
+<br/>
+
+**2.** Приводим **файл** в следующий вид:
+>```
+>[hq]
+>192.168.200.2 ansible_port=2024 ansible_user=sshuser
+>192.168.100.62 ansible_user=user
+>172.16.4.2 ansible_user=net_admin
+>
+>[br]
+>172.16.5.2 ansible_user=net_admin
+>```
+
+**где:**
+- `ansible_port` - Номер порта ssh, если не 22
+- `ansible_user` - Использовать имя пользователя ssh по умолчанию.
+
+<br/>
+
+### Запуск команд с пользовательским инвентарем (ping-pong)
+
+**1.** Что бы запустить модуль ping на всех хостах, перечисленных файле инвентаря **`/etc/ansible/demo`** пишем следующую команду:
+
+```
+ansible all -i /etc/ansible/demo -m ping
+```
+
+**!!! Может появиться предупреждение про обнаружение интерпретатора Python, на целевом хосте**
+
+<br/>
+
+**2.** Для управления поведением обнаружения в глобальном масштабе необходимо в файле конфигурации **`ansible /etc/ansible/ansible.cfg`** в разделе **`[defaults]`** прописать ключ **`interpreter_python`** с параметром **`auto_silent`**. В большинстве дистрибутивов прописываем вручную.
+```
+nano /etc/ansible/ansible.cfg
+
+[defaults]
+interpreter_python=auto_silent
+```
+<br/>
+
+**3.** Запускаем команду `ping` на всех хостах:
+```
+ansible all -i /etc/ansible/demo -m ping
+```
+<br/>
+
+</details>
+
 # ✔️ Задание 5
 ## Развертывание приложений в Docker на сервере BR-SRV
 - На BR-SRV открываем файл `/home/student/wiki.yml` и приводим к следующему виду:

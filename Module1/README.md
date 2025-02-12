@@ -396,7 +396,7 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 
 ### Пользователь `net_admin` на *HQ-RTR и BR-RTR*
 
-  1. Создаём **`net_admin`**, следующими командами, но уже без `-u 1010` и с новым паролем
+**1.** Создаём **`net_admin`**, следующими командами, но уже без `-u 1010` и с новым паролем:
 ```
 useradd net_admin
 password net_admin

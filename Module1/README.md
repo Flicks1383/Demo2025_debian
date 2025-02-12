@@ -367,7 +367,7 @@ systemctl restart netfilter-persistent
 
   - Пользователь sshuser должен иметь возможность запускать sudo без дополнительной аутентификации.
 
-  - Создайте пользователя net_admin на маршрутизаторах HQ-RTR и BR-RTR
+- Создайте пользователя net_admin на маршрутизаторах HQ-RTR и BR-RTR
 
   - Пароль пользователя net_admin с паролем P@$$word
 

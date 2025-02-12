@@ -25,19 +25,19 @@
   
   4. **[Настройте на интерфейсе _HQ-RTR_ в сторону офиса _HQ_ виртуальный коммутатор](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)**
    
-  5. **[Настройка безопасного удаленного доступа на серверах _HQ-SRV_ и _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-5)**
+  5. **[Настройка безопасного удаленного доступа на серверах _HQ-SRV_ и _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5)**
   
-  6. **[Между офисами _HQ_ и _BR_ необходимо сконфигурировать _IP-туннель_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-6)**
+  6. **[Между офисами _HQ_ и _BR_ необходимо сконфигурировать _IP-туннель_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-6)**
 
-  7. **[Обеспечьте _ДИНАМИЧЕСКУЮ МАРШРУТИЗАЦИЮ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-7)**
+  7. **[Обеспечьте _ДИНАМИЧЕСКУЮ МАРШРУТИЗАЦИЮ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-7)**
 
-  8. **[Настройка _ДИНАМИЧЕСКОЙ ТРАНСЛЯЦИИ АДРЕСОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-8)**
+  8. **[Настройка _ДИНАМИЧЕСКОЙ ТРАНСЛЯЦИИ АДРЕСОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-8)**
 
-  9. **[Настройка _ПРОТОКОЛА ДИНАМИЧЕСКОЙ КОНФИГУРАЦИИ ХОСТОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-9)**
+  9. **[Настройка _ПРОТОКОЛА ДИНАМИЧЕСКОЙ КОНФИГУРАЦИИ ХОСТОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-9)**
 
-  10. **[Настройка _DNS для офисов HQ и BR_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-10)**
+  10. **[Настройка _DNS для офисов HQ и BR_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-10)**
 
-  11. **[Настройте _ЧАСОВОЙ ПОЯС_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-11)**
+  11. **[Настройте _ЧАСОВОЙ ПОЯС_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-11)**
     
   </details>
 

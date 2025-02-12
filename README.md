@@ -17,7 +17,7 @@
 
 **[⚙️МОДУЛЬ 1](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md)** 
 <details>
-  <summary><ins>Содержание</ins></summary> 
+  <summary><strong>[Содержание]</strong></summary> 
   
   1. **[Произведите _базовую настройку_ устройств](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-1)**
   
@@ -47,7 +47,7 @@
 
 **[⚙️МОДУЛЬ 2](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#модуль-2)**
 <details>
-  <summary><ins>Содержание</ins></summary>
+ <summary><strong>[Содержание]</strong></summary> 
 
 1. **[Настройте доменный контроллер _SAMBA_ на машине _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)**
     

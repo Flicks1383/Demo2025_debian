@@ -379,19 +379,9 @@ systemctl restart netfilter-persistent
 - ### Создание учёток на HQ-SRV и BR-SRV:
 ```
 useradd sshuser -u 1010
-passwd sshuser
+password sshuser
 P@ssw0rd
 ```
-
-Добавляем в группу **wheel**:
-```yml
-usermod -aG wheel sshuser
-```
-!!! **Если** такой группы нет и выдаётся ошибка, то создаём группу **wheel** командой:
-```
-groupadd wheel
-```
-
 <br/>
 
 Добавляем строку в **`/etc/sudoers`**:
@@ -423,13 +413,32 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 <summary>[В процессе]</summary>
 <br/>
 
-### Конфигурация VLAN на HQ-RTR
+## Конфигурация VLAN на HQ-RTR
 
 ----------**В процессе**----------
 
-</details>
+### Устанавливаем пакет для работы с `виртуальным свитчем - OVS`:
+```
+apt-get install openvswitch-switch
+```
 
 <br/>
+
+Добавляем свитч в автозагрузку:
+```
+systemctl enable --now openvswitch
+```
+
+<br/>
+
+Создаём мост(виртуальный коммутатор) hq-sw:
+```
+ovs-vsctl add-br hq-sw
+```
+
+</details>
+
+
 
 ## ✔️ Задание 5
 
@@ -464,7 +473,7 @@ Banner /etc/ssh/bannermotd
 AllowUsers  sshuser
            ^ - это TAB
 ```
-- После чего требуется создать файл `/etc/openssh/bannermotd`
+- После чего требуется создать файл `/etc/openssh/bannermotd` и привести его в следующую форму:
 ```
 ----------------------
 Authorized access only
@@ -474,7 +483,6 @@ Authorized access only
   
 `systemctl restart sshd`
 
-#
 
 </details>
 
@@ -631,7 +639,7 @@ vtysh
  
 ```
 conf t
-router ospf 1
+router ospf
   passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
@@ -768,16 +776,16 @@ systemctl restart netfilter-persistent
 
 <br/>
 
-<br/>
-
 Устанавливаем сам **DHCP-сервер**:  
 ```
 apt install isc-dhcp-server
 ```
-После чего переходим в конфигурацию файла `/etc/dhcp/dhcpd.conf` и меняем ее добалвяя данный текст:
+<br/>
+
+После чего переходим в конфигурацию файла `/etc/dhcp/dhcpd.conf` и добавляем следующие строчки:
 ```
-subnet 192.168.100.64 netmask 255.255.255.240 {
-  range 192.168.200.2 192.168.100.14;
+subnet 192.168.200.0 netmask 255.255.255.240 {
+  range 192.168.200.2 192.168.200.14;
   option domain-name-servers 192.168.100.62;
   option domain-name "au-team.irpo";
   option routers 192.168.200.1;
@@ -787,7 +795,7 @@ subnet 192.168.100.64 netmask 255.255.255.240 {
 ```
 После чего переходим в конфигурацию файла `/etc/default/isc-dhcp-server` и меняем ее добалвяя данный текст:
 ```
-INTERFACESv4="ens224"
+INTERFACESv4="ens161" - порт смотрящий в сторону CLI
 ```
 Далее на клиенсткой машине необходимо в настройках адаптера выбрать **DHCP** и проверить работоспособность
 <br/>

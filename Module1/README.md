@@ -376,7 +376,7 @@ systemctl restart netfilter-persistent
 <summary><strong>[Решение]</strong></summary>
 <br/>
 
-- ### Создание учёток на Linux `КРОМЕ ISP`:
+- ### Создание учёток на HQ-SRV и BR-SRV:
 ```
 useradd sshuser -u 1010
 passwd sshuser
@@ -386,6 +386,10 @@ P@ssw0rd
 Добавляем в группу **wheel**:
 ```yml
 usermod -aG wheel sshuser
+```
+!!! **Если** такой группы нет и выдаётся ошибка, то создаём группу **wheel** командой:
+```
+groupadd wheel
 ```
 
 <br/>

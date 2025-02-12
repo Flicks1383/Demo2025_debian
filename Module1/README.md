@@ -410,6 +410,14 @@ P@$$word
 
 <br/>
 
+**2.** Добавляем следующую строку в **`/etc/sudoers`**:
+```yml
+net_admin ALL=(ALL) NOPASSWD:ALL
+```
+> Позволяет запускать **sudo** без аутентификации 
+
+<br/>
+
 </details>
 
 <br/>

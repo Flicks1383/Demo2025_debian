@@ -47,11 +47,11 @@
 <details>
   <summary><ins>Содержание</ins></summary>
 
-1. **[Настройте доменный контроллер _SAMBA_ на машине _BR-SRV_]()**
+1. **[Настройте доменный контроллер _SAMBA_ на машине _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)**
     
 2. **[Сконфигурируйте _ФАЙЛОВОЕ ХРАНИЛИЩЕ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-2)**
 
-3. **[Настройте службу сетевого времени на базе сервиса _CHRONY_]()**
+3. **[Настройте службу сетевого времени на базе сервиса _CHRONY_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3)**
 
 4. **[Сконфигурируйте _ANSIBLE_ на сервере BR-SRV]()**
     

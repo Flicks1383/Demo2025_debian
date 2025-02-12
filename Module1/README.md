@@ -438,7 +438,7 @@ ovs-vsctl add-br hq-sw
 
 </details>
 
-
+<br/>
 
 ## ✔️ Задание 5
 
@@ -455,16 +455,16 @@ ovs-vsctl add-br hq-sw
 <summary><strong>[Решение]</strong></summary>
 <br/>
 
-# > Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV <
+### SSH настраиваем на HQ-SRV и BR-SRV
 
-#
+**1.** Для настройки **SSH** необходимо его установить коммандой:
+```
+apt-get install openssh-server
+```
 
-## Для настройки SSH необходимо его установить коммандой 
-`apt-get install openssh-server`
+</br>
 
-#
-
-- После чего необходимо добавить строчки в файл `/etc/ssh/sshd_config`
+**2.** После чего необходимо добавить строчки в файл **`/etc/ssh/sshd_config`**:
 ```
 Port 2024
 MaxAuthTries 2
@@ -473,15 +473,21 @@ Banner /etc/ssh/bannermotd
 AllowUsers  sshuser
            ^ - это TAB
 ```
-- После чего требуется создать файл `/etc/openssh/bannermotd` и привести его в следующую форму:
+<br/>
+
+**3.** После чего требуется создать файл **`/etc/openssh/bannermotd`** и привести его в следующую форму:
 ```
 ----------------------
 Authorized access only
 ----------------------
 ```
-- Далее необходимо перезапустить SSH коммандой
+</br>
+
+**4.** Далее необходимо перезапустить **`SSH`** коммандой:
   
-`systemctl restart sshd`
+```
+systemctl restart sshd`
+```
 
 
 </details>

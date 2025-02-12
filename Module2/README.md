@@ -388,6 +388,38 @@ systemctl restart chronyd
 systemctl enable --now  chronyd
 ```
 
+## ПРОВЕРКА конфигурации NTP-сервера
+
+  
+<details>
+  
+<summary><strong>[Подробнее]</strong></summary>
+
+</br>
+
+Получаем вывод источников времени с помощью команды:
+```yml
+chronyc sources
+```
+> Вывод:
+> ```yml
+> MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
+> =============================================================================
+> ^/ localhost.localdomain  0        8     377    -       +0ns[  +0ns] +/-  0ns
+> ```
+
+<br/>
+
+Получаем вывод **уровня стратума** с помощью связки команд:
+```yml
+chronyc tracking | grep Stratum
+```
+> Вывод:
+> ```yml
+> Stratum: 5
+> ```
+</details>
+
 </details>
 
 </br>

@@ -55,7 +55,7 @@
 <br/>
 
 <details>
-<summary>Решение</summary>
+<summary><strong>[Решение]</strong></summary>
 <br/>
 
 ## Сконфигурируйте файловое хранилище

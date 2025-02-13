@@ -566,7 +566,7 @@ ansible all -i /etc/ansible/demo -m ping
 
 </details>
 
-## Задание 5
+## ✔️ Задание 5
 
 ### Развертывание приложений в Docker на сервере BR-SRV
 
@@ -591,9 +591,91 @@ ansible all -i /etc/ansible/demo -m ping
 <br/>
 
 <details>
-<summary><strong>Решение</strong></summary>
+<summary><strong>[с помощью CLI]</strong></summary>
 <br/>
-  
+
+**1.** Подключаемся при помощи **HQ-CLI** к **BR-SRV** по `SSH`:
+```
+ssh sshuser@192.168.0.2 -p2024
+```
+
+**2.** Обновляем пакеты и устанавливаем **Docker**:
+```
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli docker-compose
+```
+</br>
+
+**3.**  Добавляем **Docker** в автозагрузку и запускаем:
+```
+systemctl enable docker --now
+```
+</br>
+
+**4.** Проверяем статус запущенной службы **(Docker)** и информацию:
+```
+systemctl status docker
+
+docker info
+```
+
+</br>
+
+**5.** В случае первого варианта установки,с неработающим **(copy-paste)** с вневшней машиной, с `CLI` заходим в **YandexBrowser**:
+
+`1 ->` Пишем в поисковик **mediawiki docker-compose**
+
+`2 ->` заходим на сайт [mediawiki.org]
+
+`3 ->` СЛЕВА находим надпись и заходим в ***Adding a Database Server**
+
+`4 ->` копируем конфиг, который там будет.
+
+</br>
+
+**6.** В домашней директории пользователя **sshuser** создаем композер-файл **wiki.yaml**:
+```
+cd /home/sshuser
+
+nano wiki.yaml
+```
+
+</br>
+
+**8.** Копируем и вставляем содержимое c сайта в **wiki.yml**:
+```yml
+services:
+  MediaWiki:
+    container_name: wiki
+    image: mediawiki
+    restart: always
+    ports: 
+      - 8080:80 \\Порт доступа извне
+    links:
+      - database
+    volumes:
+      - images:/var/www/html/images
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+  database:
+    container_name: mariadb \\Имя контейнера с БД
+    image: mariadb \\Образ БД
+    environment:
+      MYSQL_DATABASE: mediawiki \\Имя БД
+      MYSQL_USER: wiki \\Имя пользователя
+      MYSQL_PASSWORD: P@ssw0rd \\Пароль пользователя БД
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - dbvolume:/var/lib/mariadb \\Путь хранения Volume
+volumes:
+  dbvolume:
+      external: true
+  images:
+```
+
+</br>
+
+
 - На BR-SRV открываем файл `/home/student/wiki.yml` и приводим к следующему виду:
 ```
 services:

@@ -977,13 +977,170 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 <summary><strong>[Решение]</strong></summary>
 <br/>
 
+### HQ-SRV
 
-**1.** Установка необходимых **пакетов**:
+**1.** Устанавливаем необходимые **пакеты**:
 ```
 sudo apt update
 
-sudo apt install apache2 mariadb-server php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git
+sudo apt install -y apache2 mariadb-server mariadb-client php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git
 ```
+</br>
+
+**2.** Запуcкаем **MariaDB**:
+```
+sudo systemctl start mariadb
+
+sudo systemctl enable mariadb
+```
+
+</br>
+
+**3.** Зайдите в консоль **MariaDB**:
+```
+sudo mysql -u root -p
+```
+</br>
+
+**4.** **Создайте** базу данных и пользователя:
+```
+CREATE DATABASE moodledb;
+CREATE USER 'moodle'@'localhost' IDENTIFIED BY 'P@ssw0rd';
+GRANT ALL PRIVILEGES ON moodledb.* TO 'moodle'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+</br>
+
+**`НЕОБЯЗАТЕЛЬНО`**
+
+**Настройка безопасности** Mariadb
+  <details>
+  <summary><strong>[Подробнее]</strong></summary>
+  </br>
+
+  **1.** Запуск скрипта безопасности:
+  ```
+  sudo mysql_secure_installation
+  ```
+  </br>
+
+  **2.** После запуска скрипта вам будет предложено ответить на несколько вопросов. Вот что вам нужно будет сделать:
+
+  - **`Введите текущий пароль для пользователя root`**: Если вы только что установили MariaDB и не устанавливали пароль, просто нажмите **Enter**.
+
+  - **`Установить пароль для пользователя root?`**: Если вы хотите установить пароль для пользователя **root**, выберите **Y (Yes)** и **введите новый пароль**. **Рекомендуется использовать сложный пароль**.
+
+  - **`Удалить анонимных пользователей?`**: Выберите **Y (Yes)**, **чтобы удалить анонимных пользователей**. Это **повысит безопасность**.
+
+  - **`Запретить удаленный доступ к пользователю root?`**: Выберите **Y (Yes)**, чтобы **запретить удаленный доступ к пользователю root**. Это также повысит безопасность.
+
+  - **`Удалить тестовую базу данных и доступ к ней?`**: Выберите **Y (Yes)**, чтобы **удалить тестовую базу данных**. Это предотвратит доступ к ней.
+
+  - **`Перезагрузить таблицы привилегий?`**: Выберите **Y (Yes)**, чтобы **перезагрузить таблицы привилегий**, чтобы **изменения вступили в силу**.
+
+  </br>
+  
+  </details>
+  </br>
+
+**5.** Перезапускаем MariaDB:
+```
+systemctl restart mariadb-server
+```
+
+## Установка *Moodle* через *Git*
+
+### HQ-SRV
+
+**5.** Заходим в директорию где будет установлен **moodle**
+```
+cd /var/www/
+```
+</br>
+
+**6.** Клонируем репозиторий **Moodle**:
+```
+sudo git clone git://git.moodle.org/moodle.git
+```
+</br>
+
+**7.** Переходим в директорию **Moodle**
+```
+cd moodle
+```
+</br>
+
+**8.** Чтобы узнать, какая версия является последней доступной, выполните:
+```
+cd moodle
+git tag
+```
+</br>
+
+**9.** Клонирование репозитория **Moodle**
+```
+sudo git checkout -t origin/MOODLE_452_STABLE
+                                    ^ данная версия актуальна в момент написания методички, проверяйте версию в git tag
+```
+</br>
+
+**10.** Настройка директорий и прав:
+```
+sudo mkdir -p /var/www/moodledata
+sudo chown -R www-data:www-data /var/www/moodledata
+sudo chmod -R 770 /var/www/moodledata
+sudo chown -R www-data:www-data /var/www/moodle
+```
+</br>
+
+**11.** Создание файла конфигурации **Apache**
+```
+sudo nano /etc/apache2/sites-available/moodle.conf
+```
+</br>
+
+**12.** Вставляем следующие настройки в эту конфигурацию:
+```
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/html/moodle
+    DirectoryIndex index.php
+    <Directory /var/www/html/moodle>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/moodle_error.log
+    CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
+</VirtualHost>
+```
+</br>
+
+**13.** Активируем новый сайт и модули:
+```
+sudo a2ensite moodle.conf
+sudo a2enmod rewrite
+```
+</br>
+
+**14.** Перезапускаем **Apache**:
+```
+sudo systemctl restart apache2
+```
+</br>
+
+## Настройка в Moodle в Web-интерфейсе
+
+**1.** Откройте веб-браузер и перейдите по адресу http://192.168.100.62/moodle.
+
+**2.** В процессе установки укажите данные для подключения к базе данных:
+
+**`База данных`**: moodledb
+
+**`Пользователь`**: moodle
+
+**`Пароль`**: P@ssw0rd
 
 </details>
 </br>

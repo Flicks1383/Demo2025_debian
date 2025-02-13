@@ -45,7 +45,7 @@
 
 </br>
 
-**[⚙️МОДУЛЬ 2](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#модуль-2)**
+**[⚙️МОДУЛЬ 2](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#модуль-2 "Ну с богом!")**
 <details>
  <summary><strong>[Содержание]</strong></summary> 
 

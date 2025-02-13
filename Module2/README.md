@@ -900,19 +900,58 @@ docker-compose -f wiki.yml up -d
 
 <br/>
 
-# Задание 6 (Проверить (не уверен в ___работоспособности___))
-## На маршрутизаторах сконфигурируйте статическую трансляцию портов
-- Для BR-RTR настройка выглядит следующим образом:
+## ✔️ Задание 6 (Необходимо проверить)
+
+### На маршрутизаторах сконфигурируйте статическую трансляцию портов
+
+>[!WARNING]
+>Настройка портов проходит с помощью **[IPTABLES](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-2 "Установка IPtables")**
+
+- Пробросьте порт 80 в порт 8080 на BR-SRV на маршрутизаторе BR-RTR, для обеспечения работы сервиса wiki
+  
+- Пробросьте порт 2024 в порт 2024 на HQ-SRV на маршрутизаторе HQ-RTR
+  
+- Пробросьте порт 2024 в порт 2024 на BR-SRV на маршрутизаторе BR-RTR
+
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+### BR-RTR
+
+**1.** Проброс 80 порта B 2024 на BR-RTR
 ```
-ip nat source static tcp 192.168.1.2 80 192.168.1.65 8080
-ip nat source static tcp 172.16.5.1 80 192.168.1.2 8080
-ip nat source static tcp 192.168.1.2 2024 192.168.1.65 2024  
+### Проброс порта 80 на порт 8080 на BR-SRV
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.0.2:8080
+
+### Разрешение трафика на BR-SRV
+sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 8080 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
+######################################
+
+### Проброс порта 2024 на BR-SRV
+sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.0.2:2024
+
+# Разрешение трафика на BR-SRV
+sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+```
+<br/>
+
+### HQ-RTR
+
+**2.** Проброс порта 2024 на HQ-RTR
+```
+### Проброс порта 2024 на HQ-SRV
+sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
+
+### Разрешение трафика на HQ-SRV
+sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 ```
 
-- Для HQ-RTR настройка выглядит следующим образом:
-```
-ip nat source static tcp 192.168.0.2 2024 192.168.1.65 2024  
-```
+
+</details>
 
 ## ❌ Задание 7
 ### Запустите сервис moodle на сервере HQ-SRV:
@@ -920,11 +959,25 @@ ip nat source static tcp 192.168.0.2 2024 192.168.1.65 2024
 
 ## ❌ Задание 8
 ### Настройте веб-сервер nginx как обратный прокси-сервер на HQ-RTR
-- Настройка производится на HQ-RTR в режиме конфигурации:  
-# ✔️ Задание 9
-## Удобным способом установите приложение Яндекс Браузере для организаций на HQ-CLI
-- Если есть встроенный браузер - скачать Яндекс с его помощью
-- Если нет - установка при помощи команды:
+- Настройка производится на HQ-RTR в режиме конфигурации:
+
+## ✔️ Задание 9
+
+### Удобным способом установите приложение Яндекс Браузере для организаций на HQ-CLI
+
+- Установку браузера отметьте в отчёте
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+`Если есть встроенный браузер` - скачать Яндекс с его помощью
+
+`Если нет` - установка при помощи **команды**:
+
 ```
-# apt-get install yandex-browser-stable
+# sudo apt-get install yandex-browser-stable
 ```
+
+</details>

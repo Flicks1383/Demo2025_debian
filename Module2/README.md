@@ -959,8 +959,34 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 
 ### Запустите сервис moodle на сервере HQ-SRV:
 
+  - Используйте веб-сервер apache
+ 
+  - В качестве системы управления базами данных используйте mariadb
+  
+  - Создайте базу данных moodledb
+  
+  - Создайте пользователя moodle с паролем P@ssw0rd и предоставьте ему права доступа к этой базе данных
+  
+  - У пользователя admin в системе обучения задайте пароль P@ssw0rd
+  
+  - На главной странице должен отражаться номер рабочего места в виде арабской цифры, других подписей делать не надо
+    
+  - Основные параметры отметьте в отчёте
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
 
 
+**1.** Установка необходимых **пакетов**:
+```
+sudo apt update
+
+sudo apt install apache2 mariadb-server php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git
+```
+
+</details>
+</br>
 
 ## ✔️ Задание 8
 

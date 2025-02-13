@@ -956,13 +956,78 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 <br/>
 
 ## ❌ Задание 7
+
 ### Запустите сервис moodle на сервере HQ-SRV:
 
 
-## ❌ Задание 8
-### Настройте веб-сервер nginx как обратный прокси-сервер на HQ-RTR
-- Настройка производится на HQ-RTR в режиме конфигурации:
+## ✔️ Задание 8
 
+### Настройте веб-сервер nginx как обратный прокси-сервер на HQ-RTR
+
+- При обращении к HQ-RTR по доменному имени moodle.au-team.irpo клиента должно перенаправлять на HQ-SRV на стандартный порт, на сервис moodle
+
+- При обращении к HQ-RTR по доменному имени wiki. au-team.irpo клиента должно перенаправлять на BR-SRV на порт, на сервис mediawiki
+<br/>
+
+<details>
+<summary><strong>[Решение]</strong></summary>
+<br/>
+
+**1.** Установка **Nginx**:
+```
+sudo apt install nginx -y
+```
+
+**2.** Включаем автозагрузку службы:
+```
+systemctl enable --now nginx
+```
+
+**3.** Открываем на редактирование конфигурационный файл **`Nginx`**
+```
+nano nano /etc/ nginx/nginx.conf
+```
+
+**4.** Cпускаемся в конец документа и перед последней фигурной скобкой **`}`** прописываем:
+```
+server  {
+        listen 80;
+        server_name moodle.au-team.irpo;
+
+        location / {
+            proxy_pass http://192.168.100.62:80;
+        }
+}
+
+server {
+        listen 80;
+        server_name wiki.au-team.irpo;
+
+        location / {
+            proxy_pass http://192.168.0.2:8080;
+        }
+}
+```
+</br>
+
+### ПРОВЕРКА
+
+- На **`HQ-CLI`** в браузере заходим по доменному имени:
+
+  на **`Moodle`** – moodle.au-team.irpo
+
+  на **`MediaWiki`** – wiki.au-team.irpo
+
+
+</br>
+
+**5.** Перезагружаем **`Nginx`**
+```
+systemctl restart nginx
+```
+
+</details>
+  
 ## ✔️ Задание 9
 
 ### Удобным способом установите приложение Яндекс Браузере для организаций на HQ-CLI

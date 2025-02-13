@@ -566,6 +566,8 @@ ansible all -i /etc/ansible/demo -m ping
 
 </details>
 
+<br/>
+
 ## ✔️ Задание 5
 
 ### Развертывание приложений в Docker на сервере BR-SRV
@@ -593,6 +595,8 @@ ansible all -i /etc/ansible/demo -m ping
 <details>
 <summary><strong>[с помощью CLI]</strong></summary>
 <br/>
+
+### Установка Wiki (по SSH с CLI на BR-SRV)
 
 **1.** Подключаемся при помощи **HQ-CLI** к **BR-SRV** по `SSH`:
 ```
@@ -686,7 +690,13 @@ docker volume ls
 ```
 </br>
 
+**10.** Выполняем сборку и запуск стека контейнеров с приложением **MediaWiki** и базой данных описанных в файле **wiki.yml**:
+```
+docker-compose -f wiki.yml up -d
+```
+</br>
 
+**11.** Производим настройку в WEB-интерфейсе wiki
 
 
 - На BR-SRV открываем файл `/home/student/wiki.yml` и приводим к следующему виду:

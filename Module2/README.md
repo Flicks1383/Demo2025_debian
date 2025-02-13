@@ -622,7 +622,7 @@ docker info
 
 </br>
 
-**5.** В случае первого варианта установки,с неработающим **(copy-paste)** с вневшней машиной, с `CLI` заходим в **YandexBrowser**:
+**5.**с `CLI` заходим в **YandexBrowser**:
 
 `1 ->` Пишем в поисковик **mediawiki docker-compose**
 
@@ -651,22 +651,22 @@ services:
     image: mediawiki
     restart: always
     ports: 
-      - 8080:80 \\Порт доступа извне
+      - 8080:80   \\  Порт доступа извне
     links:
       - database
     volumes:
       - images:/var/www/html/images
       # - ./LocalSettings.php:/var/www/html/LocalSettings.php
   database:
-    container_name: mariadb \\Имя контейнера с БД
-    image: mariadb \\Образ БД
+    container_name: mariadb   \\  Имя контейнера с БД
+    image: mariadb   \\  Образ БД
     environment:
-      MYSQL_DATABASE: mediawiki \\Имя БД
-      MYSQL_USER: wiki \\Имя пользователя
-      MYSQL_PASSWORD: P@ssw0rd \\Пароль пользователя БД
+      MYSQL_DATABASE: mediawiki    \\   Имя БД
+      MYSQL_USER: wiki        \\  Имя пользователя
+      MYSQL_PASSWORD: P@ssw0rd    \\   Пароль пользователя БД
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
-      - dbvolume:/var/lib/mariadb \\Путь хранения Volume
+      - dbvolume:/var/lib/mariadb   \\  Путь хранения Volume
 volumes:
   dbvolume:
       external: true
@@ -674,6 +674,19 @@ volumes:
 ```
 
 </br>
+
+**9.** Чтобы отдельный **volume** для хранения базы данных **имел правильное имя** - создаём его средствами **docker**:
+```
+docker volume create dbvolume
+```
+
+**`Информация|Проверка.`** Посмотреть все тмеющиеся **volume** можно командой:
+```
+docker volume ls
+```
+</br>
+
+
 
 
 - На BR-SRV открываем файл `/home/student/wiki.yml` и приводим к следующему виду:

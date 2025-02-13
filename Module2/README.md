@@ -949,9 +949,11 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 
 ### Разрешение трафика на HQ-SRV
 sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 ```
-
+<br/>
 
 </details>
+
+<br/>
 
 ## ❌ Задание 7
 ### Запустите сервис moodle на сервере HQ-SRV:

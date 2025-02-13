@@ -593,7 +593,7 @@ ansible all -i /etc/ansible/demo -m ping
 <br/>
 
 <details>
-<summary><strong>[с помощью CLI]</strong></summary>
+<summary><strong>[C помощью CLI]</strong></summary>
 <br/>
 
 ### Установка Wiki (по SSH с CLI на BR-SRV)
@@ -607,7 +607,7 @@ ssh sshuser@192.168.0.2 -p2024
 ```
 sudo apt update
 
-sudo apt install docker-ce docker-ce-cli docker-compose
+sudo apt install docker-ce docker-ce-cli docker-compose docker-engine
 ```
 </br>
 
@@ -626,7 +626,7 @@ docker info
 
 </br>
 
-**5.** с `CLI` заходим в **YandexBrowser**:
+**5.**  При помощи `CLI` заходим в **YandexBrowser**:
 
 `1 ->` Пишем в поисковик **mediawiki docker-compose**
 
@@ -698,65 +698,231 @@ docker-compose -f wiki.yml up -d
 
 ### Настройка Wiki через WEB-интерфейс:
 
-**1.** Переходим на `HQ-CLI` в браузере по адресу **http://192.168.0.62:8080** (айпишник BR-SRV:8080):
-
+**1.** Переходим на `HQ-CLI` в браузере по адресу **http://192.168.0.2:8080** (айпишник BR-SRV:8080):
 - Для продолжения установки через **WEB-интерфейс** - нажимаем **`set up the wiki`**
-
-</br>
+ 
+  </br>
 
 **2.** Выбираем необходимый Язык - жмем **Далее**, проходим проверку внешней среды и так-же нажимаем **далее**:
+</br>
 
 **3.** Заполняем параметры подключение к **БД** в соответствие с заданными переменными окружения в **wiki.yml**, которые соответствуют заданию:
 
+ ![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/wiki.png)
 
+</br>
 
-- На BR-SRV открываем файл `/home/student/wiki.yml` и приводим к следующему виду:
+---
+
+**4.** Ставим галочку и жмем **Далее**:
+
+</br>
+
+---
+
+**5.** Вносим необхоимые изменения, ставим галочку и жмём **Далее**:
+
+![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/wiki%202.png)
+
+</br>
+
+**6.** Будет автоматически скачен файл **`LocalSettings.php`** - который необходимо передать на **BR-SRV** c HQ-CLI в директорию **`/home/sshuser`** туда же где лежит **`wiki.yml`**:
 ```
+scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.0.2:/home/sshuser
+```
+</br>
+
+**7.** Раскомментируем строку в файле **`wiki.yml`** :
+```
+nano wiki.yml
+```
+![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/phplocalconfigwiki.png)
+
+</br>
+
+**8.** Перезапускаем сервисы средствами **`docker-compose`**:
+```
+docker-compose -f wiki.yml stop
+
+docker-compose -f wiki.yml up -d
+```
+</br>
+
+**9.** Проверяем доступ к Wiki **`http://192.168.0.2:8080`**
+
+Входим под
+
+- `Пользователь`: wiki 
+
+- `Пароль`: P@ssw0rd
+
+</br>
+
+</details>
+
+<details>
+<summary><strong>[C помощью BR-SRV]</strong></summary>
+<br/>
+
+### BR-SRV
+<br/>
+
+**1.** Обновляем пакеты и устанавливаем **Docker** на **`BR-SRV`**:
+```
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli docker-compose docker-engine
+```
+</br>
+
+**2.**  Добавляем **Docker** в автозагрузку и запускаем:
+```
+systemctl enable docker --now
+```
+</br>
+
+**3.** Проверяем статус запущенной службы **(Docker)** и информацию:
+```
+systemctl status docker
+
+docker info
+```
+
+</br>
+
+**3.** В домашней директории пользователя создаем композер-файл **wiki.yaml**:
+```
+nano wiki.yaml
+```
+
+</br>
+
+**4.**  заходим в **Браузер**:
+
+`1 ->` Пишем в поисковик **mediawiki docker-compose**
+
+`2 ->` заходим на сайт [mediawiki.org]
+
+`3 ->` СЛЕВА находим надпись и заходим в ***Adding a Database Server**
+
+`4 ->` копируем конфиг, который там будет и вставляем в `wiki.yaml` Прямиком в **BR-SRV**.
+
+</br>
+
+**5.** Cодержимое c сайта в **wiki.yml**:
+```yml
 services:
-MediaWiki:
-   container_name: wiki
-   image: mediawiki
-   restart: always
-   ports: 
-     - 80:8080
-   links:
-     - database
-   volumes:
-     - images:/var/www/html/images
-     # - ./LocalSettings.php:/var/www/html/LocalSettings.php
- database:
-   container_name: mariadb
-   image: mariadb
-   environment:
-     MYSQL_DATABASE: mediawiki
-     MYSQL_USER: wiki
-     MYSQL_PASSWORD: WikiP@ssw0rd
-     MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-   volumes:
-     - dbvolume:/var/lib/mysql
+  MediaWiki:
+    container_name: wiki
+    image: mediawiki
+    restart: always
+    ports: 
+      - 8080:80
+    links:
+      - database
+    volumes:
+      - images:/var/www/html/images
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+  database:
+    container_name: mariadb
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: wiki
+      MYSQL_PASSWORD: P@ssw0rd
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - dbvolume:/var/lib/mariadb
 volumes:
- dbvolume:
-     external: true
- images:
+  dbvolume:
+      external: true
+  images:
 ```
-- После чего устанавливаем Docker на сервер командой:
+
+</br>
+
+**6.** Чтобы отдельный **volume** для хранения базы данных **имел правильное имя** - создаём его средствами **docker**:
 ```
-  apt-get install docker-engine
+docker volume create dbvolume
 ```
--
+
+**`Информация|Проверка.`** Посмотреть все тмеющиеся **volume** можно командой:
 ```
-docker compose -f wiki.yml up -d
+docker volume ls
 ```
-- После сего поднимаем стек контейнеров командой:
+</br>
+
+**7.** Выполняем сборку и запуск стека контейнеров с приложением **MediaWiki** и базой данных описанных в файле **wiki.yml**:
 ```
-docker compose -f wiki.yml up -d  
+docker-compose -f wiki.yml up -d
 ```
-- Далее необходимо раскоментировать (убрать #) в ранее сконфигурированом файле
-- Далее прописываем команды:
+</br>
+
+### Настройка Wiki через WEB-интерфейс на HQ-CLI:
+
+**1.** Переходим на `HQ-CLI` в браузере по адресу **http://192.168.0.2:8080** (айпишник BR-SRV:8080):
+- Для продолжения установки через **WEB-интерфейс** - нажимаем **`set up the wiki`**
+ 
+  </br>
+
+**2.** Выбираем необходимый Язык - жмем **Далее**, проходим проверку внешней среды и так-же нажимаем **далее**:
+</br>
+
+**3.** Заполняем параметры подключение к **БД** в соответствие с заданными переменными окружения в **wiki.yml**, которые соответствуют заданию:
+
+ ![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/wiki.png)
+
+</br>
+
+---
+
+**4.** Ставим галочку и жмем **Далее**:
+
+</br>
+
+---
+
+**5.** Вносим необхоимые изменения, ставим галочку и жмём **Далее**:
+
+![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/wiki%202.png)
+
+</br>
+
+**6.** Будет автоматически скачен файл **`LocalSettings.php`** - который необходимо передать на **BR-SRV** c HQ-CLI в директорию туда же где лежит **`wiki.yml`**:
 ```
-docker-compose -f wiki.yml stop  
-docker-compose -f wiki.yml up -d  
+scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.0.2:/root(Там где лежит wiki.yaml)
 ```
+</br>
+
+**7.** Раскомментируем строку в файле **`wiki.yml`** :
+```
+nano wiki.yml
+```
+![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/phplocalconfigwiki.png)
+
+</br>
+
+**8.** Перезапускаем сервисы средствами **`docker-compose`**:
+```
+docker-compose -f wiki.yml stop
+
+docker-compose -f wiki.yml up -d
+```
+</br>
+
+**9.** Проверяем доступ к **Wiki** на **HQ-CLI** **`http://192.168.0.2:8080`**
+
+Входим под
+
+- `Пользователь`: wiki 
+
+- `Пароль`: P@ssw0rd
+
+</br>
+
+
+</details>
+
 # Задание 6 (Проверить (не уверен в ___работоспособности___))
 ## На маршрутизаторах сконфигурируйте статическую трансляцию портов
 - Для BR-RTR настройка выглядит следующим образом:

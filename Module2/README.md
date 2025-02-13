@@ -648,34 +648,8 @@ nano wiki.yaml
 </br>
 
 **8.** Копируем и вставляем содержимое c сайта в **wiki.yml**:
-```yml
-services:
-  MediaWiki:
-    container_name: wiki
-    image: mediawiki
-    restart: always
-    ports: 
-      - 8080:80   \\  Порт доступа извне
-    links:
-      - database
-    volumes:
-      - images:/var/www/html/images
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
-  database:
-    container_name: mariadb   \\  Имя контейнера с БД
-    image: mariadb   \\  Образ БД
-    environment:
-      MYSQL_DATABASE: mediawiki    \\   Имя БД
-      MYSQL_USER: wiki        \\  Имя пользователя
-      MYSQL_PASSWORD: P@ssw0rd    \\   Пароль пользователя БД
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-    volumes:
-      - dbvolume:/var/lib/mariadb   \\  Путь хранения Volume
-volumes:
-  dbvolume:
-      external: true
-  images:
-```
+
+![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/WIKItutorial.png)
 
 </br>
 
@@ -754,7 +728,7 @@ docker-compose -f wiki.yml up -d
 
 - `Пользователь`: wiki 
 
-- `Пароль`: P@ssw0rd
+- `Пароль`: WikiP@ssw0rd
 
 </br>
 
@@ -829,7 +803,7 @@ services:
     environment:
       MYSQL_DATABASE: mediawiki
       MYSQL_USER: wiki
-      MYSQL_PASSWORD: P@ssw0rd
+      MYSQL_PASSWORD: WikiP@ssw0rd
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
       - dbvolume:/var/lib/mariadb
@@ -916,12 +890,14 @@ docker-compose -f wiki.yml up -d
 
 - `Пользователь`: wiki 
 
-- `Пароль`: P@ssw0rd
+- `Пароль`: WikiP@ssw0rd
 
 </br>
 
 
 </details>
+
+<br/>
 
 # Задание 6 (Проверить (не уверен в ___работоспособности___))
 ## На маршрутизаторах сконфигурируйте статическую трансляцию портов

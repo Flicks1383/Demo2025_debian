@@ -985,7 +985,7 @@ systemctl enable --now nginx
 
 **3.** Открываем на редактирование конфигурационный файл **`Nginx`**
 ```
-nano nano /etc/ nginx/nginx.conf
+nano nano /etc/nginx/nginx.conf
 ```
 
 **4.** Cпускаемся в конец документа и перед последней фигурной скобкой **`}`** прописываем:

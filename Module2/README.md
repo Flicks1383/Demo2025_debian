@@ -649,9 +649,10 @@ nano wiki.yaml
 
 **8.** Копируем и вставляем содержимое c сайта в **wiki.yml**:
 
-![image](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/WIKItutorial.png)
+ <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/WIKItutorial.png" alt="Конфиг" width="400" height="400" />
 
 </br>
+
 
 **9.** Чтобы отдельный **volume** для хранения базы данных **имел правильное имя** - создаём его средствами **docker**:
 ```

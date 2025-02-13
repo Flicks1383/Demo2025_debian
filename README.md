@@ -51,19 +51,19 @@
 
 1. **[Настройте доменный контроллер _SAMBA_ на машине _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)**
     
-2. **[Сконфигурируйте _ФАЙЛОВОЕ ХРАНИЛИЩЕ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-2)**
+2. **[Сконфигурируйте _ФАЙЛОВОЕ ХРАНИЛИЩЕ_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-2-тестируется)**
 
-3. **[Настройте службу сетевого времени на базе сервиса _CHRONY_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3)**
+3. **[Настройте службу сетевого времени на базе сервиса _CHRONY_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3-тестируется)**
 
-4. **[Сконфигурируйте _ANSIBLE_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-4---требуется-проверка-возможно-требуется-установка-pyt3)**
+4. **[Сконфигурируйте _ANSIBLE_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-4---тестируется)**
     
-5. **[Развертывание приложений в _DOCKER_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-5)**
+5. **[Развертывание приложений в _DOCKER_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-5-тестируется)**
     
-6. **[На маршрутизаторах сконфигурируйте _СТАТИЧЕСКУЮ ТРАНСЛЯЦИЮ ПОРТОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-6-необходимо-проверить)**
+6. **[На маршрутизаторах сконфигурируйте _СТАТИЧЕСКУЮ ТРАНСЛЯЦИЮ ПОРТОВ_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-6-тестируется)**
 
-7. **[Запустите сервис _MOODLE_ на сервере _HQ-SRV_:]()**
+7. **[Запустите сервис _MOODLE_ на сервере _HQ-SRV_:](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-7-тестируется)**
 
-8. **[Настройте веб-сервер _NGINX_ как обратный _ПРОКСИ-СЕРВЕР_ на _HQ-RTR_]()**
+8. **[Настройте веб-сервер _NGINX_ как обратный _ПРОКСИ-СЕРВЕР_ на _HQ-RTR_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-8)**
 
 9. **[Удобным способом установите приложение _Яндекс Браузере_ для организаций на _HQ-CLI_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-9)**
   </details>

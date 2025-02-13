@@ -921,12 +921,12 @@ docker-compose -f wiki.yml up -d
 
 ### BR-RTR
 
-**1.** Проброс 80 порта B 2024 на BR-RTR
+**1.** Проброс **80** порта и **2024** для BR-SRV
 ```
 ### Проброс порта 80 на порт 8080 на BR-SRV
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.0.2:8080
 
-### Разрешение трафика на BR-SRV
+### Разрешение трафика на **BR-SRV**
 sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 8080 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 
 ######################################
@@ -941,7 +941,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 2024 -m state --state NEW
 
 ### HQ-RTR
 
-**2.** Проброс порта 2024 на HQ-RTR
+**2.** Проброс порта **2024** для HQ-SRV
 ```
 ### Проброс порта 2024 на HQ-SRV
 sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024

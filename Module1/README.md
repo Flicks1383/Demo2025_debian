@@ -422,7 +422,7 @@ net_admin ALL=(ALL) NOPASSWD:ALL
 
 <br/>
 
-## ❌ Задание 4
+## ✔️ Задание 4
 
 ### Настройте на интерфейсе HQ-RTR в сторону офиса HQ виртуальный коммутатор
 
@@ -434,7 +434,7 @@ net_admin ALL=(ALL) NOPASSWD:ALL
 <br/>
 
 <details>
-<summary>[В процессе]</summary>
+<summary>[Решение]</summary>
 <br/>
 
 ## Конфигурация VLAN на HQ-RTR

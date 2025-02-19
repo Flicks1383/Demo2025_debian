@@ -450,11 +450,17 @@ net_admin ALL=(ALL) NOPASSWD:ALL
   <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0RTR.png" alt="" />
 </p>
 
-После чего аналогичным образом создаем интерфейс для клиентского компа и настраиваем его  
+После чего аналогичным образом создаем интерфейс для клиентского компа и настраиваем его.  
 Далее переходим на сервер, создаем и переходим к конфигурации *VLAN'а*
 
 <p align="center">
   <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0SRV.png" alt="" />
+</p>
+
+После чего переходим на клиентский комп и при помощи *nmtui* создаем VLAN и настраиваеи его.  
+
+<p align="center">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLANcli.png" alt="" />
 </p>
 
 </details>

@@ -444,10 +444,10 @@ net_admin ALL=(ALL) NOPASSWD:ALL
   <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5.png" alt="" />
 </p>
 
-После чего требуется настроить его название и интерфейс (название интерфейса берете с настроек *nmtui*):
+После чего требуется настроить его название и интерфейс (название интерфейса берете с настроек *nmtui*) а также его MAC адрес:
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0RTR.png" alt="" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0.png" alt="" />
 </p>
 
 После чего аналогичным образом создаем интерфейс для клиентского компа и настраиваем его.  

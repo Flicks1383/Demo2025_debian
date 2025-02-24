@@ -303,7 +303,7 @@ mount -a
 </br>
 
 
-## ✔️ Задание 3 (Тестируется)
+## ✔️ Задание 3
 
 ### Настройте службу сетевого времени на базе сервиса chrony
 
@@ -357,9 +357,9 @@ allow 192.168.0.0/27
 
 **3.** После установки, **перезагружаем сервис** и **добавляем в автозагрузку**:
 ```
-systemctl restart chronyd
+systemctl restart chrony
 
-systemctl enable --now  chronyd
+systemctl enable --now  chrony
 ```
 
 </br>
@@ -384,9 +384,9 @@ server 192.168.100.1 iburst <- Дописываем данную строчку
 
 **3.** После установки, **перезагружаем сервис** и **добавляем в автозагрузку**:
 ```
-systemctl restart chronyd
+systemctl restart chrony
 
-systemctl enable --now  chronyd
+systemctl enable --now  chrony
 ```
 
 ## ПРОВЕРКА конфигурации NTP-сервера
@@ -402,11 +402,18 @@ systemctl enable --now  chronyd
 ```yml
 chronyc sources
 ```
-> Вывод:
+> Вывод на сервере:
 > ```yml
 > MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
 > =============================================================================
 > ^/ localhost.localdomain     5      8     377     -     +0ns  [+0ns] +/-  0ns
+> ```
+
+> Вывод на клиенте:
+> ```yml
+> MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
+> =============================================================================
+> ^/ hq-rtr.au-team.irpo     5      6     37       50    +91ns  [+31ns] +/-  88us
 > ```
 
 <br/>

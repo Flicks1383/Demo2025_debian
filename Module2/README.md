@@ -34,7 +34,7 @@
 
 </br>
 
-## ✔️ Задание 2 (Тестируется)
+## ✔️ Задание 2 (*Конкретно не работает NFS*)
 
 ### Сконфигурируйте файловое хранилище
 
@@ -206,7 +206,7 @@ mkdir /mnt/raid5
 **1.** Устанавливаем **утилиты:**
 
 ```
-apt-get install -y nfs-{server,utils}
+apt-get install -y nfs-server
 ```
 
 </br>
@@ -256,7 +256,7 @@ systemctl enable --now nfs-server
 **1.**  Устанавливаем NFS клиент:  
 
 ```
-apt-get update && apt-get install -y nfs-{utils,clients}
+apt-get update && apt-get install -y nfs-client
 ```
 
 </br>

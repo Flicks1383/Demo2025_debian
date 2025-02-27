@@ -983,22 +983,22 @@ search yandex.ru
 ```
 zone "au-team.irpo" {
   type master;
-  file "au-team.irpo.db";
+  file "/etc/bind/au-team.irpo.db";
 };
 
 zone "100.168.192.in-addr.arpa" {
   type master;
-  file "100.168.192.in-addr.arpa";
+  file "/etc/bind/100.168.192.in-addr.arpa";
 };
 
 zone "200.168.192.in-addr.arpa" {
   type master;
-  file "200.168.192.in-addr.arpa";
+  file "/etc/bind/200.168.192.in-addr.arpa";
 };
 
 zone "0.168.192.in-addr.arpa" {
   type master;
-  file "0.168.192.in-addr.arpa";
+  file "/etc/bind/0.168.192.in-addr.arpa";
 };
 ```
 </br>
@@ -1128,7 +1128,7 @@ named-checkconf -z
 **17.** А также перезапускаем **`bind`** командой:
 
 ```
-systemctl restart named
+systemctl restart named bind9
 ```
 </br>
 

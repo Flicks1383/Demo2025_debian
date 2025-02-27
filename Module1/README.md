@@ -386,7 +386,7 @@ systemctl restart netfilter-persistent
 **1.** Создаём sshuser следующими командами:
 ```
 useradd sshuser -u 1010
-password sshuser
+passwd sshuser
 P@ssw0rd
 ```
 <br/>

@@ -1042,9 +1042,9 @@ wiki    IN      CNAME   hq-rtr
 
 **10.** После чего **создаем файлы** командами:
 ```
-cp /etc/bind/127.in-addr.arpa /etc/bind/100.168.192.in-addr.arpa
-cp /etc/bind/127.in-addr.arpa /etc/bind/200.168.192.in-addr.arpa
-cp /etc/bind/127.in-addr.arpa /etc/bind/0.168.192.in-addr.arpa
+cp /etc/bind/db.127 /etc/bind/100.168.192.in-addr.arpa
+cp /etc/bind/db.127 /etc/bind/200.168.192.in-addr.arpa
+cp /etc/bind/db.127 /etc/bind/0.168.192.in-addr.arpa
 ```
 
 </br>

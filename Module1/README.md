@@ -502,7 +502,7 @@ AllowUsers  sshuser
 ```
 <br/>
 
-**3.** После чего требуется создать файл **`/etc/openssh/bannermotd`** и привести его в следующую форму:
+**3.** После чего требуется создать файл **`/etc/ssh/bannermotd`** и привести его в следующую форму:
 ```
 ----------------------
 Authorized access only
@@ -513,7 +513,7 @@ Authorized access only
 **4.** Далее необходимо перезапустить **`SSH`** коммандой:
   
 ```
-systemctl restart sshd`
+systemctl restart sshd
 ```
 
 

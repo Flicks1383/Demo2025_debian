@@ -985,6 +985,21 @@ zone "au-team.irpo" {
   type master;
   file "au-team.irpo.db";
 };
+
+zone "100.168.192.in-addr.arpa" {
+  type master;
+  file "100.168.192.in-addr.arpa";
+};
+
+zone "200.168.192.in-addr.arpa" {
+  type master;
+  file "200.168.192.in-addr.arpa";
+};
+
+zone "0.168.192.in-addr.arpa" {
+  type master;
+  file "0.168.192.in-addr.arpa";
+};
 ```
 </br>
 
@@ -1023,28 +1038,9 @@ wiki    IN      CNAME   hq-rtr
 ```
 </br>
 
-**10.** Далее файл **`/etc/bind/named.conf.local`** приводим к следующему виду:
-
-```
-zone "100.168.192.in-addr.arpa" {
-  type master;
-  file "100.168.192.in-addr.arpa";
-};
-
-zone "200.168.192.in-addr.arpa" {
-  type master;
-  file "200.168.192.in-addr.arpa";
-};
-
-zone "0.168.192.in-addr.arpa" {
-  type master;
-  file "0.168.192.in-addr.arpa";
-};
-```
-
 </br>
 
-**11.** После чего **создаем файлы** командами:
+**10.** После чего **создаем файлы** командами:
 ```
 cp /etc/bind/127.in-addr.arpa /etc/bind/100.168.192.in-addr.arpa
 cp /etc/bind/127.in-addr.arpa /etc/bind/200.168.192.in-addr.arpa
@@ -1053,7 +1049,7 @@ cp /etc/bind/127.in-addr.arpa /etc/bind/0.168.192.in-addr.arpa
 
 </br>
 
-**12.** После этого задаем **права** файлам командами:
+**11.** После этого задаем **права** файлам командами:
 ```
 chown root /etc/bind/100.168.192.in-addr.arpa
 chmod 600 /etc/bind/100.168.192.in-addr.arpa
@@ -1065,7 +1061,7 @@ chmod 600 /etc/bind/0.168.192.in-addr.arpa
 
 </br>
 
-**13.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
+**12.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1082,7 +1078,7 @@ $TTL    1D
 
 </br>
 
-**14.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
+**13.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1098,7 +1094,7 @@ $TTL    1D
 
 </br>
 
-**15.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
+**14.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1117,26 +1113,26 @@ $TTL    1D
 
 </br>
 
-**16.** В файле **`/etc/resolv.conf`** **всех машин** необходимо дописать следующую строчку:
+**15.** В файле **`/etc/resolv.conf`** **всех машин** необходимо дописать следующую строчку:
 ```
 nameserver 192.168.100.62
 ```
 </br>
 
-**17.** После чего можно проверить **ошибки** командой:
+**16.** После чего можно проверить **ошибки** командой:
 ```
 named-checkconf -z
 ```
 </br>
 
-**18.** А также перезапускаем **`bind`** командой:
+**17.** А также перезапускаем **`bind`** командой:
 
 ```
 systemctl restart named
 ```
 </br>
 
-**19.** Проверить работоспособность можно **командой**:
+**18.** Проверить работоспособность можно **командой**:
 ```
 nslookup **IP-адрес/DNS-имя**
 ```

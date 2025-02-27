@@ -963,7 +963,7 @@ named-checkconf
 
 **5.** Далее необходимо запустить **утилиту** коммандой:
 ```
-systemctl enable --now bind
+systemctl enable --now named
 ```
 </br>
 
@@ -991,16 +991,16 @@ zone "au-team.irpo" {
 **8.** Далее следующими командами **создаём копию** файла и присваиваем права:
 
 ```
-cp /etc/bind/zone/localdomain /etc/bind/au-team.irpo.db
+cp /etc/bind/db.local /etc/bind/au-team.irpo.db
 ```
 
 ```
-chown named. /etc/bind/zone/au-team.irpo.db
-chmod 600 /etc/bind/zone/au-team.irpo.db
+chown root /etc/bind/au-team.irpo.db
+chmod 600 /etc/bind/au-team.irpo.db
 ```
 </br>
 
-**9.** После чего приводим **файл `/etc/bind/zone/au-team.irpo.db`** к следующему виду:
+**9.** После чего приводим **файл `/etc/bind/au-team.irpo.db`** к следующему виду:
 
 ```
 $TTL    1D
@@ -1046,21 +1046,21 @@ zone "0.168.192.in-addr.arpa" {
 
 **11.** После чего **создаем файлы** командами:
 ```
-cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/100.168.192.in-addr.arpa
-cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/200.168.192.in-addr.arpa
-cp /etc/bind/zone/127.in-addr.arpa /etc/bind/zone/0.168.192.in-addr.arpa
+cp /etc/bind/127.in-addr.arpa /etc/bind/100.168.192.in-addr.arpa
+cp /etc/bind/127.in-addr.arpa /etc/bind/200.168.192.in-addr.arpa
+cp /etc/bind/127.in-addr.arpa /etc/bind/0.168.192.in-addr.arpa
 ```
 
 </br>
 
 **12.** После этого задаем **права** файлам командами:
 ```
-chown named. /etc/bind/zone/100.168.192.in-addr.arpa
-chmod 600 /etc/bind/zone/100.168.192.in-addr.arpa
-chown named. /etc/bind/zone/200.168.192.in-addr.arpa
-chmod 600 /etc/bind/zone/200.168.192.in-addr.arpa
-chown named. /etc/bind/zone/0.168.192.in-addr.arpa
-chmod 600 /etc/bind/zone/0.168.192.in-addr.arpa
+chown root /etc/bind/100.168.192.in-addr.arpa
+chmod 600 /etc/bind/100.168.192.in-addr.arpa
+chown root /etc/bind/200.168.192.in-addr.arpa
+chmod 600 /etc/bind/200.168.192.in-addr.arpa
+chown root /etc/bind/0.168.192.in-addr.arpa
+chmod 600 /etc/bind/0.168.192.in-addr.arpa
 ```
 
 </br>
@@ -1132,7 +1132,7 @@ named-checkconf -z
 **18.** А также перезапускаем **`bind`** командой:
 
 ```
-systemctl restart bind
+systemctl restart named
 ```
 </br>
 

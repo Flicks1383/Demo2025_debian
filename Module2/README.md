@@ -625,7 +625,7 @@ ssh sshuser@192.168.0.2 -p2024
 ```
 sudo apt update
 
-sudo apt install docker-ce docker-ce-cli docker-compose docker-engine
+sudo apt install docker docker-compose docker-doc
 ```
 </br>
 
@@ -674,18 +674,18 @@ nano wiki.yaml
 
 **9.** Чтобы отдельный **volume** для хранения базы данных **имел правильное имя** - создаём его средствами **docker**:
 ```
-docker volume create dbvolume
+sudo docker volume create dbvolume
 ```
 
 **`Информация|Проверка.`** Посмотреть все тмеющиеся **volume** можно командой:
 ```
-docker volume ls
+sudo docker volume ls
 ```
 </br>
 
 **10.** Выполняем сборку и запуск стека контейнеров с приложением **MediaWiki** и базой данных описанных в файле **wiki.yml**:
 ```
-docker-compose -f wiki.yml up -d
+sudo docker-compose -f wiki.yaml up -d
 ```
 </br>
 

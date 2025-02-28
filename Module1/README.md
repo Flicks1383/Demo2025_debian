@@ -932,25 +932,13 @@ recursion yes;
 allow-query { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 allow-query-cache { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
 allow-recursion { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; };
+dnssec-validation no;
 ```
   <br/>
 
 **3.** Конфигурация ключей **`rndc`**:
 ```
-rndc-confgen > /etc/rndckey 
-```
-</br>
-
-**4.** После чего требуется привести файл **`/etc/bind/rndc.key`** к следующему виду:
-
-```
-//key "rndc-key" {
-//  secret "@RNDC_KEY@";
-//};
-key "rndc-key" {
-  algorithm hmac-sha256;
-  secret "VTmhjyXFDo0QpaBl3UQWx1e0g9HElS2MiFDtNQzDylo=";
-};
+rndc-confgen > /etc/rndc.key 
 ```
 </br>
 
@@ -961,13 +949,13 @@ named-checkconf
 ```
 </br>
 
-**5.** Далее необходимо запустить **утилиту** коммандой:
+**4.** Далее необходимо запустить **утилиту** коммандой:
 ```
 systemctl enable --now named
 ```
 </br>
 
-**6.** Далее требуется изменить конфигурацию файла **`/etc/resolv.conf`**:
+**5.** Далее требуется изменить конфигурацию файла **`/etc/resolv.conf`**:
 
 ```
 search au-team.irpo
@@ -978,7 +966,7 @@ search yandex.ru
 ```
 </br>
 
-**7.** После чего требуется прописать в **`/etc/bind/named.conf.local`**:
+**6.** После чего требуется прописать в **`/etc/bind/named.conf.local`**:
 
 ```
 zone "au-team.irpo" {
@@ -1003,19 +991,15 @@ zone "0.168.192.in-addr.arpa" {
 ```
 </br>
 
-**8.** Далее следующими командами **создаём копию** файла и присваиваем права:
+**7.** Далее следующими командами **создаём копию** файла и присваиваем права:
 
 ```
-cp /etc/bind/db.local /etc/bind/au-team.irpo.db
+cp /etc/bind/db.local /etc/bind/au-team.irpo
 ```
 
-```
-chown root /etc/bind/au-team.irpo.db
-chmod 600 /etc/bind/au-team.irpo.db
-```
 </br>
 
-**9.** После чего приводим **файл `/etc/bind/au-team.irpo.db`** к следующему виду:
+**8.** После чего приводим **файл `/etc/bind/au-team.irpo`** к следующему виду:
 
 ```
 $TTL    1D
@@ -1040,28 +1024,17 @@ wiki    IN      CNAME   hq-rtr
 
 </br>
 
-**10.** После чего **создаем файлы** командами:
+**9.** После чего **создаем файлы** командами:
 ```
 cp /etc/bind/db.127 /etc/bind/100.168.192.in-addr.arpa
 cp /etc/bind/db.127 /etc/bind/200.168.192.in-addr.arpa
 cp /etc/bind/db.127 /etc/bind/0.168.192.in-addr.arpa
 ```
+</br>
 
 </br>
 
-**11.** После этого задаем **права** файлам командами:
-```
-chown root /etc/bind/100.168.192.in-addr.arpa
-chmod 600 /etc/bind/100.168.192.in-addr.arpa
-chown root /etc/bind/200.168.192.in-addr.arpa
-chmod 600 /etc/bind/200.168.192.in-addr.arpa
-chown root /etc/bind/0.168.192.in-addr.arpa
-chmod 600 /etc/bind/0.168.192.in-addr.arpa
-```
-
-</br>
-
-**12.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
+**10.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1078,7 +1051,7 @@ $TTL    1D
 
 </br>
 
-**13.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
+**11.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1094,7 +1067,7 @@ $TTL    1D
 
 </br>
 
-**14.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
+**12.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
 @       IN      SOA     au-team.irpo. root.au-team.irpo. (
@@ -1113,26 +1086,22 @@ $TTL    1D
 
 </br>
 
-**15.** В файле **`/etc/resolv.conf`** **всех машин** необходимо дописать следующую строчку:
-```
-nameserver 192.168.100.62
-```
 </br>
 
-**16.** После чего можно проверить **ошибки** командой:
+**13.** После чего можно проверить **ошибки** командой:
 ```
 named-checkconf -z
 ```
 </br>
 
-**17.** А также перезапускаем **`bind`** командой:
+**14.** А также перезапускаем **`bind`** командой:
 
 ```
 systemctl restart named bind9
 ```
 </br>
 
-**18.** Проверить работоспособность можно **командой**:
+**15.** Проверить работоспособность можно **командой**:
 ```
 nslookup **IP-адрес/DNS-имя**
 ```

@@ -395,7 +395,6 @@ P@ssw0rd
 ```yml
 usermod -aG sudo sshuser
 ```
-> Позволяет запускать **sudo** без аутентификации 
 
 <br/>
 
@@ -427,6 +426,7 @@ usermod -aG sudo sshuser
 ```yml
 net_admin ALL=(ALL) NOPASSWD:ALL
 ```
+> Позволяет запускать **sudo** без аутентификации
 
 <br/>
 

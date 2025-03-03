@@ -442,7 +442,7 @@ chronyc tracking | grep Stratum
 
 </br>
 
-## ✔️ Задание 4 - (Тестируется)
+## ✔️ Задание 4
 
 ### Сконфигурируйте ansible на сервере BR-SRV
 
@@ -531,7 +531,7 @@ ssh-copy-id net_admin@172.16.5.2
 
 ### Готовим файл инвентаря (hosts)
 
-**1.** Создаем файл инвентаря **`/etc/ansible/demo`**
+**1.** Создаем каталог, а также файл инвентаря **`/etc/ansible/demo`**
 ```
 nano /etc/ansible/demo
 ```
@@ -541,8 +541,8 @@ nano /etc/ansible/demo
 **2.** Приводим **файл** в следующий вид:
 >```
 >[hq]
->192.168.200.2 ansible_port=2024 ansible_user=sshuser
->192.168.100.62 ansible_user=user
+>192.168.100.62 ansible_port=2024 ansible_user=sshuser
+>192.168.200.2 ansible_user=user
 >172.16.4.2 ansible_user=net_admin
 >
 >[br]

@@ -945,21 +945,24 @@ sudo chown -R www-data:www-data /var/www/moodledata
 sudo chmod -R 770 /var/www/moodledata
 sudo chown -R www-data:www-data /var/www/moodle
 ```
+**11.** Далее переносим файлы в другой каталог
+mv -f /var/www/moodle/{.,}* /var/www/html/
+
 </br>
 
-**11.** Создание файла конфигурации **Apache**
+**12.** Создание файла конфигурации **Apache**
 ```
 sudo nano /etc/apache2/sites-available/moodle.conf
 ```
 </br>
 
-**12.** Вставляем следующие настройки в эту конфигурацию:
+**13.** Вставляем следующие настройки в эту конфигурацию:
 ```
 <VirtualHost *:80>
-    ServerAdmin admin@example.com
-    DocumentRoot /var/www/html/moodle
+    ServerAdmin hq-srv@au-team.irpo
+    DocumentRoot /var/www/html
     DirectoryIndex index.php
-    <Directory /var/www/html/moodle>
+    <Directory /var/www/html>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
@@ -970,14 +973,14 @@ sudo nano /etc/apache2/sites-available/moodle.conf
 ```
 </br>
 
-**13.** Активируем новый сайт и модули:
+**14.** Активируем новый сайт и модули:
 ```
 sudo a2ensite moodle.conf
 sudo a2enmod rewrite
 ```
 </br>
 
-**14.** Перезапускаем **Apache**:
+**15.** Перезапускаем **Apache**:
 ```
 sudo systemctl restart apache2
 ```
@@ -985,7 +988,7 @@ sudo systemctl restart apache2
 
 ## Настройка в Moodle в Web-интерфейсе
 
-**1.** Откройте веб-браузер и перейдите по адресу http://192.168.100.62/moodle.
+**1.** Откройте веб-браузер и перейдите по адресу http://192.168.100.62.
 
 **2.** В процессе установки укажите данные для подключения к базе данных:
 

@@ -908,13 +908,13 @@ systemctl restart mariadb-server
 
 **5.** Заходим в директорию где будет установлен **moodle**
 ```
-cd /var/www/
+cd /tmp
 ```
 </br>
 
 **6.** Клонируем репозиторий **Moodle**:
 ```
-sudo git clone git://git.moodle.org/moodle.git
+git clone git://git.moodle.org/moodle.git
 ```
 </br>
 
@@ -933,20 +933,21 @@ git tag
 
 **9.** Клонирование репозитория **Moodle**
 ```
-sudo git checkout -t origin/MOODLE_452_STABLE
+sudo git checkout -t origin/MOODLE_405_STABLE
                                     ^ данная версия актуальна в момент написания методички, проверяйте версию в git tag
 ```
 </br>
 
 **10.** Настройка директорий и прав:
 ```
+sudo mkdir -p /var/www/html/moodle
 sudo mkdir -p /var/www/moodledata
 sudo chown -R www-data:www-data /var/www/moodledata
 sudo chmod -R 770 /var/www/moodledata
-sudo chown -R www-data:www-data /var/www/moodle
+sudo chown -R www-data:www-data /var/www/html/moodle
 ```
 **11.** Далее переносим файлы в другой каталог
-mv -f /var/www/moodle/{.,}* /var/www/html/
+mv -f /tmp/moodle/{.,}* /var/www/html/moodle
 
 </br>
 
@@ -960,9 +961,9 @@ sudo nano /etc/apache2/sites-available/moodle.conf
 ```
 <VirtualHost *:80>
     ServerAdmin hq-srv@au-team.irpo
-    DocumentRoot /var/www/html
+    DocumentRoot /var/www/html/moodle/
     DirectoryIndex index.php
-    <Directory /var/www/html>
+    <Directory /var/www/html/moodle/>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted

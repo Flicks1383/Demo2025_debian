@@ -857,9 +857,9 @@ sudo mysql -u root -p
 
 **4.** **Создайте** базу данных и пользователя:
 ```
-CREATE DATABASE moodledb;
+CREATE DATABASE moodledb DEFAULT CHARACTER SET utf8;
 CREATE USER 'moodle'@'localhost' IDENTIFIED BY 'P@ssw0rd';
-GRANT ALL PRIVILEGES ON moodledb.* TO 'moodle'@'localhost';
+GRANT ALL ON moodledb.* TO 'moodle'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```

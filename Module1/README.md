@@ -402,8 +402,16 @@ usermod -aG sudo sshuser
 ```yml
 sshuser ALL=(ALL) NOPASSWD:ALL
 ```
-> Позволяет запускать **sudo** без аутентификации 
+> Позволяет запускать **sudo** без аутентификации
 
+<br/>
+
+**4.** Создаем и задаем необходимые права на домашнюю папку
+```
+mkdir /home/sshuser
+chown sshuser:sshuser /home/sshsuer
+chmod 700 /home/sshuser
+```
 <br/>
 
 ### Пользователь `net_admin` на *HQ-RTR и BR-RTR*
@@ -414,20 +422,27 @@ useradd net_admin
 passwd net_admin
 P@$$word
 ```
-
 <br/>
 
 **2.** После чего даем пользователю *root* права:
 ```yml
 usermod -aG sudo sshuser
 ```
+<br/>
 
 **3.** Добавляем следующую строку в **`/etc/sudoers`**:
 ```yml
 net_admin ALL=(ALL) NOPASSWD:ALL
 ```
 > Позволяет запускать **sudo** без аутентификации
+<br/>
 
+**4.** Создаем и задаем необходимые права на домашнюю папку
+```
+mkdir /home/net_admin
+chown sshuser:sshuser /home/net_admin
+chmod 700 /home/net_admin
+```
 <br/>
 
 </details>

@@ -835,8 +835,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 **1.** Устанавливаем необходимые **пакеты**:
 ```
 sudo apt update
-
-sudo apt install -y apache2 mariadb-server mariadb-client php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git
+sudo apt install -y apache2 mariadb-server mariadb-client php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git php-intl php-soap
 ```
 </br>
 
@@ -899,10 +898,10 @@ EXIT;
 
 **5.** Перезапускаем MariaDB:
 ```
-systemctl restart mariadb-server
+systemctl restart mariadb
 ```
 
-## Установка *Moodle* через *Git*
+## Установка *Moodle*
 
 ### HQ-SRV
 
@@ -914,50 +913,38 @@ cd /tmp
 
 **6.** Клонируем репозиторий **Moodle**:
 ```
-git clone git://git.moodle.org/moodle.git
+wget https://packaging.moodle.org/stable405/moodle-latest-405.tgz -P /tmp
+На момент написания методички эта ссылка ^ правильна, на месте можно сверить.
 ```
 </br>
 
-**7.** Переходим в директорию **Moodle**
+**7.** Распаковываем скачаный архив
 ```
-cd moodle
+tar -xzf /tmp/moodle-latest-405.tgz
 ```
-</br>
+**8.** Далее переносим файлы в другой каталог
+```
+mkdir -p /var/www/html/moodle
+mv -f /tmp/moodle/{.,}* /var/www/html/moodle
+```
 
-**8.** Чтобы узнать, какая версия является последней доступной, выполните:
+**8.** Настройка директорий и прав:
 ```
-cd moodle
-git tag
-```
-</br>
-
-**9.** Клонирование репозитория **Moodle**
-```
-sudo git checkout -t origin/MOODLE_405_STABLE
-                                    ^ данная версия актуальна в момент написания методички, проверяйте версию в git tag
-```
-</br>
-
-**10.** Настройка директорий и прав:
-```
-sudo mkdir -p /var/www/html/moodle
 sudo mkdir -p /var/www/moodledata
 sudo chown -R www-data:www-data /var/www/moodledata
 sudo chmod -R 770 /var/www/moodledata
 sudo chown -R www-data:www-data /var/www/html/moodle
 ```
-**11.** Далее переносим файлы в другой каталог
-mv -f /tmp/moodle/{.,}* /var/www/html/moodle
 
 </br>
 
-**12.** Создание файла конфигурации **Apache**
+**9.** Создание файла конфигурации **Apache**
 ```
-sudo nano /etc/apache2/sites-available/moodle.conf
+nano /etc/apache2/sites-available/moodle.conf
 ```
 </br>
 
-**13.** Вставляем следующие настройки в эту конфигурацию:
+**10.** Вставляем следующие настройки в эту конфигурацию:
 ```
 <VirtualHost *:80>
     ServerAdmin hq-srv@au-team.irpo
@@ -971,6 +958,42 @@ sudo nano /etc/apache2/sites-available/moodle.conf
     ErrorLog ${APACHE_LOG_DIR}/moodle_error.log
     CustomLog ${APACHE_LOG_DIR}/moodle_access.log combined
 </VirtualHost>
+```
+</br>
+
+**11.** Переходим в настройку файла `php.ini`
+```
+nano /etc/php/8.2/cli/php.ini
+```
+</br>
+
+Прошимаем клавиши *ctrl + w* и пишем `max_input_vars`  
+После знака *=* прописываем *5000*  
+```
+max_input_vars = 5000
+```
+</br>
+
+**12.** Далее создаем файл и добавляем в него текст:
+```
+nano /var/www/html/.htaccess
+```
+</br>
+
+```
+php_value max_input_vars 5000
+```
+</br>
+
+**13.** После чего переходим к конфигурации следующего файла:
+```
+nano /etc/apache2/apache2.conf
+```
+</br>
+
+Делаем поиск по тексту `Directory /var/www` и меняем параметр:
+```
+AllowOverride All
 ```
 </br>
 
@@ -989,7 +1012,7 @@ sudo systemctl restart apache2
 
 ## Настройка в Moodle в Web-интерфейсе
 
-**1.** Откройте веб-браузер и перейдите по адресу http://192.168.100.62.
+**1.** Откройте веб-браузер и перейдите по адресу http://192.168.100.62/moodle
 
 **2.** В процессе установки укажите данные для подключения к базе данных:
 

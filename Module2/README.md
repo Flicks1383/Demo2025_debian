@@ -808,7 +808,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 
 <br/>
 
-## ✔️ Задание 7 (Тестируется)
+## ✔️ Задание 7
 
 ### Запустите сервис moodle на сервере HQ-SRV:
 

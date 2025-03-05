@@ -310,14 +310,17 @@
 # Настройка в текстовом файле (если настроил в *nmtui*, сюда не лезь)
 
 <br/>
+
 <details>
 <summary><strong>Настройка в файле</strong></summary>
 <br/>
 
 # adwafsa
 
+
+</details>
+
 <br/>
-<details>
 
 ## ✔️ Задание 2
 

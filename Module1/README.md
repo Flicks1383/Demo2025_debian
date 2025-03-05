@@ -498,7 +498,7 @@ chmod 700 /home/net_admin
 <br/>
 
 <details>
-<summary>[Решение]</summary>
+<summary>Настройка в nmtui</summary>
 <br/>
 
 ## Конфигурация VLAN на HQ-RTR
@@ -530,7 +530,18 @@ chmod 700 /home/net_admin
 </details>
 
 <br/>
+ 
+<br/>
 
+<details>
+<summary>Настройка в файле</summary>
+<br/>
+
+чвапчп
+  
+</details>
+
+<br/>
 ## ✔️ Задание 5
 
 ### Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV

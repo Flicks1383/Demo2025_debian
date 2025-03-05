@@ -348,6 +348,7 @@ sudo apt install chrony
 
 server 127.0.0.1 iburst prefer
 local stratum 5
+allow 172.16.0.0/30
 allow 192.168.100.0/26
 allow 192.168.200.0/28
 allow 192.168.0.0/27

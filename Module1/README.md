@@ -537,11 +537,44 @@ chmod 700 /home/net_admin
 <summary>Настройка в файле</summary>
 <br/>
 
-чвапчп
-  
+## Для начала установи пакет *vlan*:
+```
+apt install vlan
+```
+
+После чего добавляем модуль *`modprobe 8021q`* командой:
+```
+echo 8021q >> /etc/modules
+```
+Далее переходим к конфигурации файла `/etc/network/interfaces` и приводим ее к виду:
+
+```
+# The primary network interface
+allow-hotplug ens161
+iface ens161 inet static
+address 172.16.4.2
+netmask 255.255.255.240
+gateway 172.16.4.1
+
+auto ens192
+iface ens192 inet dhcp
+
+auto ens192.100
+iface ens192.100 inet static
+address 192.168.100.1
+netmask 255.255.255.192
+dns-nameservers 192.168.100.62
+
+auto ens192.200
+iface ens192.200 inet static
+address 192.168.200.1/28
+dns-nameservers 192.168.100.62
+```
+
 </details>
 
 <br/>
+
 ## ✔️ Задание 5
 
 ### Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV
@@ -612,7 +645,7 @@ systemctl restart sshd
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка в nmtui</strong></summary>
 <br/>
 
 # > Конфигурация GRE туннеля <
@@ -688,6 +721,47 @@ systemctl restart sshd
       
       systemctl restart networking **или** NetworkManager
       
+</details>
+
+<br/>
+
+<br/>
+
+<details>
+<summary><strong>Настройка в файле</strong></summary>
+<br/>
+
+Для настройки *GRE* туннеля на *HQ-RTR* переходим в файл конфигурации
+```
+nano /etc/network/interfaces
+```
+
+И приводим добавляем следующий текст:
+```
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.1/30
+mode gre
+local 172.16.4.2
+endpoint 172.16.5.2
+ttl 64
+```
+
+Для настройки *GRE* туннеля на *BR-RTR* переходим в файл конфигурации
+```
+nano /etc/network/interfaces
+```
+
+И приводим добавляем следующий текст:
+```
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.2/30
+mode gre
+local 172.16.5.2
+endpoint 172.16.4.2
+ttl 64
+```
 </details>
 
 <br/>

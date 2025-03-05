@@ -307,7 +307,7 @@
 
 <br/>
 
-# Настройка адресации в текстовом файле  
+## Настройка адресации в текстовом файле  
 (Если настроил в *nmtui*, сюда не лезь)
 
 <br/>
@@ -315,11 +315,34 @@
 <summary><strong>Настройка в файле</strong></summary>
 <br/>
 
-# adwafsa
+# Настройка адресации всех устройств производится в файле `/etc/network/interfaces`
+Конфигурация файла на примере *ISP*:
+```
+nano /etc/network/interfaces
+```
 
+```
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug ens192
+iface ens192 inet dhcp
+
+auto ens161
+iface ens161 inet static
+address 172.16.4.1
+netmask 255.255.255.240
+
+auto ens224 
+face ens224 inet static
+address 172.16.5.1
+netmask 255.255.255.240
+```
+По этому примеру настраиваются все интерфейсы на всех устройствах. Заменяются только *адреса*, *маски*, *интерфейсы*
 
 </details>
-
 <br/>
 
 ## ✔️ Задание 2

@@ -76,6 +76,13 @@
 
 </br>
 
+### Репозитории добряков откуда взят материал:
++ **>[damh66](https://github.com/damh66/demo2025)**
++ **>[ItsLiventsev](https://github.com/ItsLiventsev/NetSys_Demo_2025?tab=readme-ov-file)**
++ **>[abdurrah1m](https://github.com/abdurrah1m/DEMO2025/blob/main/README.md)**
++ **>[doughboyjaba](https://github.com/doughboyjaba/demo25)**
++ **>[каб-220](http://каб-220.рф/ru/demo-2025/modul-1/modul-1-1)**
+
 ## Решения проблем
 
 

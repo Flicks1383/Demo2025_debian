@@ -740,7 +740,8 @@ nano /etc/network/interfaces
 ```
 auto gre1
 iface gre1 inet tunnel
-address 172.16.0.1/30
+address 172.16.0.1
+netmask 255.255.255.252
 mode gre
 local 172.16.4.2
 endpoint 172.16.5.2
@@ -756,7 +757,8 @@ nano /etc/network/interfaces
 ```
 auto gre1
 iface gre1 inet tunnel
-address 172.16.0.2/30
+address 172.16.0.2
+netmask 255.255.255.252
 mode gre
 local 172.16.5.2
 endpoint 172.16.4.2

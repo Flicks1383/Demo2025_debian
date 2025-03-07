@@ -806,9 +806,10 @@ ospfd = yes
 
 ```
 
-**3.** Далее включаем и добавляем в автозагрузку службу **`FRR`**
+**3.** Далее перезаргужаем и добавляем в автозагрузку службу **`FRR`**
 
 ```
+systemctl restart frr
 systemctl enable --now frr
 ```
 
@@ -825,8 +826,8 @@ router ospf
   passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
-  network 192.168.100.0/28 area 1
-  network 192.168.200.0/26 area 2
+  network 192.168.100.0/26 area 1
+  network 192.168.200.0/28 area 2
   area 0 authentication
 exit
 

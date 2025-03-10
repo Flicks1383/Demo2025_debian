@@ -1135,7 +1135,7 @@ search yandex.ru
 ```
 zone "au-team.irpo" {
   type master;
-  file "/etc/bind/au-team.irpo.db";
+  file "/etc/bind/au-team.irpo";
 };
 
 zone "100.168.192.in-addr.arpa" {

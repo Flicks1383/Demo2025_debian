@@ -778,6 +778,8 @@ ttl 64
 sudo nano /etc/systemd/system/iproute.service
 ```
 
+<br/>
+
 После чего добавляем текст:
 ```
 [Unit]
@@ -792,6 +794,8 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 ```
+
+<br/>
 
 На роутере *BR-RTR* создаем тот же файли настраивеим:
 ```
@@ -810,6 +814,9 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 ```
+
+<br/>
+
 После на обоих устройствах прописываем:
 ```
 systemctl daemon-reload

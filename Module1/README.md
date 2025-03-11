@@ -765,15 +765,56 @@ endpoint 172.16.4.2
 ttl 64
 ```
 
+
+<br/>
+
+<details>
+<summary><strong>Настройка маршрутов</strong></summary>
+<br/>
+
 После создания влана настраиваем маршрут для подсетей (чтобы они видели друг друга)  
 На роутере *HQ-RTR* настройка выглядит так:
 ```
-ip route add 192.168.0.0/27 via 172.16.0.2 dev gre1
+sudo nano /etc/systemd/system/iproute.service
 ```
-На роутере *BR-RTR* настройка выглядит так:
+
+После чего добавляем текст:
 ```
-ip route add 192.168.100.0/26 via 172.16.0.1 dev gre1
-ip route add 192.168.200.0/28 via 172.16.0.1 dev gre1
+[Unit]
+Description=iproute
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip route add 192.168.0.0/27 via 172.16.0.2 dev gre1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+На роутере *BR-RTR* создаем тот же файли настраивеим:
+```
+sudo nano /etc/systemd/system/iproute.service
+Для HQ-RTR:
+[Unit]
+Description=iproute
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip route add 192.168.100.0/26 via 172.16.0.1 dev gre1
+ExecStart=/sbin/ip route add 192.168.200.0/28 via 172.16.0.1 dev gre1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+После на обоих устройствах прописываем:
+```
+systemctl daemon-reload
+systemctl enable iproute.service
+systemctl start iproute.service
 ```
 
 </details>

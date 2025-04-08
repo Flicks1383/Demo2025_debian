@@ -1063,10 +1063,7 @@ systemctl enable --now named
 
 ```
 search au-team.irpo
-nameserver 127.0.0.1
 nameserver 192.168.100.62
-nameserver 77.88.8.8
-search yandex.ru
 ```
 </br>
 

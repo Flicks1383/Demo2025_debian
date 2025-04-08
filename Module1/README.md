@@ -783,7 +783,7 @@ router ospf
   area 0 authentication
 exit
 
-int tun1
+int gre1
   no ip ospf network broadcast
   no ip ospf passive
   ip ospf authentication
@@ -818,7 +818,7 @@ router ospf 1
   area 0 authentication
 exit
 
-int tun1
+int gre1
   no ip ospf network broadcast
   no ip ospf passive
   ip ospf authentication

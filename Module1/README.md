@@ -498,42 +498,6 @@ chmod 700 /home/net_admin
 <br/>
 
 <details>
-<summary>Настройка в nmtui</summary>
-<br/>
-
-## Конфигурация VLAN на HQ-RTR
-### Первым делом необхходимо создать VLAN в утилите `nmtui`:
-
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5.png" alt="" />
-</p>
-
-После чего требуется настроить его название и интерфейс (название интерфейса берете с настроек *nmtui*) а также его MAC адрес:
-
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0.png" alt="" />
-</p>
-
-После чего аналогичным образом создаем интерфейс для клиентского компа и настраиваем его.  
-Далее переходим на сервер, создаем и переходим к конфигурации *VLAN'а*
-
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLAN%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0SRV.png" alt="" />
-</p>
-
-После чего переходим на клиентский комп и при помощи *nmtui* создаем VLAN и настраиваеи его.  
-
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/VLANcli.png" alt="" />
-</p>
-
-</details>
-
-<br/>
- 
-<br/>
-
-<details>
 <summary>Настройка в файле</summary>
 <br/>
 
@@ -556,19 +520,23 @@ address 172.16.4.2
 netmask 255.255.255.240
 gateway 172.16.4.1
 
-auto ens192
-iface ens192 inet dhcp
+auto ens224
+iface ens224 inet static
+address 192.168.100.1/26
 
-auto ens192.100
-iface ens192.100 inet static
-address 192.168.100.1
-netmask 255.255.255.192
-dns-nameservers 192.168.100.62
-
-auto ens192.200
-iface ens192.200 inet static
+auto ens224:1
+iface ens224:1 inet static
 address 192.168.200.1/28
-dns-nameservers 192.168.100.62
+
+auto ens224.100
+iface ens224.100 inet static
+address 192.168.100.3/26
+vlan-raw-device ens224
+
+auto ens224.200
+iface ens224.200 inet static
+address 192.168.200.3/28
+vlan-raw-device ens224:1
 ```
 
 </details>

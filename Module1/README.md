@@ -1208,19 +1208,19 @@ nslookup **IP-адрес/DNS-имя**
 ```
 </br>
 
-# Укажите интерфейс, на котором будет работать dnsmasq
-interface=eth0  # Замените на ваш интерфейс
-
-# Укажите, какие адреса будут выдаваться
-domain-needed
-bogus-priv
-no-resolv
-server=8.8.8.8  # Используйте DNS-сервер Google
-server=1.1.1.1   # Используйте DNS-сервер Cloudflare
-
-# Укажите домен и IP-адрес
-address=/example.com/192.0.2.1  # Замените на ваш IP-адрес
-
+Укажите интерфейс, на котором будет работать dnsmasq  
+interface=eth0  # Замените на ваш интерфейс  
+  
+Укажите, какие адреса будут выдаваться  
+domain-needed  
+bogus-priv  
+no-resolv  
+server=8.8.8.8  # Используйте DNS-сервер Google  
+server=1.1.1.1   # Используйте DNS-сервер Cloudflare  
+  
+Укажите домен и IP-адрес  
+address=/example.com/192.0.2.1  # Замените на ваш IP-адрес  
+  
 
 
 

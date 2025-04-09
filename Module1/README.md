@@ -77,9 +77,9 @@
   
 <br/>
 
-  - Для **Linux** используется команда <strong>`hostnamectl set-hostname (имя устройства.au-team.irpo)`</strong>
-
-<br/>   
+  - Для **Linux** используется команда: <strong>`hostnamectl set-hostname (имя устройства.au-team.irpo)`</strong>
+  
+  - Обновить имя можно введя команду: **`bash`**
 
 > <strong>ISP</strong>: `hostnamectl set-hostname isp.au-team.irpo`
 >
@@ -94,7 +94,6 @@
 > <strong>BR-SRV</strong>: `hostnamectl set-hostname br-srv.au-team.irpo`
 
 </details>
-
 
 <details>
 <summary><strong>Таблицы сетей</strong></summary>
@@ -245,7 +244,7 @@
 <br/>
 
 
-### Настройка адресации всех устройств производится в файле `/etc/network/interfaces`
+### Настройка адресации
 ##
 Конфигурация файла на примере **`ISP`**:
 #### По этому примеру настраиваются все интерфейсы _НА ВСЕХ УСТРОЙСТВАХ_. Заменяются только *`адреса`*, *`маски`*, *`интерфейсы`*

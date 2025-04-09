@@ -1381,6 +1381,10 @@ address=/br-rtr.au-team.irpo/192.168.0.1
 address=/br-srv.au-team.irpo/192.168.0.2
 address=/hq-cli.au-team.irpo/192.168.200.4
 ```
+После чего, на ВСЕХ машинах, в конфигурационном файле `/etc/resolv.conf` добавляем строку:
+```
+nameserver 192.168.100.62
+```
 
 </details>
   

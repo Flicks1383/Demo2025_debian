@@ -295,7 +295,7 @@ netmask 255.255.255.240
 <br/>
 
 <details>
-<summary><strong>Настройка динамической маршрутизации <code>NAT</code></strong></summary>
+<summary><strong>Настройка динамической трансляции <code>NAT</code></strong></summary>
 <br/>
 
 

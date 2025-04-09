@@ -11,7 +11,7 @@
 <br/>
 
 > [!NOTE]
-> Для удобства проверки адресации можно использовать:
+> **Для удобства проверки адресации можно использовать:**
 >
 > ```
 > ip -c -br a \\\ кратко - четко
@@ -51,15 +51,16 @@
   </tbody>
 </table>
 
+</br>
 
 ## ✔️ Задание 1
-### Произведите базовую настройку устройств
+### Произведите `базовую` настройку устройств
 
 > [!WARNING]
-> **При использовании `nmtui` для сетевой настройки ни в коем случае не редактируйте `/etc/network/interfaces`, иначе отключите сервис `nmtui`, так как возникает конфликт между двумя сервисами настройки сети.**
+> В инструкции по сетевой настройке используется редактирование: <strong>`etc/network/interfaces`</strong>
 
 > [!NOTE]
-> **По ходу выполнения заданий, можно воспользоваться сразу же редактором файла NANO**
+> **Используй редактор файлов: `nano`**
 
 - Настройте имена устройств согласно топологии. Используйте полное доменное имя
 - На всех устройствах необходимо сконфигурировать IPv4
@@ -76,7 +77,7 @@
   
 <br/>
 
-  - Для **Linux** используется команда `hostnamectl set-hostname (имя устройства.au-team.irpo)`
+  - Для **Linux** используется команда <strong>`hostnamectl set-hostname (имя устройства.au-team.irpo)`</strong>
 
 <br/>   
 
@@ -107,24 +108,24 @@
     <td align="center"><strong>Пул-адресов</strong></td>
   </tr>
   <tr>
-    <td align="center">SRV-Net (VLAN 200)</td>
-    <td align="center">192.168.200.0/26</td>
-    <td align="center">192.168.200.1 - 62</td>
+    <td align="center">SRV-Net (VLAN 100)</td>
+    <td align="center">192.168.100.0/26</td>
+    <td align="center">192.168.100.1-62</td>
   </tr>
   <tr>
-    <td align="center">CLI-Net (VLAN 100)</td>
-    <td align="center">192.168.100.0/28</td>
-    <td align="center">192.168.100.1 - 14</td>
-  </tr>
-  <tr>
-    <td align="center">BR-Net</td>
-    <td align="center">192.168.0.0/27</td>
-    <td align="center">192.168.0.1 - 30</td>
+    <td align="center">CLI-Net (VLAN 200)</td>
+    <td align="center">192.168.200.0/28</td>
+    <td align="center">192.168.200.1-14</td>
   </tr>
   <tr>
     <td align="center">MGMT (VLAN 999)</td>
     <td align="center">192.168.99.0/29</td>
-    <td align="center">192.168.99.1 - 6</td>
+    <td align="center">192.168.99.1-6</td>
+  </tr>
+  <tr>
+    <td align="center">BR-Net</td>
+    <td align="center">192.168.0.0/27</td>
+    <td align="center">192.168.0.1-30</td>
   </tr>
   <tr>
     <td align="center">ISP-HQ</td>
@@ -152,21 +153,21 @@
   </tr>
   <tr>
     <td align="center" rowspan="3">ISP</td>
-      <td align="center">ens192</td>
-    <td align="center">192.168.###.### (DHCP)</td>
-    <td align="center">/##</td>
-    <td align="center">192.168.###.###</td>
+    <td align="center">??</td>
+    <td align="center">(DHCP)</td>
+    <td align="center">(DHCP)</td>
+    <td align="center">(DHCP)</td>
     <td align="center">INTERNET</td>
   </tr>
   <tr>
-    <td align="center">ens161</td>
+    <td align="center">??</td>
     <td align="center">172.16.4.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
     <td align="center">ISP-HQ-RTR</td>
   </tr>
   <tr>
-    <td align="center">ens224</td>
+    <td align="center">??</td>
     <td align="center">172.16.5.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
@@ -174,21 +175,21 @@
   </tr>
   <tr>
     <td align="center" rowspan="3">HQ-RTR</td>
-    <td align="center">ens256</td>
+    <td align="center">??</td>
     <td align="center">172.16.4.2</td>
     <td align="center">/28</td>
     <td align="center">172.16.4.1</td>
     <td align="center">ISP-HQ-RTR</td>
   </tr>
   <tr>
-    <td align="center">vlan200/ens224</td>
+    <td align="center">ens224.200</td>
     <td align="center">192.168.200.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
     <td align="center">HQ-RTR-CLI</td>
   </tr>
   <tr>
-    <td align="center">vlan100/ens161</td>
+    <td align="center">ens224.100</td>
     <td align="center">192.168.100.1</td>
     <td align="center">/26</td>
     <td align="center"></td>
@@ -239,16 +240,15 @@
 </br>
 </details>
 
-## Настройка адресации в текстовом файле  
-(Если настроил в *nmtui*, сюда не лезь)
-
-<br/>
 <details>
-<summary><strong>Настройка в файле</strong></summary>
+<summary><strong>Настройка адрессации в файле <code>etc/network/interfaces</code></strong></summary>
 <br/>
 
-# Настройка адресации всех устройств производится в файле `/etc/network/interfaces`
-Конфигурация файла на примере *ISP*:
+
+### Настройка адресации всех устройств производится в файле `/etc/network/interfaces`
+##
+Конфигурация файла на примере **`ISP`**:
+#### По этому примеру настраиваются все интерфейсы _НА ВСЕХ УСТРОЙСТВАХ_. Заменяются только *`адреса`*, *`маски`*, *`интерфейсы`*
 ```
 nano /etc/network/interfaces
 ```
@@ -272,14 +272,13 @@ face ens224 inet static
 address 172.16.5.1
 netmask 255.255.255.240
 ```
-По этому примеру настраиваются все интерфейсы на всех устройствах. Заменяются только *адреса*, *маски*, *интерфейсы*
 
 </details>
 <br/>
 
 ## ✔️ Задание 2
 
-### Настройка ISP
+### Настройка `ISP`
 
 - Настройте адресацию на интерфейсах:
 
@@ -296,21 +295,27 @@ netmask 255.255.255.240
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка динамической маршрутизации <code>NAT</code></strong></summary>
 <br/>
 
 
-### Настройка динамической сетевой трансляции на `ISP`
+### Настройка динамической сетевой трансляции на _`ISP`_
 
 ```
 echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
-apt-get install iptables iptables-persistent –y  
+```
+```
+apt-get install iptables iptables-persistent –y
+```
+```
 iptables –t nat –A POSTROUTING –s 172.16.4.0/28 –o ens192 –j MASQUERADE  
 iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
 
+> **`ens192`** - интерфейс с которого приходит **интернет**
+> 
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети
 
 #
@@ -347,10 +352,10 @@ systemctl restart netfilter-persistent
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Как создать <code>sshuser</code></strong></summary>
 <br/>
 
-### Создание учёток `sshuser` производится на HQ-SRV и BR-SRV
+- ### Создание учёток _`sshuser`_ производится на _`HQ-SRV`_ и _`BR-SRV`_
 
 **1.** Создаём sshuser следующими командами:
 ```
@@ -382,8 +387,13 @@ chown sshuser:sshuser /home/sshsuer
 chmod 700 /home/sshuser
 ```
 <br/>
+</details>
 
-### Пользователь `net_admin` на *HQ-RTR и BR-RTR*
+<details>
+<summary><strong>Как создать <code>net_admin</code></strong></summary>
+<br/>
+
+- ### Пользователь _`net_admin`_ на *HQ-RTR и BR-RTR*
 
 **1.** Создаём **`net_admin`**, следующими командами, но уже без `-u 1010` и с новым паролем:
 ```
@@ -395,7 +405,7 @@ P@$$word
 
 **2.** После чего даем пользователю *root* права:
 ```yml
-usermod -aG sudo sshuser
+usermod -aG sudo net_admin
 ```
 <br/>
 
@@ -409,7 +419,7 @@ net_admin ALL=(ALL) NOPASSWD:ALL
 **4.** Создаем и задаем необходимые права на домашнюю папку
 ```
 mkdir /home/net_admin
-chown sshuser:sshuser /home/net_admin
+chown net_admin:net_admin /home/net_admin
 chmod 700 /home/net_admin
 ```
 <br/>
@@ -426,23 +436,24 @@ chmod 700 /home/net_admin
 - Клиент HQ-CLI в ID VLAN 200
 - Создайте подсеть управления с ID VLAN 999
 - Основные сведения о настройке коммутатора и выбора реализации разделения на VLAN занесите в отчёт
-
 <br/>
 
 <details>
-<summary>Настройка в файле</summary>
-<br/>
+<summary><strong>Настройка VLAN на <code>HQ-RTR</code></strong></summary>
 
-## Для начала установи пакет *vlan*:
+## Настройка VLAN на **`HQ-RTR`**
+
+- Для начала установи пакет _**`vlan`**_:
+
 ```
 apt install vlan
 ```
 
-После чего добавляем модуль *`modprobe 8021q`* командой:
+- После чего добавляем модуль _**`modprobe 8021q`**_ командой:
 ```
 echo 8021q >> /etc/modules
 ```
-Далее переходим к конфигурации файла `/etc/network/interfaces` и приводим ее к виду:
+- Далее переходим к конфигурации файла _**`/etc/network/interfaces`**_ и приводим ее к виду:
 
 ```
 # The primary network interface

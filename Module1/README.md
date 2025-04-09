@@ -19,6 +19,39 @@
 > ip -c a \\\ где мой серый мир
 > ```
 
+<table>
+  <thead>
+    <tr>
+      <th>Маска подсети</th>
+      <th>Полная маска</th>
+      <th>Сколько адресов вмещает</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/26</td>
+      <td>255.255.255.192</td>
+      <td align="center">62</td>
+    </tr>
+    <tr>
+      <td>/27</td>
+      <td>255.255.255.224</td>
+      <td align="center">30</td>
+    </tr>
+    <tr>
+      <td>/28</td>
+      <td>255.255.255.240</td>
+      <td align="center">14</td>
+    </tr>
+    <tr>
+      <td>/29</td>
+      <td>255.255.255.248</td>
+      <td align="center">6</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## ✔️ Задание 1
 ### Произведите базовую настройку устройств
 
@@ -37,10 +70,33 @@
 - Локальная сеть для управления(VLAN999) должна вмещать не более 8 адресов
 - Сведения об адресах занесите в отчёт, в качестве примера используйте Таблицу 3
 <br/>
+
 <details>
-<summary><strong>Таблицы сети</strong></summary>
+<summary><strong>Настройка имени</strong></summary>
+  
 <br/>
-### <p align="center"><strong>Таблицы адрессации </strong></p>
+
+  - Для **Linux** используется команда `hostnamectl set-hostname (имя устройства.au-team.irpo)`
+
+<br/>   
+
+> <strong>ISP</strong>: `hostnamectl set-hostname isp.au-team.irpo`
+>
+> <strong>HQ-RTR</strong>: `hostnamectl set-hostname hq-rtr.au-team.irpo`
+>
+> <strong>BR-RTR</strong>: `hostnamectl set-hostname br-rtr.au-team.irpo`
+>
+> <strong>HQ-SRV</strong>: `hostnamectl set-hostname hq-srv.au-team.irpo`
+>
+> <strong>HQ-CLI</strong>: `hostnamectl set-hostname hq-cli.au-team.irpo`
+>
+> <strong>BR-SRV</strong>: `hostnamectl set-hostname br-srv.au-team.irpo`
+
+</details>
+
+
+<details>
+<summary><strong>Таблицы сетей</strong></summary>
 
 <br/>
 
@@ -83,7 +139,7 @@
 </table>
 <p align="center"><strong>Таблица подсетей</strong></p>
 
-# <br/>
+#
 
 <table align="center">
   <tr>
@@ -186,169 +242,8 @@
 <details>
 <summary><strong>Настройка при помощи *nmtui*</strong></summary>
 <br/>
+
   
-   ## > Настройка имени устройств <
-   
-  - Для **Linux** используется команда `hostnamectl set-hostname (имя устройства.au-team.irpo)`
-    
-  - Для **EcoRouter** используется команда `hostname (имя устройства)`
-    
->ISP: `isp.au-team.irpo`
->
->HQ-RTR: `hq-rtr.au-team.irpo`
->
-> BR-RTR: `br-rtr.au-team.irpo`
->
-> HQ-SRV: `hq-srv.au-team.irpo`
->
-> HQ-CLI: `hq-cli.au-team.irpo`
->
-> BR-SRV: `br-srv.au-team.irpo`
-
-#
-
-### <p align="center"><strong>Таблицы адрессации </strong></p>
-
-<br/>
-
-<table align="center">
-  <tr>
-    <td align="center"><strong>Сеть</strong></td>
-    <td align="center"><strong>Адрес подсети</strong></td>
-    <td align="center"><strong>Пул-адресов</strong></td>
-  </tr>
-  <tr>
-    <td align="center">SRV-Net (VLAN 200)</td>
-    <td align="center">192.168.200.0/26</td>
-    <td align="center">192.168.200.1 - 62</td>
-  </tr>
-  <tr>
-    <td align="center">CLI-Net (VLAN 100)</td>
-    <td align="center">192.168.100.0/28</td>
-    <td align="center">192.168.100.1 - 14</td>
-  </tr>
-  <tr>
-    <td align="center">BR-Net</td>
-    <td align="center">192.168.0.0/27</td>
-    <td align="center">192.168.0.1 - 30</td>
-  </tr>
-  <tr>
-    <td align="center">MGMT (VLAN 999)</td>
-    <td align="center">192.168.99.0/29</td>
-    <td align="center">192.168.99.1 - 6</td>
-  </tr>
-  <tr>
-    <td align="center">ISP-HQ</td>
-    <td align="center">172.16.4.0/28</td>
-    <td align="center">172.16.4.1 - 14</td>
-  </tr>
-  <tr>
-    <td align="center">ISP-BR</td>
-    <td align="center">172.16.5.0/28</td>
-    <td align="center">172.16.5.1 - 14</td>
-  </tr>
-</table>
-<p align="center"><strong>Таблица подсетей</strong></p>
-
-# <br/>
-
-<table align="center">
-  <tr>
-    <td align="center"><strong>Устройство</strong></td>
-    <td align="center"><strong>Интерфейс</strong></td>
-    <td align="center"><strong>IPv4/IPv6</strong></td>
-    <td align="center"><strong>Маска/Префикс</strong></td>
-    <td align="center"><strong>Шлюз</strong></td>
-    <td align="center"><strong>Сеть</strong></td>
-  </tr>
-  <tr>
-    <td align="center" rowspan="3">ISP</td>
-      <td align="center">ens192</td>
-    <td align="center">192.168.###.### (DHCP)</td>
-    <td align="center">/##</td>
-    <td align="center">192.168.###.###</td>
-    <td align="center">INTERNET</td>
-  </tr>
-  <tr>
-    <td align="center">ens161</td>
-    <td align="center">172.16.4.1</td>
-    <td align="center">/28</td>
-    <td align="center"></td>
-    <td align="center">ISP-HQ-RTR</td>
-  </tr>
-  <tr>
-    <td align="center">ens224</td>
-    <td align="center">172.16.5.1</td>
-    <td align="center">/28</td>
-    <td align="center"></td>
-    <td align="center">ISP-BR-RTR</td>
-  </tr>
-  <tr>
-    <td align="center" rowspan="3">HQ-RTR</td>
-    <td align="center">ens256</td>
-    <td align="center">172.16.4.2</td>
-    <td align="center">/28</td>
-    <td align="center">172.16.4.1</td>
-    <td align="center">ISP-HQ-RTR</td>
-  </tr>
-  <tr>
-    <td align="center">vlan200/ens224</td>
-    <td align="center">192.168.200.1</td>
-    <td align="center">/28</td>
-    <td align="center"></td>
-    <td align="center">HQ-RTR-CLI</td>
-  </tr>
-  <tr>
-    <td align="center">vlan100/ens161</td>
-    <td align="center">192.168.100.1</td>
-    <td align="center">/26</td>
-    <td align="center"></td>
-    <td align="center">HQ-RTR-SRV</td>
-  </tr>
-  <tr>
-    <td align="center" rowspan="2">BR-RTR</td>
-    <td align="center">ens224</td>
-    <td align="center">172.16.5.2</td>
-    <td align="center">/28</td>
-    <td align="center">172.16.5.1</td>
-    <td align="center">ISP-BR-RTR</td>
-  </tr>
-  <tr>
-    <td align="center">ens256</td>
-    <td align="center">192.168.0.1</td>
-    <td align="center">/27</td>
-    <td align="center"></td>
-    <td align="center">BR-RTR-SRV</td>
-  </tr>
-  <tr>
-    <td align="center">HQ-SRV</td>
-    <td align="center">ens224</td>
-    <td align="center">192.168.100.62</td>
-    <td align="center">/26</td>
-    <td align="center">192.168.100.1</td>
-    <td align="center">HQ-RTR-SRV</td>
-  </tr>
-  <tr>
-    <td align="center">BR-SRV</td>
-    <td align="center">ens224</td>
-    <td align="center">192.168.0.2</td>
-    <td align="center">/27</td>
-    <td align="center">192.168.0.1</td>
-    <td align="center">BR-RTR-SRV</td>
-  </tr>
-  <tr>
-    <td align="center">HQ-CLI</td>
-    <td align="center">ens224</td>
-    <td align="center">192.168.200.##(DHCP)</td>
-    <td align="center">/28</td>
-    <td align="center">192.168.200.1</td>
-    <td align="center">HQ-RTR-CLI</td>
-  </tr>
-</table>
-<p align="center"><strong>Таблица адресации</strong></p>
-
-</br>
-
 ## <p align="center">> Настройка адрессации <</p>
 
 </br>

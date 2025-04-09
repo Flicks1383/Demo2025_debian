@@ -1010,7 +1010,7 @@ systemctl enable isc-dhcp-server
 <details>
 <summary><strong>bind9</strong></summary>
 
-  <br/>
+<br/>
 
 # > Настройка DNS <
 ### Основной DNS-сервер реализован на `HQ-SRV`
@@ -1018,7 +1018,7 @@ systemctl enable isc-dhcp-server
 
 ### HQ-SRV
 
- <br/>
+<br/>
 
 **1.** Для работы с **DNS** требуется установить **`bind`** и доп. пакет командой:
 
@@ -1208,6 +1208,7 @@ nslookup **IP-адрес/DNS-имя**
 ```
 </br>
 
+<details>
 
 <br/>
 

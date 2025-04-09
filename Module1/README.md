@@ -38,6 +38,152 @@
 - Сведения об адресах занесите в отчёт, в качестве примера используйте Таблицу 3
 <br/>
 <details>
+<summary><strong>Таблицы сети</strong></summary>
+<br/>
+### <p align="center"><strong>Таблицы адрессации </strong></p>
+
+<br/>
+
+<table align="center">
+  <tr>
+    <td align="center"><strong>Сеть</strong></td>
+    <td align="center"><strong>Адрес подсети</strong></td>
+    <td align="center"><strong>Пул-адресов</strong></td>
+  </tr>
+  <tr>
+    <td align="center">SRV-Net (VLAN 200)</td>
+    <td align="center">192.168.200.0/26</td>
+    <td align="center">192.168.200.1 - 62</td>
+  </tr>
+  <tr>
+    <td align="center">CLI-Net (VLAN 100)</td>
+    <td align="center">192.168.100.0/28</td>
+    <td align="center">192.168.100.1 - 14</td>
+  </tr>
+  <tr>
+    <td align="center">BR-Net</td>
+    <td align="center">192.168.0.0/27</td>
+    <td align="center">192.168.0.1 - 30</td>
+  </tr>
+  <tr>
+    <td align="center">MGMT (VLAN 999)</td>
+    <td align="center">192.168.99.0/29</td>
+    <td align="center">192.168.99.1 - 6</td>
+  </tr>
+  <tr>
+    <td align="center">ISP-HQ</td>
+    <td align="center">172.16.4.0/28</td>
+    <td align="center">172.16.4.1 - 14</td>
+  </tr>
+  <tr>
+    <td align="center">ISP-BR</td>
+    <td align="center">172.16.5.0/28</td>
+    <td align="center">172.16.5.1 - 14</td>
+  </tr>
+</table>
+<p align="center"><strong>Таблица подсетей</strong></p>
+
+# <br/>
+
+<table align="center">
+  <tr>
+    <td align="center"><strong>Устройство</strong></td>
+    <td align="center"><strong>Интерфейс</strong></td>
+    <td align="center"><strong>IPv4/IPv6</strong></td>
+    <td align="center"><strong>Маска/Префикс</strong></td>
+    <td align="center"><strong>Шлюз</strong></td>
+    <td align="center"><strong>Сеть</strong></td>
+  </tr>
+  <tr>
+    <td align="center" rowspan="3">ISP</td>
+      <td align="center">ens192</td>
+    <td align="center">192.168.###.### (DHCP)</td>
+    <td align="center">/##</td>
+    <td align="center">192.168.###.###</td>
+    <td align="center">INTERNET</td>
+  </tr>
+  <tr>
+    <td align="center">ens161</td>
+    <td align="center">172.16.4.1</td>
+    <td align="center">/28</td>
+    <td align="center"></td>
+    <td align="center">ISP-HQ-RTR</td>
+  </tr>
+  <tr>
+    <td align="center">ens224</td>
+    <td align="center">172.16.5.1</td>
+    <td align="center">/28</td>
+    <td align="center"></td>
+    <td align="center">ISP-BR-RTR</td>
+  </tr>
+  <tr>
+    <td align="center" rowspan="3">HQ-RTR</td>
+    <td align="center">ens256</td>
+    <td align="center">172.16.4.2</td>
+    <td align="center">/28</td>
+    <td align="center">172.16.4.1</td>
+    <td align="center">ISP-HQ-RTR</td>
+  </tr>
+  <tr>
+    <td align="center">vlan200/ens224</td>
+    <td align="center">192.168.200.1</td>
+    <td align="center">/28</td>
+    <td align="center"></td>
+    <td align="center">HQ-RTR-CLI</td>
+  </tr>
+  <tr>
+    <td align="center">vlan100/ens161</td>
+    <td align="center">192.168.100.1</td>
+    <td align="center">/26</td>
+    <td align="center"></td>
+    <td align="center">HQ-RTR-SRV</td>
+  </tr>
+  <tr>
+    <td align="center" rowspan="2">BR-RTR</td>
+    <td align="center">ens224</td>
+    <td align="center">172.16.5.2</td>
+    <td align="center">/28</td>
+    <td align="center">172.16.5.1</td>
+    <td align="center">ISP-BR-RTR</td>
+  </tr>
+  <tr>
+    <td align="center">ens256</td>
+    <td align="center">192.168.0.1</td>
+    <td align="center">/27</td>
+    <td align="center"></td>
+    <td align="center">BR-RTR-SRV</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-SRV</td>
+    <td align="center">ens224</td>
+    <td align="center">192.168.100.62</td>
+    <td align="center">/26</td>
+    <td align="center">192.168.100.1</td>
+    <td align="center">HQ-RTR-SRV</td>
+  </tr>
+  <tr>
+    <td align="center">BR-SRV</td>
+    <td align="center">ens224</td>
+    <td align="center">192.168.0.2</td>
+    <td align="center">/27</td>
+    <td align="center">192.168.0.1</td>
+    <td align="center">BR-RTR-SRV</td>
+  </tr>
+  <tr>
+    <td align="center">HQ-CLI</td>
+    <td align="center">ens224</td>
+    <td align="center">192.168.200.##(DHCP)</td>
+    <td align="center">/28</td>
+    <td align="center">192.168.200.1</td>
+    <td align="center">HQ-RTR-CLI</td>
+  </tr>
+</table>
+<p align="center"><strong>Таблица адресации</strong></p>
+
+</br>
+</details>
+
+<details>
 <summary><strong>Настройка при помощи *nmtui*</strong></summary>
 <br/>
   

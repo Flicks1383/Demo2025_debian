@@ -677,13 +677,11 @@ systemctl start iproute.service
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка <code>OSPF</code></strong></summary>
 <br/>
 
 
-## Настройка `OSPF` производится HQ-RTR и BR-RTR:
-
-</br>
+## Настройка `OSPF` производится на `HQ-RTR` и `BR-RTR`:
 
 ### HQ-RTR
 
@@ -802,14 +800,12 @@ vtysh
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка NAT на <code>BR</code> и <code>HQ</code></strong></summary>
 <br/>
 
-# > Настройка динамичесткой трансляции адресов <
+## > Настройка динамической трансляции адресов <
 
-<br/>
-
-> ### Настройка на `ISP выполнена` в [Задании 2](https://github.com/Flicks1383/Demo09.02.06_2025/tree/main/module1#задание-2)
+> ### Настройка на `ISP` выполнена в [Задании 2](https://github.com/Flicks1383/Demo09.02.06_2025/tree/main/module1#задание-2)
 
 ### Настройка динамической сетевой трансляции на `HQ-RTR`
 ```

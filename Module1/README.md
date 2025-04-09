@@ -1008,7 +1008,7 @@ systemctl enable isc-dhcp-server
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>bind9</strong></summary>
 
   <br/>
 
@@ -1208,9 +1208,16 @@ nslookup **IP-адрес/DNS-имя**
 ```
 </br>
 
+
+<br/>
+
+<details>
+<summary>dnsmasq</summary>
+<br/>
+
 Укажите интерфейс, на котором будет работать dnsmasq  
 interface=eth0  # Замените на ваш интерфейс  
-  
+
 Укажите, какие адреса будут выдаваться  
 domain-needed  
 bogus-priv  
@@ -1221,13 +1228,8 @@ server=1.1.1.1   # Используйте DNS-сервер Cloudflare
 Укажите домен и IP-адрес  
 address=/example.com/192.0.2.1  # Замените на ваш IP-адрес  
   
-
-
-
-
-
-</details>
-
+<details>
+  
 <br/>
 
 ## ✔️ Задание 11

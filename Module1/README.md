@@ -295,8 +295,6 @@ netmask 255.255.255.240
 
 <details>
 <summary><strong>Настройка динамической трансляции <code>NAT</code></strong></summary>
-<br/>
-
 
 ### Настройка динамической сетевой трансляции на _`ISP`_
 
@@ -487,7 +485,7 @@ vlan-raw-device ens224:1
 
 ## ✔️ Задание 5
 
-### Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV
+### Настройка безопасного удаленного доступа на серверах `HQ-SRV` и `BR-SRV`
 
 - Для подключения используйте порт 2024
 - Разрешите подключения только пользователю sshuser
@@ -497,10 +495,10 @@ vlan-raw-device ens224:1
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка <code>SSH</code></strong></summary>
 <br/>
 
-### SSH настраиваем на HQ-SRV и BR-SRV
+### SSH настраиваем на `HQ-SRV` и `BR-SRV`
 
 **1.** Для настройки **SSH** необходимо его установить коммандой:
 ```
@@ -546,19 +544,17 @@ systemctl restart sshd
 > [!WARNING]
 > **Не используйте** устройства с именем **`tun0`, `gre0` и `sit0`**, т.к они являются зарезервированными в iproute2 («base devices») и имеют особое поведение.
 
-> [!NOTE]
-> Для настройки **`GRE - туннеля`**, как и **`адресации`**, удобнее из-за интерфейса будет выбрать **`nmtui`**
-
 - Сведения о туннеле занесите в отчёт  
 - На выбор технологии GRE или IP in IP
 
 <br/>
 
 <details>
-<summary><strong>Настройка в файле</strong></summary>
+<summary><strong>Настройка GRE в файле <code>etc/network/interfaces</code>на <code>HQ-RTR</code></strong></summary>
 <br/>
 
-Для настройки *GRE* туннеля на *HQ-RTR* переходим в файл конфигурации
+Для настройки _**`GRE`**_ туннеля на **`HQ-RTR`** переходим в файл конфигурации
+
 ```
 nano /etc/network/interfaces
 ```
@@ -575,7 +571,13 @@ endpoint 172.16.5.2
 ttl 64
 ```
 
+</details>
+
+<details>
+<summary><strong>Настройка GRE в файле <code>etc/network/interfaces</code> на <code>BR-RTR</code></strong></summary>
+<br/>
 Для настройки *GRE* туннеля на *BR-RTR* переходим в файл конфигурации
+  
 ```
 nano /etc/network/interfaces
 ```
@@ -662,7 +664,8 @@ systemctl start iproute.service
 </details>
 
 <br/>
-✔️ Задание 7
+
+## ✔️ Задание 7
 
 ### Обеспечьте динамическую маршрутизацию: ресурсы одного офиса должны быть доступны из другого офиса. Для обеспечения динамической маршрутизации используйте `link state` протокол на ваше усмотрение
 

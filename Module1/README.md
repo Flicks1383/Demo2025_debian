@@ -1357,19 +1357,31 @@ nslookup **IP-адрес/DNS-имя**
 <summary>dnsmasq</summary>
 <br/>
 
-Укажите интерфейс, на котором будет работать dnsmasq  
-interface=eth0  # Замените на ваш интерфейс  
+Для начала устанавливаются необходимые пакеты:
+```
+apt install iptables iptables-persistent dnsmasq -y
+```
 
-Укажите, какие адреса будут выдаваться  
-domain-needed  
-bogus-priv  
-no-resolv  
-server=8.8.8.8  # Используйте DNS-сервер Google  
-server=1.1.1.1   # Используйте DNS-сервер Cloudflare  
-  
-Укажите домен и IP-адрес  
-address=/example.com/192.0.2.1  # Замените на ваш IP-адрес  
-  
+После чего необходимо открыть порт 53
+```
+iptables -I INPUT -p udp --dport 53 -j ACCEPT
+```
+Дальше конфигурируем файл `/etc/dnsmasq.conf`
+```
+no-resolv
+bind-intefaces
+
+listen-address=0.0.0.0
+
+server=8.8.8.8
+server=8.8.4.4
+address=/hq-rtr.au-team.irpo/192.168.100.1
+address=/hq-srv.au-team.irpo/192.168.100.62
+address=/br-rtr.au-team.irpo/192.168.0.1
+address=/br-srv.au-team.irpo/192.168.0.2
+address=/hq-cli.au-team.irpo/192.168.200.4
+```
+
 </details>
   
 <br/>

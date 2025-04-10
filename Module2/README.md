@@ -58,7 +58,7 @@
 <br/>
 
 <details>
-<summary><strong>Настройка RAID массива на <code>HQ-SRV<code></strong></summary>
+<summary><strong>Настройка RAID массива на <code>HQ-SRV</code></strong></summary>
 <br/>
 
 </br>
@@ -316,7 +316,7 @@ mount -a
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настойка <code>chrony</code></strong></summary>
 <br/>
 
 ## Настройка `chrony` на HQ-RTR

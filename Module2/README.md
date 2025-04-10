@@ -446,7 +446,7 @@ chronyc tracking | grep Stratum
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code></strong></summary>
 <br/>
 
 ## Настройка ansible производится на `BR-SRV`
@@ -602,7 +602,7 @@ ansible all -i /etc/ansible/demo -m ping
 <br/>
 
 <details>
-<summary><strong>[C помощью CLI]</strong></summary>
+<summary><strong>Развертывание <code>MediaWiKi</code> используя<code>HQ-CLI</code></strong></summary>
 <br/>
 
 ### Установка Wiki (по SSH с CLI на BR-SRV)
@@ -760,10 +760,10 @@ docker-compose -f wiki.yaml up -d
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Проброс портов</strong></summary>
 <br/>
 
-### BR-RTR
+## BR-RTR
 
 **1.** Проброс **80** порта и **2024** для BR-SRV
 ```
@@ -783,7 +783,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 2024 -m state --state NEW
 ```
 <br/>
 
-### HQ-RTR
+## HQ-RTR
 
 **2.** Проброс порта **2024** для HQ-SRV
 ```
@@ -818,7 +818,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
   - Основные параметры отметьте в отчёте
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка сервиса <code>Moodle</code></strong></summary>
 <br/>
 
 ### HQ-SRV
@@ -1027,7 +1027,7 @@ sudo systemctl restart apache2
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка <code>nginx</code></strong></summary>
 <br/>
 
 **1.** Установка **Nginx**:
@@ -1093,7 +1093,7 @@ systemctl restart nginx
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Установка Yandex</strong></summary>
 <br/>
 
 `Если есть встроенный браузер` - скачать Яндекс с его помощью

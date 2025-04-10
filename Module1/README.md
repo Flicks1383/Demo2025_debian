@@ -380,7 +380,7 @@ sshuser ALL=(ALL) NOPASSWD:ALL
 **4.** Создаем и задаем необходимые права на домашнюю папку
 ```
 mkdir /home/sshuser
-chown sshuser:sshuser /home/sshsuer
+chown sshuser:sshuser /home/sshuser
 chmod 700 /home/sshuser
 ```
 <br/>

@@ -846,7 +846,7 @@ systemctl restart netfilter-persistent
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка DHCP на <code>HQ-RTR</code></strong></summary>
 <br/>
 
 # > Настройка динамической конфигурации хостов <

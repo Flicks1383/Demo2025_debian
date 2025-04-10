@@ -1149,7 +1149,7 @@ nslookup **IP-адрес/DNS-имя**
 <br/>
 
 <details>
-<summary><code>Настройка при помощи <code>dnsmasq</code></summary>
+<summary>Настройка при помощи <code>dnsmasq</code></summary>
 <br/>
 
 Для начала устанавливаются необходимые пакеты:
@@ -1192,17 +1192,13 @@ nameserver 192.168.100.62
 <br/>
 
 <details>
-<summary>[Решение]</summary>
+<summary>Настройка часового пояса</summary>
 <br/>
 
 # > Настройте часовой пояс на всех устройствах <
-- На Linux настраивается часовой пояс командой
+- На Linux настраивается часовой пояс командой:
 ```
 timedatectl set-timezone Asia/Tomsk
 ```  
-- На EcoRouter настраивается часовой пояс командой
-```
-ntp timezone utc+7
-```
 
 </details>

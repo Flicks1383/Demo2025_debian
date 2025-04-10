@@ -58,7 +58,7 @@
 <br/>
 
 <details>
-<summary><strong>[Решение]</strong></summary>
+<summary><strong>Настройка RAID массива на <code>HQ-SRV<code></strong></summary>
 <br/>
 
 </br>

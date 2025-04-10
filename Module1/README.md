@@ -326,9 +326,7 @@ systemctl restart netfilter-persistent
 ## ✔️ Задание 3
 
 > [!WARNING]
-> Обратите внимание, что группа **wheel** не используется!
->
->  Если возникли проблемы с привилегиями(что странно-_-), то обратите внимание на раздел **[Решение проблем](https://github.com/Flicks1383/Demo2025_debian/tree/main?tab=readme-ov-file#решения-проблем)**
+> Обратите внимание, что группа <code><strong>WHEEL</strong></code> не используется!
 
 ### Создание локальных учетных записей
 
@@ -354,7 +352,7 @@ systemctl restart netfilter-persistent
 <summary><strong>Как создать <code>sshuser</code></strong></summary>
 <br/>
 
-- ### Создание учёток _`sshuser`_ производится на _`HQ-SRV`_ и _`BR-SRV`_
+- ## Создание учёток _`sshuser`_ производится на _`HQ-SRV`_ и _`BR-SRV`_
 
 **1.** Создаём sshuser следующими командами:
 ```
@@ -364,7 +362,7 @@ P@ssw0rd
 ```
 <br/>
 
-**2.** После чего даем пользователю *root* права:
+**2.** После чего даем пользователю <strong><code>root</strong></code> права:
 ```yml
 usermod -aG sudo sshuser
 ```
@@ -375,7 +373,7 @@ usermod -aG sudo sshuser
 ```yml
 sshuser ALL=(ALL) NOPASSWD:ALL
 ```
-> Позволяет запускать **sudo** без аутентификации
+> Позволяет запускать **`sudo`** без аутентификации
 
 <br/>
 
@@ -392,7 +390,7 @@ chmod 700 /home/sshuser
 <summary><strong>Как создать <code>net_admin</code></strong></summary>
 <br/>
 
-- ### Пользователь _`net_admin`_ на *HQ-RTR и BR-RTR*
+- ## Пользователь _`net_admin`_ на _`HQ-RTR`_ и _`BR-RTR`_
 
 **1.** Создаём **`net_admin`**, следующими командами, но уже без `-u 1010` и с новым паролем:
 ```
@@ -402,7 +400,7 @@ P@$$word
 ```
 <br/>
 
-**2.** После чего даем пользователю *root* права:
+**2.** После чего даем пользователю <strong><code>root</strong></code> права:
 ```yml
 usermod -aG sudo net_admin
 ```
@@ -412,7 +410,7 @@ usermod -aG sudo net_admin
 ```yml
 net_admin ALL=(ALL) NOPASSWD:ALL
 ```
-> Позволяет запускать **sudo** без аутентификации
+> Позволяет запускать **`sudo`** без аутентификации
 <br/>
 
 **4.** Создаем и задаем необходимые права на домашнюю папку
@@ -604,71 +602,7 @@ ttl 64
 ```
 gre_ip
 ```
-
 </details>
-
-<br/>
-Настройку маршрутов выполняете, если не работает <code>OSPF</code>:
-<br/>
-
-<details>
-<summary><strong>Настройка маршрутов</strong></summary>
-<br/>
-
-После создания влана настраиваем маршрут для подсетей (чтобы они видели друг друга)  
-На роутере *HQ-RTR* настройка выглядит так:
-```
-sudo nano /etc/systemd/system/iproute.service
-```
-
-<br/>
-
-После чего добавляем текст:
-```
-[Unit]
-Description=iproute
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/ip route add 192.168.0.0/27 via 172.16.0.2 dev gre1
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-```
-
-<br/>
-
-На роутере *BR-RTR* создаем тот же файли настраивеим:
-```
-sudo nano /etc/systemd/system/iproute.service
-Для HQ-RTR:
-[Unit]
-Description=iproute
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/ip route add 192.168.100.0/26 via 172.16.0.1 dev gre1
-ExecStart=/sbin/ip route add 192.168.200.0/28 via 172.16.0.1 dev gre1
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-```
-
-<br/>
-
-После на обоих устройствах прописываем:
-```
-systemctl daemon-reload
-systemctl enable iproute.service
-systemctl start iproute.service
-```
-
-</details>
-
 <br/>
 
 ## ✔️ Задание 7
@@ -787,6 +721,71 @@ int gre1
 vtysh
   show ip ospf neighbor
   show ip route ospf
+```
+
+</details>
+
+<br/>
+
+
+<br/>
+Настройка маршрутов, если не работает <code><strong>OSPF</strong></code>:
+
+<br/>
+<details>
+<summary><strong>Настройка <code>маршрутов</code></strong></summary>
+<br/>
+
+После создания влана настраиваем маршрут для подсетей (чтобы они видели друг друга)  
+На роутере *HQ-RTR* настройка выглядит так:
+```
+sudo nano /etc/systemd/system/iproute.service
+```
+
+<br/>
+
+После чего добавляем текст:
+```
+[Unit]
+Description=iproute
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip route add 192.168.0.0/27 via 172.16.0.2 dev gre1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+<br/>
+
+На роутере *BR-RTR* создаем тот же файли настраивеим:
+```
+sudo nano /etc/systemd/system/iproute.service
+Для HQ-RTR:
+[Unit]
+Description=iproute
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip route add 192.168.100.0/26 via 172.16.0.1 dev gre1
+ExecStart=/sbin/ip route add 192.168.200.0/28 via 172.16.0.1 dev gre1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+<br/>
+
+После на обоих устройствах прописываем:
+```
+systemctl daemon-reload
+systemctl enable iproute.service
+systemctl start iproute.service
 ```
 
 </details>

@@ -1169,7 +1169,7 @@ iptables -I INPUT -p udp --dport 53 -j ACCEPT
 Дальше конфигурируем файл `/etc/dnsmasq.conf`
 ```
 no-resolv
-bind-intefaces
+interface=ens224
 
 listen-address=0.0.0.0
 

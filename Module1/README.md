@@ -1004,7 +1004,7 @@ systemctl enable --now named
 ```
 </br>
 
-**5.** Далее требуется изменить конфигурацию файла **`/etc/resolv.conf`**:
+**5.** Далее требуется изменить конфигурацию файла на **`HQ-SRV`** **`/etc/resolv.conf`**:
 
 ```
 nameserver 8.8.8.8
@@ -1051,22 +1051,21 @@ cp /etc/bind/db.local /etc/bind/au-team.irpo
 
 ```
 $TTL    1D
-@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+@       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; serial
                                 12H             ; refresh
                                 1H              ; retry
                                 1W              ; expire
                                 1H              ; ncache
                         )
-        IN      NS      au-team.irpo.
-        IN      A       192.168.100.62
+@       IN      NS      hq-srv.au-team.irpo.
 hq-rtr  IN      A       192.168.100.1
 br-rtr  IN      A       192.168.0.1
 hq-srv  IN      A       192.168.100.62
 hq-cli  IN      A       192.168.200.2
 br-srv  IN      A       192.168.0.2
 moodle  IN      CNAME   hq-rtr
-wiki    IN      CNAME   hq-rtr
+wiki    IN      CNAME   br-rtr
 ```
 </br>
 
@@ -1083,14 +1082,14 @@ cp /etc/bind/db.127 /etc/bind/0.168.192.in-addr.arpa
 **10.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
-@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+@       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; Serial
                                 12H             ; Refresh
                                 1H              ; Retry
                                 1W              ; Expire
                                 1H              ; Ncache
                         )
-        IN      NS      localhost.
+@       IN      NS      localhost.
 1       IN      PTR     hq-rtr.au-team.irpo.
 62      IN      PTR     hq-srv.au-team.irpo.
 ```
@@ -1100,15 +1099,15 @@ $TTL    1D
 **11.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
-@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+@       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; Serial
                                 12H             ; Refresh
                                 1H              ; Retry
                                 1W              ; Expire
                                 1H              ; Ncache
                         )
-        IN      NS      localhost.
-14      IN      PTR     hq-cli.au-team.irpo.
+@       IN      NS      localhost.
+2       IN      PTR     hq-cli.au-team.irpo.
 ```
 
 </br>
@@ -1116,14 +1115,14 @@ $TTL    1D
 **12.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
 ```
 $TTL    1D
-@       IN      SOA     au-team.irpo. root.au-team.irpo. (
+@       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; Serial
                                 12H             ; Refresh
                                 1H              ; Retry
                                 1W              ; Expire
                                 1H              ; Ncache
                         )
-        IN      NS      localhost.
+@       IN      NS      localhost.
 1       IN      PTR     br-rtr.au-team.irpo.
 2       IN      PTR     br-srv.au-team.irpo.
 ```
@@ -1145,7 +1144,14 @@ systemctl restart named bind9
 ```
 </br>
 
-**15.** Проверить работоспособность можно **командой**:
+**17.** На всех устройствах локальной сети необходимо указать в конфигурационном файле `/etc/resolv.conf`:
+```
+nameserver 192.168.100.62
+search au-team.irpo
+```
+</br>
+
+**16.** Проверить работоспособность можно **командой**:
 ```
 nslookup **IP-адрес/DNS-имя**
 ```

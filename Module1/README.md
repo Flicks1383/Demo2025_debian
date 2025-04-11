@@ -958,8 +958,7 @@ systemctl enable isc-dhcp-server
 
 <br/>
 
-# > Настройка DNS <
-### Основной DNS-сервер реализован на `HQ-SRV`
+## > Настройка BIND9 на `HQ-SRV`<
 
 ### HQ-SRV
 

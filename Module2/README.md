@@ -345,7 +345,7 @@ sudo apt install chrony
 
 ```
 #server ntp4.uniiftri.ru iburst <- ПОДОБНЫЕ ЗАПИСИ КОММЕНТИРУЕМ!!!
-
+#pool 2.debian.pool.ntp.org iburst
 /// ДОПИСЫВАЕМ ВСЁ ЧТО СНИЗУ ///
 
 server 127.0.0.1 iburst prefer

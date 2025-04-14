@@ -477,7 +477,7 @@ chronyc tracking | grep Stratum
 <br/>
 
 <details>
-<summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code></strong></summary>
+<summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code>[В процессе]</strong></summary>
 <br/>
 
 ## Настройка ansible производится на `BR-SRV`
@@ -803,33 +803,52 @@ docker-compose -f wiki.yaml up -d
 ## BR-RTR
 
 **1.** Проброс **80** порта и **2024** для BR-SRV
-```
-### Проброс порта 80 на порт 8080 на BR-SRV
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.0.2:8080
 
-### Разрешение трафика на **BR-SRV**
-sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 8080 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+>```
+> ### Проброс порта 80 на порт 8080 для BR-SRV
+> |
+> sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.0.2:8080
+> 
+>
+> ### Разрешение трафика для BR-SRV
+> |
+> sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 8080 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+> sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j RETURN
+>```
 
-######################################
+> ```
+> ### Проброс порта 2024 для BR-SRV
+> |
+> sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.0.2:2024
+>
+> # Разрешение трафика для BR-SRV
+> |
+> sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+> sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.0.2:2024
+> sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.2 --dport 2024 -j MASQUERADE
+> sudo iptables -t nat -A OUTPUT -p tcp --dport 2024 -j DNAT --to-destination 192.168.0.2:2024
+> 
+> ```
 
-### Проброс порта 2024 на BR-SRV
-sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.0.2:2024
-
-# Разрешение трафика на BR-SRV
-sudo iptables -A FORWARD -p tcp -d 192.168.0.2 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
-```
 <br/>
 
 ## HQ-RTR
 
 **2.** Проброс порта **2024** для HQ-SRV
-```
-### Проброс порта 2024 на HQ-SRV
-sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
+>```
+>### Проброс порта 2024 для HQ-SRV
+>|
+>sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
+>```
 
-### Разрешение трафика на HQ-SRV
-sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
-```
+>```
+>### Разрешение трафика для HQ-SRV
+>|
+>sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+>sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
+>sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.100.62 --dport 2024 -j MASQUERADE
+>sudo iptables -t nat -A OUTPUT -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
+>```
 <br/>
 
 </details>

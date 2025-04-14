@@ -1076,7 +1076,7 @@ server  {
         server_name moodle.au-team.irpo;
 
         location / {
-            proxy_pass http://192.168.100.62:80;
+            proxy_pass http://192.168.100.62:80/moodle;
         }
 }
 

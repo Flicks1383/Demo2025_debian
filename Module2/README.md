@@ -328,7 +328,7 @@ mount -a
 <br/>
 
 <details>
-<summary><strong>Настойка <code>chrony</code></strong></summary>
+<summary><strong>Настройка <code>chrony</code></strong></summary>
 <br/>
 
 ## Настройка `chrony` на HQ-RTR
@@ -346,6 +346,7 @@ sudo apt install chrony
 ```
 #server ntp4.uniiftri.ru iburst <- ПОДОБНЫЕ ЗАПИСИ КОММЕНТИРУЕМ!!!
 #pool 2.debian.pool.ntp.org iburst
+
 /// ДОПИСЫВАЕМ ВСЁ ЧТО СНИЗУ ///
 
 server 127.0.0.1 iburst prefer
@@ -355,6 +356,11 @@ allow 192.168.100.0/26
 allow 192.168.200.0/28
 allow 192.168.0.0/27
 ```
+<details>
+  
+<summary><strong><code>[что к чему]</code></strong></summary>
+
+</br>
 
 `server` - машина выступающая на роль сервера chrony;
 
@@ -365,6 +371,8 @@ allow 192.168.0.0/27
 `local stratum 5` - установка 5 уровня на локальный сервер;
 
 `allow` - устройства с каких подсетей имеют возможность синхронизироваться с сервером;
+
+</details>
 
 </br>
 
@@ -385,9 +393,12 @@ sudo apt install chrony
 ```
 </br>
 
-**2.** Далее редактируем конфигурационный файл **`sudo nano /etc/chrony/chrony.conf`**
+**2.** Далее редактируем конфигурационный файл **`/etc/chrony/chrony.conf`**
 ```
-#server ntp1.uniiftri.ru iburst <- Комментируем подобные записи в конфиге
+sudo nano /etc/chrony/chrony.conf
+
+#server ntp4.uniiftri.ru iburst <- ПОДОБНЫЕ ЗАПИСИ КОММЕНТИРУЕМ!!!
+#pool 2.debian.pool.ntp.org iburst <- ПОДОБНЫЕ ЗАПИСИ КОММЕНТИРУЕМ!!!
 
 server 192.168.100.1 iburst <- Дописываем данную строчку
 ```
@@ -402,26 +413,30 @@ systemctl restart chrony
 systemctl enable --now  chrony
 ```
 
-## ПРОВЕРКА конфигурации NTP-сервера
+## `ПРОВЕРКА` конфигурации NTP-сервера
 
   
 <details>
   
-<summary><strong>[Подробнее]</strong></summary>
+<summary><strong>[ПРОВЕРКА NTP]</strong></summary>
 
 </br>
 
 Получаем вывод источников времени с помощью команды:
 ```yml
-chronyc sources
+chronyc clients
 ```
 > Вывод на сервере:
 > ```yml
-> MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
-> =============================================================================
-> ^/ localhost.localdomain     5      8     377     -     +0ns  [+0ns] +/-  0ns
+>| Hostname               | NTP | Droop | Int | Init | Last | Cond | Droop | Int | Last |
+>|------------------------|-----|-------|-----|------|------|------|-------|-----|------|
+>| br-srv.au-team.irpp    | 54  | 0     | 10  | -    | 297  | 0    | 0     | -   | -    |
+>| hq-srv.au-team.irpp    | 35  | 0     | 10  | -    | 394  | 0    | 0     | -   | -    |
+>| 172.16.0.2             | 37  | 0     | 10  | -    | 492  | 0    | 0     | -   | -    |
+>| hq-cli.au-team.irpp    | 35  | 0     | 10  | -    | 307  | 0    | 0     | -   | -    |
 > ```
 
+chronyc sources
 > Вывод на клиенте:
 > ```yml
 > MS Name/IP address        Stratum  Poll  Reach  LastRx  Last  sample
@@ -447,7 +462,7 @@ chronyc tracking | grep Stratum
 
 [//]: # (---------------------------------------------------------------------------------------------------)
 
-## ✔️ Задание 4
+## ❌ Задание 4
 
 ### Сконфигурируйте ansible на сервере BR-SRV
 
@@ -780,7 +795,7 @@ docker-compose -f wiki.yaml up -d
 <br/>
 
 <details>
-<summary><strong>Проброс портов</strong></summary>
+<summary><strong>Проброс <code>портов</code></strong></summary>
 <br/>
 
 ## BR-RTR

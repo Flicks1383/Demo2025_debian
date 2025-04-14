@@ -316,6 +316,7 @@ systemctl restart netfilter-persistent
 > **`ens192`** - интерфейс с которого приходит **интернет**
 > 
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети
+> Для того, чтобы сбросить настройку *nat*, можно использовать команду `iptables -t nat -F`
 
 #
 
@@ -828,6 +829,7 @@ iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens224 –j MASQUERA
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
+> Для того, чтобы сбросить настройку *nat*, можно использовать команду `iptables -t nat -F`
 
 </br>
 

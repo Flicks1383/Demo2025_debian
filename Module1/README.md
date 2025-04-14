@@ -1147,6 +1147,8 @@ systemctl restart named bind9
 ```
 nameserver 192.168.100.62
 search au-team.irpo
+nameserver 8.8.8.8
+nameserver 1.1.1.1
 ```
 </br>
 

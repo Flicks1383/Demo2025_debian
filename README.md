@@ -9,6 +9,33 @@
 >[!WARNING]
 >Так же не забывайте про **`sysctl -p`** на Роутерах!!!
 
+<details>
+  <summary><strong>[sysctl -p при перезагрузке]</strong></summary> 
+  
+>```
+>echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
+>
+>sudo tee /etc/systemd/system/sysctl-p.service > /dev/null <<EOF
+>
+>[Unit]
+>Description=Apply sysctl settings
+>After=network.target
+>
+>[Service]
+>Type=oneshot
+>ExecStart=/sbin/sysctl -p
+>
+>[Install]
+>WantedBy=multi-user.target
+>EOF
+>
+>sudo systemctl daemon-reload
+>sudo systemctl enable sysctl-p.service
+>sudo systemctl start sysctl-p.service
+>```
+</details>
+</br>
+
 >[!WARNING]
 >Если настраиваете что либо в **`network/interfaces`** не трогайте **`nmtui`** и наоборот!!!
 

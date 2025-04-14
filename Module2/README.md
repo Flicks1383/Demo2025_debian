@@ -1036,12 +1036,6 @@ sudo systemctl restart apache2
 
 **`Пароль`**: P@ssw0rd
 
-## Проброс портов
-```
-sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j RETURN
-netfilter-persistent save
-```
-
 </details>
 </br>
 
@@ -1111,6 +1105,12 @@ server {
 **5.** Перезагружаем **`Nginx`**
 ```
 systemctl restart nginx
+```
+
+## Проброс портов
+```
+sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j RETURN
+netfilter-persistent save
 ```
 
 </details>

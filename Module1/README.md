@@ -1009,9 +1009,7 @@ systemctl enable --now named
 **5.** Далее требуется изменить конфигурацию файла на **`HQ-SRV`** **`/etc/resolv.conf`**:
 
 ```
-nameserver 8.8.8.8
 nameserver 192.168.100.62
-nameserver 8.8.4.4
 search au-team.irpo
 ```
 </br>
@@ -1150,8 +1148,6 @@ systemctl restart named bind9
 ```
 nameserver 192.168.100.62
 search au-team.irpo
-nameserver 8.8.8.8
-nameserver 1.1.1.1
 ```
 </br>
 

@@ -341,9 +341,11 @@ sudo apt install chrony
 ```
 </br>
 
-**2.** Далее редактируем конфигурационный файл **`sudo nano /etc/chrony/chrony.conf`**
+**2.** Далее редактируем конфигурационный файл **`/etc/chrony/chrony.conf`**
 
 ```
+sudo nano /etc/chrony/chrony.conf
+
 #server ntp4.uniiftri.ru iburst <- ПОДОБНЫЕ ЗАПИСИ КОММЕНТИРУЕМ!!!
 #pool 2.debian.pool.ntp.org iburst
 

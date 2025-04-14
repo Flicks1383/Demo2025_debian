@@ -848,7 +848,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state 
 **1.** Устанавливаем необходимые **пакеты**:
 ```
 sudo apt update
-sudo apt install -y apache2 mariadb-server mariadb-client php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git php-intl php-soap
+sudo apt install -y apache2 mariadb-server mariadb-client php php-mysql libapache2-mod-php php-xml php-mbstring php-zip php-curl php-gd git php-intl php-soap iptables iptables-persistent
 ```
 </br>
 
@@ -1035,6 +1035,12 @@ sudo systemctl restart apache2
 **`Пользователь`**: moodle
 
 **`Пароль`**: P@ssw0rd
+
+## Проброс портов
+```
+sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j RETURN
+netfilter-persistent save
+```
 
 </details>
 </br>

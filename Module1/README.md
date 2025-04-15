@@ -465,29 +465,33 @@ echo 8021q >> /etc/modules
 
 ```
 # The primary network interface
-allow-hotplug ens161
-iface ens161 inet static
-address 172.16.4.2
-netmask 255.255.255.240
-gateway 172.16.4.1
+auto ens192  
+iface ens192 inet static  
+address 172.16.4.2  
+netmask 255.255.255.240  
+gateway 172.16.4.1  
+  
+auto ens224  
+iface ens224 inet static  
+address 192.168.100.1  
+netmask 255.255.255.192  
+  
+auto ens224:1  
+iface ens224:1 inet static  
+address 192.168.200.1  
+netmask 255.255.255.240  
 
-auto ens224
-iface ens224 inet static
-address 192.168.100.1/26
-
-auto ens224:1
-iface ens224:1 inet static
-address 192.168.200.1/28
-
-auto ens224.100
-iface ens224.100 inet static
-address 192.168.100.3/26
-vlan-raw-device ens224
-
-auto ens224.200
-iface ens224.200 inet static
-address 192.168.200.3/28
-vlan-raw-device ens224:1
+auto ens224.100  
+iface ens224.100 inet static  
+address 192.168.100.3  
+netmask 255.255.255.192  
+Vlan-raw-device ens224  
+  
+auto ens224.200  
+iface ens224.200 inet static  
+address 192.168.200.3  
+netmask 255.255.255.240  
+Vlan-raw-device ens224:1
 ```
 
 </details>

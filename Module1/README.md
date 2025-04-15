@@ -708,7 +708,7 @@ int gre1
 
 ```
 conf t
-router ospf 1
+router ospf
   passive-interface default
   router-id 2.2.2.2
   network 192.168.0.0/27 area 3

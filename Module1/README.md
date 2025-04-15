@@ -311,8 +311,17 @@ iptables –t nat –A POSTROUTING –s 172.16.4.0/28 –o ens192 –j MASQUERAD
 iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
+```  
+  
+Либо другая настройка  
+```  
+apt install iptables  
+apt install iptables iptables-persistent  
+iptables –t nat –A POSTROUTING –s 172.16.4.0/28 –o ens192 –j MASQUERADE   
+iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE   
+iptables-save > /etc/iptables/rules.v4  
 ```
-
+  
 > **`ens192`** - интерфейс с которого приходит **интернет**
 > 
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети  

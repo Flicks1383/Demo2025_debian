@@ -251,7 +251,7 @@
 Конфигурация файла на устроуйстве **`ISP`**:
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" alt="Добавление дисков" width="600" height="400" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" alt="Добавление дисков" />
 </p>
 <br/>
 
@@ -260,7 +260,7 @@
 Конфигурация файла на устроуйстве **`BR-RTR`**:
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" alt="Добавление дисков" width="600" height="400" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" alt="Добавление дисков" />
 </p>
 <br/>
 
@@ -269,7 +269,7 @@
 Конфигурация файла на устроуйстве **`BR-SRV`**:
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" alt="Добавление дисков" width="600" height="400" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" alt="Добавление дисков" />
 </p>
 <br/>
 
@@ -278,7 +278,7 @@
 Конфигурация файла на устроуйстве **`HQ-SRV`**:
 
 <p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" alt="Добавление дисков" width="600" height="400" />
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" alt="Добавление дисков" />
 </p>
 <br/>
 

@@ -245,40 +245,34 @@
 <summary><strong>Настройка адрессации в файле <code>etc/network/interfaces</code></strong></summary>
 <br/>
 
-
 ### Настройка адресации
 ##
 Конфигурация файла на устроуйстве **`ISP`**:
 
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" alt="Добавление дисков" />
+<p align="left">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" />
 </p>
 <br/>
 
-### Настройка адресации
-##
 Конфигурация файла на устроуйстве **`BR-RTR`**:
 
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" alt="Добавление дисков" />
+<p align="left">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" />
 </p>
 <br/>
 
-### Настройка адресации
-##
 Конфигурация файла на устроуйстве **`BR-SRV`**:
 
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" alt="Добавление дисков" />
+<p align="left">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" />
 </p>
 <br/>
 
-### Настройка адресации
-##
+
 Конфигурация файла на устроуйстве **`HQ-SRV`**:
 
-<p align="center">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" alt="Добавление дисков" />
+<p align="left">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" />
 </p>
 <br/>
 

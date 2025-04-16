@@ -248,34 +248,33 @@
 
 ### Настройка адресации
 ##
-Конфигурация файла на примере **`ISP`**:
-#### По этому примеру настраиваются все интерфейсы _НА ВСЕХ УСТРОЙСТВАХ_. Заменяются только *`адреса`*, *`маски`*, *`интерфейсы`*
-```
-nano /etc/network/interfaces
-```
+Конфигурация файла на устроуйстве **`ISP`**:
 
-```
-# The loopback network interface
-auto lo
-iface lo inet loopback
+  <a href="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" target="_blank">
 
-# The primary network interface
-allow-hotplug ens192
-iface ens192 inet dhcp
+### Настройка адресации
+##
+Конфигурация файла на устроуйстве **`BR-RTR`**:
 
-auto ens161
-iface ens161 inet static
-address 172.16.4.1
-netmask 255.255.255.240
+  <a href="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" target="_blank">
 
-auto ens224 
-face ens224 inet static
-address 172.16.5.1
-netmask 255.255.255.240
-```
+### Настройка адресации
+##
+Конфигурация файла на устроуйстве **`BR-SRV`**:
+
+  <a href="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" target="_blank">
+
+### Настройка адресации
+##
+Конфигурация файла на устроуйстве **`HQ-SRV`**:
+
+  <a href="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" target="_blank">
+
+## Настройка адресации для устройств `HQ-RTR` и `HQ-CLI` будет произведена позже.
 
 </details>
 <br/>
+
 
 ## ✔️ Задание 2
 

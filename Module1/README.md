@@ -3,8 +3,9 @@
 <br/>
 
 <p align="center">
-  <a href="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/%D0%A2%D0%BE%D0%BF%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F.jpg" target="_blank">
+  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/%D0%A2%D0%BE%D0%BF%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F.jpg" alt="Топология" />
 </p>
+<p align="center"><strong>Топология</strong></p>
 
 ### <p align="center"><strong>Топология</strong></p>
 

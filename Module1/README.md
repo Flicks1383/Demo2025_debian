@@ -7,8 +7,6 @@
 </p>
 <p align="center"><strong>Топология</strong></p>
 
-### <p align="center"><strong>Топология</strong></p>
-
 <br/>
 
 > [!NOTE]

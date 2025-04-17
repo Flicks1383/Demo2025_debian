@@ -860,8 +860,8 @@ systemctl start iproute.service
 ### Настройка динамической сетевой трансляции на `HQ-RTR`
 ```
 apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens256 –j MASQUERADE
-iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens256 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens192 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens192 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
@@ -869,7 +869,7 @@ systemctl restart netfilter-persistent
 
 ```
 apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens224 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens192 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```

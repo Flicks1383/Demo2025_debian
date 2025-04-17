@@ -248,39 +248,60 @@
 ### Настройка адресации
 ##
 Конфигурация файла на устроуйстве **`ISP`**:
-
-<p align="left">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/ISP_NETWORK.jpg" />
-</p>
-<br/>
+```
+auto ens224
+iface ens224 inet static
+address 172.16.4.1/28
+auto ens256
+iface ens256 inet static
+address 172.16.5.1/28
+```
 
 Конфигурация файла на устроуйстве **`BR-RTR`**:
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 172.16.5.2/28
+gateway 172.16.5.1
 
-<p align="left">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-RTR_NETWORK.jpg" />
-</p>
-<br/>
+auto ens224
+iface ens224 inet static
+address 192.168.0.1/27
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.2
+netmask 255.255.255.252
+mode gre
+local 172.16.5.2
+endpoint 172.16.4.2
+ttl 64
+```
 
 Конфигурация файла на устроуйстве **`BR-SRV`**:
 
-<p align="left">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/BR-SRV_NETWORK.jpg" />
-</p>
-<br/>
-
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 192.168.0.2/27
+gateway 192.168.0.1
+dns-nameservers 192.168.100.62 192.168.0.2
+dns-search au-team.irpo
+```
 
 Конфигурация файла на устроуйстве **`HQ-SRV`**:
 
-<p align="left">
-  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/HQ-SRV_NETWORK.jpg" />
-</p>
-<br/>
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 192.168.100.62/26
+gateway 192.168.100.1
+```
 
 ## Настройка адресации для устройств `HQ-RTR` и `HQ-CLI` будет произведена позже, по ходу выполнения заданий.
 
 </details>
 <br/>
-
 
 ## ✔️ Задание 2
 

@@ -158,21 +158,21 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center" rowspan="3">ISP</td>
-    <td align="center">??</td>
+    <td align="center">ens192</td>
     <td align="center">(DHCP)</td>
     <td align="center">(DHCP)</td>
     <td align="center">(DHCP)</td>
     <td align="center">INTERNET</td>
   </tr>
   <tr>
-    <td align="center">??</td>
+    <td align="center">ens224</td>
     <td align="center">172.16.4.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
     <td align="center">ISP-HQ-RTR</td>
   </tr>
   <tr>
-    <td align="center">??</td>
+    <td align="center">ens256</td>
     <td align="center">172.16.5.1</td>
     <td align="center">/28</td>
     <td align="center"></td>
@@ -180,7 +180,7 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center" rowspan="3">HQ-RTR</td>
-    <td align="center">??</td>
+    <td align="center">ens192</td>
     <td align="center">172.16.4.2</td>
     <td align="center">/28</td>
     <td align="center">172.16.4.1</td>
@@ -202,14 +202,14 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center" rowspan="2">BR-RTR</td>
-    <td align="center">ens224</td>
+    <td align="center">ens192</td>
     <td align="center">172.16.5.2</td>
     <td align="center">/28</td>
     <td align="center">172.16.5.1</td>
     <td align="center">ISP-BR-RTR</td>
   </tr>
   <tr>
-    <td align="center">ens256</td>
+    <td align="center">ens224</td>
     <td align="center">192.168.0.1</td>
     <td align="center">/27</td>
     <td align="center"></td>
@@ -217,7 +217,7 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center">HQ-SRV</td>
-    <td align="center">ens224</td>
+    <td align="center">ens192</td>
     <td align="center">192.168.100.62</td>
     <td align="center">/26</td>
     <td align="center">192.168.100.1</td>
@@ -225,7 +225,7 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center">BR-SRV</td>
-    <td align="center">ens224</td>
+    <td align="center">ens192</td>
     <td align="center">192.168.0.2</td>
     <td align="center">/27</td>
     <td align="center">192.168.0.1</td>
@@ -233,7 +233,7 @@ nameserver 1.1.1.1
   </tr>
   <tr>
     <td align="center">HQ-CLI</td>
-    <td align="center">ens224</td>
+    <td align="center">ens192</td>
     <td align="center">192.168.200.##(DHCP)</td>
     <td align="center">/28</td>
     <td align="center">192.168.200.1</td>

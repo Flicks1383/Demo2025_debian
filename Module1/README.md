@@ -84,6 +84,9 @@ nano /etc/apt/sources.list
 # deb cdrom:.......
 ↑
 Ставим комментарий
+
+apt update
+
 ```
 
 <br/>

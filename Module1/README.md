@@ -76,7 +76,6 @@ nano /etc/resolv.conf
 
 nameserver 77.88.8.8
 nameserver 1.1.1.1
-
 ```
 ```
 nano /etc/apt/sources.list
@@ -86,7 +85,6 @@ nano /etc/apt/sources.list
 Ставим комментарий
 
 apt update
-
 ```
 
 <br/>

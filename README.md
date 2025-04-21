@@ -3,14 +3,17 @@
 <div align="center">Инструкция для написания демонстрационного экзамена 2025 года для специальности</div> <div align="center"><strong>СЕТЕВОЕ И СИСТЕМНОЕ АДМИНИСТРИРОВАНИЕ 09.02.06</strong></div>
 </br>
 
->[!WARNING]
->Убедительная просьба, перед тем как начинать настраивать машины, **ДЕЛАЙТЕ СНАПШОТИКИ**, для отката после каждого выполненного задания !!!
+>[!CAUTION]
+>Вся инструкция сделана на конфигурации **`/etc/network/interfaces`**
+
+>[!CAUTION]
+>Делаем **`СНАПШОТЫ`** перед настройкой чего то глобального !!!
 
 >[!WARNING]
->Так же не забывайте про **`sysctl -p`** на Роутерах!!!
+>**`sysctl -p`** на Роутерах !!!
 
 <details>
-  <summary><strong>[sysctl -p при перезагрузке]</strong></summary> 
+  <summary><strong>[если много времени то: sysctl -p при перезагрузке]</strong></summary> 
   
 >```
 >echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
@@ -34,13 +37,9 @@
 >sudo systemctl start sysctl-p.service
 >```
 </details>
-</br>
 
 >[!WARNING]
->Если настраиваете что либо в **`network/interfaces`** не трогайте **`nmtui`** и наоборот!!!
-
->[!WARNING]
->Если настраиваете что либо в **`network/interfaces`** после настройки пишите команду `systemctl restart networking` для применения параметров
+>После конфигурации **`/etc/network/interfaces`** пишите команду **`systemctl restart networking`** для применения параметров
 
 </br>
 

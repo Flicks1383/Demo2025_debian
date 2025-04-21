@@ -352,9 +352,11 @@ iptables –t nat –A POSTROUTING –s 172.16.4.0/28 –o ens192 –j MASQUERAD
 iptables –t nat –A POSTROUTING –s 172.16.5.0/28 –o ens192 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
-```  
-  
-Либо другая настройка  
+```
+</br>
+
+### Либо другая настройка  
+
 ```  
 apt install iptables  
 apt install iptables iptables-persistent  
@@ -367,7 +369,7 @@ iptables-save > /etc/iptables/rules.v4
 > 
 > Для проверки можно использовать команду: **`iptables –L –t nat`** - должны высветится в Chain POSTROUTING две настроенные подсети  
 
-> Для того, чтобы сбросить настройку *nat*, можно использовать команду `iptables -t nat -F`
+> Для того, чтобы сбросить настройку *nat*, можно использовать команду **`iptables -t nat -F`**
 
 #
 
@@ -884,7 +886,7 @@ iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens192 –j MASQUERA
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
-> Для того, чтобы сбросить настройку *nat*, можно использовать команду `iptables -t nat -F`
+> Для того, чтобы **сбросить** настройку *nat*, можно использовать команду **`iptables -t nat -F`**
 
 </br>
 
@@ -921,7 +923,11 @@ apt install isc-dhcp-server
 ```
 <br/>
 
-**2.** После чего переходим в конфигурацию файла `/etc/dhcp/dhcpd.conf` и добавляем следующие строчки:
+**2.** После чего переходим в конфигурацию файла `dhcpd.conf` и добавляем следующие строчки:
+```
+nano /etc/dhcp/dhcpd.conf
+```
+
 ```
 subnet 192.168.200.0 netmask 255.255.255.240 {
   range 192.168.200.2 192.168.200.14;
@@ -934,8 +940,10 @@ subnet 192.168.200.0 netmask 255.255.255.240 {
 ```
 <br/>
 
-**3.** После чего переходим в конфигурацию файла `/etc/default/isc-dhcp-server` и меняем ее добалвяя данный текст:
+**3.** После чего переходим в конфигурацию файла `isc-dhcp-server` и меняем ее добалвяя данный текст:
 ```
+nano /etc/default/isc-dhcp-server
+
 INTERFACESv4="ens224:1" - порт смотрящий в сторону CLI
 ```
 
@@ -1028,7 +1036,11 @@ apt-get install bind9 bind9-utils
 ```
 <br/>
 
-**2.** Далее необходимо сконфигурировать файл **`/etc/bind/named.conf.options`** таким образом:
+**2.** Далее необходимо сконфигурировать файл **`named.conf.options`** таким образом:
+
+```
+nano /etc/bind/named.conf.options
+```
 
 ```
 listen-on { 127.0.0.1; 192.168.100.0/26; 192.168.200.0/28; 192.168.0.0/27; 172.16.0.0/30; };
@@ -1055,12 +1067,17 @@ named-checkconf
 </br>
 
 **4.** Далее необходимо запустить **утилиту** коммандой:
+
 ```
 systemctl enable --now named
 ```
 </br>
 
-**5.** Далее требуется изменить конфигурацию файла на **`HQ-SRV`** **`/etc/resolv.conf`**:
+**5.** Далее требуется изменить конфигурацию файла на **`HQ-SRV`** **`resolv.conf`**:
+
+```
+nano /etc/resolv.conf
+```
 
 ```
 nameserver 192.168.100.62
@@ -1101,7 +1118,10 @@ cp /etc/bind/db.local /etc/bind/au-team.irpo
 
 </br>
 
-**8.** После чего приводим **файл `/etc/bind/au-team.irpo`** к следующему виду:
+**8.** После чего приводим **файл `au-team.irpo`** к следующему виду:
+```
+nano /etc/bind/au-team.irpo
+```
 
 ```
 $TTL    1D
@@ -1135,6 +1155,10 @@ cp /etc/bind/db.127 /etc/bind/0.168.192.in-addr.arpa
 
 **10.** После изменений файл **`100.168.192.in-addr.arpa`** выглядит так:
 ```
+nano /etc/bind/100.168.192.in-addr.arpa
+```
+
+```
 $TTL    1D
 @       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; Serial
@@ -1152,6 +1176,10 @@ $TTL    1D
 
 **11.** После изменений файл **`200.168.192.in-addr.arpa`** выглядит так:
 ```
+nano /etc/bind/200.168.192.in-addr.arpa
+```
+
+```
 $TTL    1D
 @       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
                                 2024102200      ; Serial
@@ -1167,6 +1195,10 @@ $TTL    1D
 </br>
 
 **12.** После изменений файл **`0.168.192.in-addr.arpa`** выглядит так:
+```
+nano /etc/bind/0.168.192.in-addr.arpa
+```
+
 ```
 $TTL    1D
 @       IN      SOA     hq-srv.au-team.irpo. root.au-team.irpo. (
@@ -1198,7 +1230,11 @@ systemctl restart named bind9
 ```
 </br>
 
-**15.** На всех устройствах локальной сети необходимо указать в конфигурационном файле `/etc/resolv.conf`:
+**15.** На всех устройствах локальной сети необходимо указать в конфигурационном файле `resolv.conf`:
+```
+nano /etc/resolv.conf
+```
+
 ```
 nameserver 192.168.100.62
 search au-team.irpo

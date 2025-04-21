@@ -57,27 +57,27 @@
 <details>
   <summary><strong>[Содержание]</strong></summary> 
   
-  1. **[Произведите _базовую настройку_ устройств](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-1)**
+  1. [_**`БАЗОВАЯ`**_ настройка](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-1)
   
-  2. **[Настройка _ISP_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-2)**
+  2. [Настройка _**`NAT`**_ на _**`ISP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-2)
   
-  3. **[Создание _ЛОКАЛЬНЫХ_ учетных записей](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-3)**
+  3. [Как создать _**`SSHUSER`**_ и _**`NET_ADMIN`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-3)
   
-  4. **[Настройте на интерфейсе _HQ-RTR_ в сторону офиса _HQ_ виртуальный коммутатор](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)** (В процессе)
+  4. [Создание _**`VLAN`**_ на **`HQ-RTR`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)
    
-  5. **[Настройка безопасного удаленного доступа на серверах _HQ-SRV_ и _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5)**
+  5. [Настройка _**`SSH`**_  **`HQ-SRV`** и **`BR-SRV`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5)
   
-  6. **[Между офисами _HQ_ и _BR_ необходимо сконфигурировать _IP-туннель_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-6)**
+  6. [_**`IP-туннель`**_ между офисами _**`HQ`**_ и _**`BR`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-6)
 
-  7. **[Обеспечьте _ДИНАМИЧЕСКУЮ МАРШРУТИЗАЦИЮ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-7)**
+  7. [Настройка _**`OSPF`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-7)
 
-  8. **[Настройка _ДИНАМИЧЕСКОЙ ТРАНСЛЯЦИИ АДРЕСОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-8)**
+  8. [Настройка __**`NAT`**_ на **`HQ-rtr`** и **`BR-rtr`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-8)
 
-  9. **[Настройка _ПРОТОКОЛА ДИНАМИЧЕСКОЙ КОНФИГУРАЦИИ ХОСТОВ_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-9)**
+  9. [Настройка _**`DHCP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-9)
 
-  10. **[Настройка _DNS для офисов HQ и BR_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-10)**
+  10. [Настройка _**`DNS`**_ для офисов HQ и BR](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-10)
 
-  11. **[Настройте _ЧАСОВОЙ ПОЯС_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-11)**
+  11. [Настройка _**`ЧАСОВОГО ПОЯСЯ`**_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-11)
     
   </details>
 
@@ -87,23 +87,23 @@
 <details>
  <summary><strong>[Содержание]</strong></summary> 
 
-1. **[Настройте доменный контроллер _SAMBA_ на машине _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)**
+1. [Настройка _**`SAMBA`**_ на _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)
     
-2. **[Сконфигурируйте _ФАЙЛОВОЕ ХРАНИЛИЩЕ_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-2-тестируется)**
+2. [Конфигурация _**`RAID + NFS`**_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-2-тестируется)
 
-3. **[Настройте службу сетевого времени на базе сервиса _CHRONY_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3-тестируется)**
+3. [Настройка _**`CHRONY`**_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3-тестируется)
 
-4. **[Сконфигурируйте _ANSIBLE_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-4---тестируется)**
+4. [Конфигурация _**`ANSIBLE`**_ на BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-4---тестируется)
     
-5. **[Развертывание приложений в _DOCKER_ на сервере BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-5-тестируется)**
+5. [Конфигурация **`DOCKER + WIKI`**_ на  BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-5-тестируется)
     
-6. **[На маршрутизаторах сконфигурируйте _СТАТИЧЕСКУЮ ТРАНСЛЯЦИЮ ПОРТОВ_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-6-тестируется)**
+6. [Проброс _**`ПОРТОВ`**_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-6-тестируется)
 
-7. **[Запустите сервис _MOODLE_ на сервере _HQ-SRV_:](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-7-тестируется)**
+7. [Запуск _**`MOODLE`**_ на _HQ-SRV_:](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-7-тестируется)
 
-8. **[Настройте веб-сервер _NGINX_ как обратный _ПРОКСИ-СЕРВЕР_ на _HQ-RTR_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-8)**
+8. [Настройка прокси_**`NGINX`**_ на _HQ-RTR_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-8)
 
-9. **[Удобным способом установите приложение _Яндекс Браузере_ для организаций на _HQ-CLI_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-9)**
+9. [Установка _**`Яндекс Браузера`**_ на _HQ-CLI_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/README.md#%EF%B8%8F-задание-9)
   </details>
 
 </br>

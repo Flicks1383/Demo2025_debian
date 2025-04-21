@@ -45,8 +45,9 @@
 
 ## Методический материал: 
 
-<strong>[МЕТОДИЧКА](https://github.com/Flicks1383/Demo2025_debian/blob/main/NGINX.pdf)<strong>
+<strong>[**МЕТОДИЧКА** с moodle](https://github.com/Flicks1383/Demo2025_debian/blob/main/NGINX.pdf)<strong>
 
+</br>
 
 ## Модули и их решения: 
 

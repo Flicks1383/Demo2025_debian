@@ -80,9 +80,9 @@ nameserver 1.1.1.1
 ```
 nano /etc/apt/sources.list
 
-# deb cdrom:.......
-↑
-Ставим комментарий
+  # deb cdrom:.......
+  ↑
+  Ставим комментарий
 
 apt update
 ```

@@ -87,13 +87,13 @@
 <details>
  <summary><strong>[Содержание]</strong></summary> 
 
-1. [Настройка _**`SAMBA`**_ на _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1)
+1. [Настройка _**`SAMBA`**_ на _BR-SRV_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#задание-1) - ТЕСТИРУЕТСЯ
     
 2. [Конфигурация _**`RAID + NFS`**_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-2-тестируется)
 
 3. [Настройка _**`CHRONY`**_](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-3-тестируется)
 
-4. [Конфигурация _**`ANSIBLE`**_ на BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-4---тестируется)
+4. [Конфигурация _**`ANSIBLE`**_ на BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-4---тестируется) - ТЕСТИРУЕТСЯ
     
 5. [Конфигурация **`DOCKER + WIKI`**_ на  BR-SRV](https://github.com/Flicks1383/Demo2025_debian/tree/main/Module2#%EF%B8%8F-задание-5-тестируется)
     

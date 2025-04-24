@@ -570,13 +570,13 @@ apt-get install openssh-server
 Port 2024
 MaxAuthTries 2
 PasswordAuthentication yes
-Banner /etc/ssh/bannermotd
+Banner /etc/ssh/banner
 AllowUsers  sshuser
            ^ - это TAB
 ```
 <br/>
 
-**3.** После чего требуется создать файл **`/etc/ssh/bannermotd`** и привести его в следующую форму:
+**3.** После чего требуется создать файл **`/etc/ssh/banner`** и привести его в следующую форму:
 ```
 ----------------------
 Authorized access only

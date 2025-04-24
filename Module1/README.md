@@ -72,6 +72,12 @@
 
 ## <code>Преднастройка на ВСЕХ устройствах (ВАЖНО!!!)</code>
 ```
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+systemctl mask NetworkManager
+```
+
+```
 nano /etc/resolv.conf
 
 nameserver 77.88.8.8

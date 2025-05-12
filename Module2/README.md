@@ -181,11 +181,9 @@ mkdir /mnt/raid5
 ```
 <br/>
 
-**10.** После, в файл **`/etc/fstab`** добавляем строчку:  
+**10.** После заполняем файл **`fstab`** текстом:  
 ```
-/dev/md127  /mnt/raid5  ext4  defaults  0  0
-
-ВСЕ ПРОБЕЛЫ СДЕЛАННЫ TAB`ом
+echo "/dev/md127  /mnt/raid5  ext4  defaults  0  0" > /etc/fstab
 ```
 <br/>
 
@@ -236,10 +234,10 @@ chmod 766 /mnt/raid5/nfs
 
 </br>
 
-**4.** В файл **`/etc/exports`** добавляем строку:  
+**4.** В файл **`exports`** добавляем строку:  
 
 ```
-/mnt/raid5/nfs 192.168.200.0/28(rw,no_root_squash)
+echo "/mnt/raid5/nfs 192.168.200.0/28(rw,no_root_squash)" > /etc/exports
 ```
 
 </br>

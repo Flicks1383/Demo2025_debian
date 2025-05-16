@@ -21,6 +21,9 @@
 
 ### Настройте доменный контроллер Samba на машине BR-SRV
 
+>[!WARNING]
+>#### Перед началом должен работать <code>DNS</code> 
+
 - Создайте 5 пользователей для офиса HQ: имена пользователей фомата user№.hq. Создайте группу hq, введите в эту группу созданных пользователей
 
 - Введите в домен машину HQ-CLI
@@ -37,7 +40,56 @@
 <summary><strong>[В процессе]</strong></summary>
 <br/>
 
-- ___Настрою позже___
+## BR-SRV
+Установка пакетов:
+```
+apt install samba krb5-config krb5-user winbind smbclient
+```
+
+  **`--1.`** **В первом открывшемся окне пишем:**
+```
+AU-TEAM.IRPO
+```
+  **`--2.`** **Во всех дальнейших окнах пишем:**
+```
+br-srv.au-team.irpo
+```
+</br>
+</br>
+
+Далее копируем конфиг **`Samba`** и удаляем **`smb.conf`**
+```
+cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+rm /etc/samba/smb.conf
+```
+</br>
+
+После вводим команду для инциализации домена | В качестве **`Forwarders`** адреса пишем ip **`HQ-SRV`**
+```
+sudo samba-tool domain provision --use-rfc2307 --interactive
+```
+</br>
+
+Далее копируем конфиги `**krb**` для дальнейшего редактирования
+```
+cp /etc/krb5.conf /etc/krb5.conf.bak
+cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+```
+**`---`** Конфиг должен выглядеть так:
+```
+[libdefaults]
+  default_realm = AU-TEAM.IRPO
+  dns_lookup_realm = false
+  dns_lookup_kdc = true
+
+[realms]
+AU-TEAM.IRPO = {
+  default_domain = au-team.irpo
+}
+
+[domain_realm]
+  br-srv = AU-TEAM.IRPO
+
 
 </details>
 

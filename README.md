@@ -49,6 +49,10 @@
 
 </br>
 
+[PDF Методичка](https://github.com/Flicks1383/demo4ka/blob/main/NGINX.pdf)
+
+</br>
+
 ## Модули и их решения: 
 
 </br>

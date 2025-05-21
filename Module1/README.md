@@ -1341,7 +1341,7 @@ netfilter-persistent save
 ```
 no-resolv
 interface=ens192
-read-ether
+read-ethers
 listen-address=192.168.100.62
 server=8.8.8.8
 server=8.8.4.4
@@ -1369,6 +1369,11 @@ nano /etc/hosts
 192.168.0.1  hq-rtr.au-team.irpo  br-rtr
 192.168.0.2  hq-rtr.au-team.irpo  br-srv
 192.168.200.3  hq-rtr.au-team.irpo  hq-cli
+```
+
+Далее по окончанию настройки:
+```
+systemctl restart dnsmasq
 ```
 
 После чего, на ВСЕХ машинах, в конфигурационном файле `/etc/resolv.conf` добавляем строку:

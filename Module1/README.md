@@ -563,37 +563,50 @@ apt install vlan
 ```
 echo 8021q >> /etc/modules
 ```
-- Далее переходим к конфигурации файла _**`/etc/network/interfaces`**_ и приводим ее к виду:
+- Далее переходим к конфигурации файла _**`/etc/network/interfaces`**_ и приводим её к виду:
+```
+nano /etc/network/interfaces
+```
 
 ```
 # The primary network interface
 auto ens192  
 iface ens192 inet static  
-address 172.16.4.2  
-netmask 255.255.255.240  
-gateway 172.16.4.1  
+address 172.16.4.2/28
+gateway 172.16.4.1
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.1
+netmask 255.255.255.252
+mode gre
+local 172.16.4.2
+endpoint 172.16.5.2
+ttl 64
   
 auto ens224  
 iface ens224 inet static  
-address 192.168.100.1  
-netmask 255.255.255.192  
+address 192.168.100.1/26 
   
 auto ens224:1  
 iface ens224:1 inet static  
-address 192.168.200.1  
-netmask 255.255.255.240  
+address 192.168.200.1/28
+
+auto ens224:2  
+iface ens224:2 inet static  
+address 192.168.99.9/29
 
 auto ens224.100  
-iface ens224.100 inet static  
-address 192.168.100.3  
-netmask 255.255.255.192  
+iface ens224.100 inet manual   
 Vlan-raw-device ens224  
   
 auto ens224.200  
-iface ens224.200 inet static  
-address 192.168.200.3  
-netmask 255.255.255.240  
+iface ens224.200 inet manual   
 Vlan-raw-device ens224:1
+
+auto ens224.999  
+iface ens224.999 inet manual   
+Vlan-raw-device ens224:2
 ```
 
 </details>

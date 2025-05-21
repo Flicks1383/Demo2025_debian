@@ -70,7 +70,7 @@
 - Локальная сеть для управления(VLAN999) должна вмещать не более 8 адресов
 - Сведения об адресах занесите в отчёт, в качестве примера используйте Таблицу 3
 
-## <code>Преднастройка на ВСЕХ устройствах (ВАЖНО!!!)</code>
+## <code>Преднастройка на ВСЕХ устройствах кроме ISP (ВАЖНО!!!)</code>
 ```
 systemctl stop NetworkManager
 systemctl disable NetworkManager
@@ -103,18 +103,41 @@ apt update
   - Для **Linux** используется команда: <strong>`hostnamectl set-hostname (имя устройства.au-team.irpo)`</strong>
   
   - Обновить имя можно введя команду: **`bash`**
+### ISP
+```
+hostnamectl set-hostname isp.au-team.irpo
+```
+<br/>
 
-> <strong>ISP</strong>: `hostnamectl set-hostname isp.au-team.irpo`
->
-> <strong>HQ-RTR</strong>: `hostnamectl set-hostname hq-rtr.au-team.irpo`
->
-> <strong>BR-RTR</strong>: `hostnamectl set-hostname br-rtr.au-team.irpo`
->
-> <strong>HQ-SRV</strong>: `hostnamectl set-hostname hq-srv.au-team.irpo`
->
-> <strong>HQ-CLI</strong>: `hostnamectl set-hostname hq-cli.au-team.irpo`
->
-> <strong>BR-SRV</strong>: `hostnamectl set-hostname br-srv.au-team.irpo`
+### HQ-RTR
+```
+hostnamectl set-hostname hq-rtr.au-team.irpo
+```
+<br/>
+
+### BR-RTR
+```
+hostnamectl set-hostname br-rtr.au-team.irpo
+```
+<br/>
+
+### HQ-SRV
+```
+hostnamectl set-hostname hq-srv.au-team.irpo
+```
+<br/>
+
+### HQ-CLI
+```
+hostnamectl set-hostname hq-cli.au-team.irpo
+```
+<br/>
+
+### BR-SRV
+```
+hostnamectl set-hostname br-srv.au-team.irpo
+```
+<br/>
 
 </details>
 
@@ -266,9 +289,9 @@ apt update
 <summary><strong>Настройка адрессации в файле <code>etc/network/interfaces</code></strong></summary>
 <br/>
 
-### Настройка адресации
+### Настройка адресации (кроме HQ-CLI(он позже))
 ##
-Конфигурация файла на устроуйстве **`ISP`**:
+### ISP:
 ```
 auto ens224
 iface ens224 inet static
@@ -278,7 +301,24 @@ iface ens256 inet static
 address 172.16.5.1/28
 ```
 
-Конфигурация файла на устроуйстве **`BR-RTR`**:
+### HQ-RTR: (в 4 и 6 задании продолжение)
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 172.16.4.2/28
+gateway 172.16.4.1
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.1
+netmask 255.255.255.252
+mode gre
+local 172.16.4.2
+endpoint 172.16.5.2
+ttl 64
+```
+
+### BR-RTR: (в 6 задании продолжение)
 ```
 allow-hotplug ens192
 iface ens192 inet static
@@ -299,7 +339,7 @@ endpoint 172.16.4.2
 ttl 64
 ```
 
-Конфигурация файла на устроуйстве **`BR-SRV`**:
+### BR-SRV:
 
 ```
 allow-hotplug ens192
@@ -310,7 +350,7 @@ dns-nameservers 192.168.100.62 192.168.0.2
 dns-search au-team.irpo
 ```
 
-Конфигурация файла на устроуйстве **`HQ-SRV`**:
+### HQ-SRV:
 
 ```
 allow-hotplug ens192
@@ -318,8 +358,6 @@ iface ens192 inet static
 address 192.168.100.62/26
 gateway 192.168.100.1
 ```
-
-## Настройка адресации для устройств `HQ-RTR` и `HQ-CLI` будет произведена позже, по ходу выполнения заданий.
 
 </details>
 <br/>

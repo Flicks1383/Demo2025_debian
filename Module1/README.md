@@ -730,7 +730,7 @@ ttl 64
 
 Для работы туннеля необходимо добавить строчку в файл `/etc/modules`
 ```
-gre_ip
+echo gre_ip >> /etc/modules
 ```
 </details>
 <br/>

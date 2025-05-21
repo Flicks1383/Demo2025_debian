@@ -1365,10 +1365,10 @@ nano /etc/hosts
 127.0.0.1  localhost
 127.0.1.1  server.localdomain  server
 192.168.100.1  hq-rtr.au-team.irpo  hq-rtr
-192.168.100.62  hq-rtr.au-team.irpo  hq-srv
-192.168.0.1  hq-rtr.au-team.irpo  br-rtr
-192.168.0.2  hq-rtr.au-team.irpo  br-srv
-192.168.200.3  hq-rtr.au-team.irpo  hq-cli
+192.168.100.62  hq-srv.au-team.irpo  hq-srv
+192.168.0.1  br-rtr.au-team.irpo  br-rtr
+192.168.0.2  br-srv.au-team.irpo  br-srv
+192.168.200.3  hq-cli.au-team.irpo  hq-cli
 ```
 
 Далее по окончанию настройки:

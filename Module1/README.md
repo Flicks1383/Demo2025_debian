@@ -106,36 +106,42 @@ apt update
 ### ISP
 ```
 hostnamectl set-hostname isp.au-team.irpo
+bash
 ```
 <br/>
 
 ### HQ-RTR
 ```
 hostnamectl set-hostname hq-rtr.au-team.irpo
+bash
 ```
 <br/>
 
 ### BR-RTR
 ```
 hostnamectl set-hostname br-rtr.au-team.irpo
+bash
 ```
 <br/>
 
 ### HQ-SRV
 ```
 hostnamectl set-hostname hq-srv.au-team.irpo
+bash
 ```
 <br/>
 
 ### HQ-CLI
 ```
 hostnamectl set-hostname hq-cli.au-team.irpo
+bash
 ```
 <br/>
 
 ### BR-SRV
 ```
 hostnamectl set-hostname br-srv.au-team.irpo
+bash
 ```
 <br/>
 
@@ -307,15 +313,6 @@ allow-hotplug ens192
 iface ens192 inet static
 address 172.16.4.2/28
 gateway 172.16.4.1
-
-auto gre1
-iface gre1 inet tunnel
-address 172.16.0.1
-netmask 255.255.255.252
-mode gre
-local 172.16.4.2
-endpoint 172.16.5.2
-ttl 64
 ```
 
 ### BR-RTR: (в 6 задании продолжение)
@@ -329,14 +326,6 @@ auto ens224
 iface ens224 inet static
 address 192.168.0.1/27
 
-auto gre1
-iface gre1 inet tunnel
-address 172.16.0.2
-netmask 255.255.255.252
-mode gre
-local 172.16.5.2
-endpoint 172.16.4.2
-ttl 64
 ```
 
 ### BR-SRV:
@@ -399,7 +388,8 @@ systemctl restart netfilter-persistent
 ```
 </br>
 
-### Либо другая настройка  
+<details>
+<summary><strong><code>Либо другая настройка</code></strong></summary>  
 
 ```  
 apt install iptables  
@@ -416,6 +406,7 @@ iptables-save > /etc/iptables/rules.v4
 > Для того, чтобы сбросить настройку *nat*, можно использовать команду **`iptables -t nat -F`**
 
 #
+</details>
 
 </details>
 
@@ -467,7 +458,11 @@ usermod -aG sudo sshuser
 
 <br/>
 
-**3.** Добавляем следующую строку в **`/etc/sudoers`**:
+**3.** Добавляем следующую строку в файле `/sudoers`:
+```
+nano /etc/sudoers
+```
+
 ```yml
 sshuser ALL=(ALL) NOPASSWD:ALL
 ```
@@ -504,7 +499,10 @@ usermod -aG sudo net_admin
 ```
 <br/>
 
-**3.** Добавляем следующую строку в **`/etc/sudoers`**:
+**3.** Добавляем следующую строку в `/sudoers`:
+```
+nano /etc/sudoers
+```
 ```yml
 net_admin ALL=(ALL) NOPASSWD:ALL
 ```

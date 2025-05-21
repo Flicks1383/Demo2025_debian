@@ -313,6 +313,15 @@ allow-hotplug ens192
 iface ens192 inet static
 address 172.16.4.2/28
 gateway 172.16.4.1
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.1
+netmask 255.255.255.252
+mode gre
+local 172.16.4.2
+endpoint 172.16.5.2
+ttl 64
 ```
 
 ### BR-RTR: (в 6 задании продолжение)
@@ -326,6 +335,14 @@ auto ens224
 iface ens224 inet static
 address 192.168.0.1/27
 
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.2
+netmask 255.255.255.252
+mode gre
+local 172.16.5.2
+endpoint 172.16.4.2
+ttl 64
 ```
 
 ### BR-SRV:

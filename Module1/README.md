@@ -1335,24 +1335,45 @@ apt install iptables iptables-persistent dnsmasq -y
 После чего необходимо открыть порт 53
 ```
 iptables -I INPUT -p udp --dport 53 -j ACCEPT
+netfilter-persistent save
 ```
 Дальше конфигурируем файл `/etc/dnsmasq.conf`
 ```
 no-resolv
-interface=ens224
-
-listen-address=0.0.0.0
-
+interface=ens192
+read-ether
+listen-address=192.168.100.62
 server=8.8.8.8
 server=8.8.4.4
 address=/hq-rtr.au-team.irpo/192.168.100.1
 address=/hq-srv.au-team.irpo/192.168.100.62
 address=/br-rtr.au-team.irpo/192.168.0.1
 address=/br-srv.au-team.irpo/192.168.0.2
-address=/hq-cli.au-team.irpo/192.168.200.4
+address=/hq-cli.au-team.irpo/192.168.200.3
+srv-host=_ldap._tcp.au-team.irpo,br-srv.au-team.irpo,389
+srv-host=_kerberos._tcp.au-team.irpo,br-srv.au-team.irpo,88
+srv-host=_kdc._tcp.au-team.irpo,br-srv.au-team.irpo,88
+srv-host=_kpasswd._tcp.au-team.irpo,br-srv.au-team.irpo,464
+cname=moodle.au-team.irpo,hq-rtr.au-team.irpo
+cname=wiki.au-team.irpo,br-rtr.au-team.irpo
 ```
+Далее в файле hosts на HQ-SRV правим:
+```
+nano /etc/hosts
+```
+```
+127.0.0.1  localhost
+127.0.1.1  server.localdomain  server
+192.168.100.1  hq-rtr.au-team.irpo  hq-rtr
+192.168.100.62  hq-rtr.au-team.irpo  hq-srv
+192.168.0.1  hq-rtr.au-team.irpo  br-rtr
+192.168.0.2  hq-rtr.au-team.irpo  br-srv
+192.168.200.3  hq-rtr.au-team.irpo  hq-cli
+```
+
 После чего, на ВСЕХ машинах, в конфигурационном файле `/etc/resolv.conf` добавляем строку:
 ```
+search au-team.irpo
 nameserver 192.168.100.62
 ```
 

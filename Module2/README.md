@@ -222,7 +222,7 @@ mkdir /etc/mdadm
 
 **8.** После **заполняем файл** информацией:  
 ```
-echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+echo "DEVICE partitions" >> /etc/mdadm/mdadm.conf
 mdadm --detail --scan | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 ```
 <br/>
@@ -235,7 +235,7 @@ mkdir /mnt/raid5
 
 **10.** После заполняем файл **`fstab`** текстом:  
 ```
-echo "/dev/md127  /mnt/raid5  ext4  defaults  0  0" > /etc/fstab
+echo "/dev/md127  /mnt/raid5  ext4  defaults  0  0" >> /etc/fstab
 ```
 <br/>
 
@@ -289,7 +289,7 @@ chmod 766 /mnt/raid5/nfs
 **4.** В файл **`exports`** добавляем строку:  
 
 ```
-echo "/mnt/raid5/nfs 192.168.200.0/28(rw,no_root_squash)" > /etc/exports
+echo "/mnt/raid5/nfs 192.168.200.0/28(rw,no_root_squash)" >> /etc/exports
 ```
 
 </br>
@@ -339,7 +339,7 @@ chmod 777 /mnt/nfs
 **4.** Добавляем в файл `fstab` строку:
 
 ```
-echo "192.168.100.62:/mnt/raid5/nfs  /mnt/nfs  nfs  defaults  0  0" > /etc/fstab
+echo "192.168.100.62:/mnt/raid5/nfs  /mnt/nfs  nfs  defaults  0  0" >> /etc/fstab
 
 Смотрим что бы знаки не отличались, ибо CLI грешит на замену знаков таких как : и ;
 ```

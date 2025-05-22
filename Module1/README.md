@@ -632,7 +632,7 @@ Vlan-raw-device ens224:2
 
 **1.** Для настройки **SSH** необходимо его установить коммандой:
 ```
-apt-get install openssh-server
+apt-get install openssh-server -y
 ```
 
 </br>

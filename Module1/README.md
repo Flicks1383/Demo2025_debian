@@ -637,7 +637,11 @@ apt-get install openssh-server -y
 
 </br>
 
-**2.** После чего необходимо добавить строчки в файл **`/etc/ssh/sshd_config`**:
+**2.** После чего необходимо добавить строчки в файл **`sshd_config`**:
+```
+nano /etc/ssh/sshd_config
+```
+
 ```
 Port 2024
 MaxAuthTries 2

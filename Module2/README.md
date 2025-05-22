@@ -530,7 +530,7 @@ chronyc tracking | grep Stratum
 <br/>
 
 <details>
-<summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code>[В процессе]</strong></summary>
+<summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code></strong></summary>
 
 <br/>
 

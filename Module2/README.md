@@ -319,6 +319,7 @@ systemctl enable --now nfs-server
 **1.**  Устанавливаем NFS клиент:  
 
 ```
+su
 apt-get update && apt-get install -y nfs-client
 ```
 

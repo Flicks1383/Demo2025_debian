@@ -517,7 +517,7 @@ chronyc tracking | grep Stratum
 
 [//]: # (---------------------------------------------------------------------------------------------------)
 
-## ❌ Задание 4
+## ✔️ Задание 4
 
 ### Сконфигурируйте ansible на сервере BR-SRV
 
@@ -531,80 +531,67 @@ chronyc tracking | grep Stratum
 
 <details>
 <summary><strong>Настройка <code>ansible</code> на <code>BR-SRV</code>[В процессе]</strong></summary>
-<br/>
-
-## Настройка ansible производится на `BR-SRV`
 
 <br/>
 
-**1.** Для начала устанавливаем "Ansible" командой:
+## HQ-RTR HQ-CLI BR-RTR
+
+<br/>
+
+### Перед настройкой установи `SSH` на все перечисленные устройства:
+**0.** Установка SSH:
+```
+apt-get install openssh-server -y
+```
+
+##  на BR-SRV
+**1.** устанавливаем **Ansible** командой:
 ```
 apt-get install ansible -y
 ```
 
 <br/>
 
-
 **2.** Создаём пары SSH-ключей следующей командой:
 
 ```
 ssh-keygen -t rsa
 ```
-- По итогу создания ключей в каталоге пользователя под которым сидим `sshuser` или же `root`, появятся ключи:
-  
-  - `/home/sshuser/.ssh` - Если зашли за **sshuser**
-
-  - `/root/.ssh` - Если зашли за **root**
-
->Смотрим каталог с ключами:
->```
->ls -l ~/.ssh
->
->id_rsa  # закрытый ключ
->id_rsa.pub # открытый ключ
->
 
 <br/>
 
-**3.** Заходим под пользователя **`sshuser`**:
-```
-su sshuser
-```
 
-<br/>
+**3.** Копируем **`SSH-ключ`** **(Всё прописываем в BR-SRV)**:
 
-**4.** Копируем открытый **`SSH-ключ`** на удаленные устройства под пользователем **`sshuser`**:
-
-- Копируем ключ для пользователя **sshuser** на **`HQ-SRV`**
-  - На HQ-SRV ssh порт изменен, указываем его:
+### HQ-SRV
 ```
 ssh-copy-id -p 2024 sshuser@192.168.100.62
 ```
 
 <br/>
 
-- Копируем ключ для пользователя **user** на **`HQ-CLI`**
+### HQ-CLI
 ```
-ssh-copy-id user@192.168.200.2
+ssh-copy-id locadm@192.168.200.2
 ```
 
 <br/>
 
-- Копируем ключ для пользователя **net_admin** на **`HQ-RTR`**
+### HQ-RTR
 ```
 ssh-copy-id net_admin@172.16.4.2
 ```
 
 <br/>
 
-- Копируем ключ для пользователя **net_admin** на **`BR-RTR`**
+### BR-RTR
 ```
 ssh-copy-id net_admin@172.16.5.2
 ```
 
 <br/>
 
-### Готовим файл инвентаря (hosts)
+### Готовим файл инвентаря (всё так же на BR-SRV)
 
 **1.** Создаем каталог, а также файл инвентаря **`/etc/ansible/demo`**
 ```
@@ -617,22 +604,18 @@ nano /etc/ansible/demo
 >```
 >[hq]
 >192.168.100.62 ansible_port=2024 ansible_user=sshuser
->192.168.200.2 ansible_user=user
+>192.168.200.3 ansible_user=locadm
 >172.16.4.2 ansible_user=net_admin
 >
 >[br]
 >172.16.5.2 ansible_user=net_admin
 >```
 
-**где:**
-- `ansible_port` - Номер порта ssh, если не 22
-- `ansible_user` - Использовать имя пользователя ssh по умолчанию.
-
 <br/>
 
 ### Запуск команд с пользовательским инвентарем (ping-pong)
 
-**1.** Что бы запустить модуль ping на всех хостах, перечисленных файле инвентаря **`/etc/ansible/demo`** пишем следующую команду:
+**1.** Проверяем Ping-pong на  **`BR-SRV`** :
 
 ```
 ansible all -i /etc/ansible/demo -m ping
@@ -651,11 +634,6 @@ interpreter_python=auto_silent
 ```
 <br/>
 
-**3.** Запускаем команду `ping` на всех хостах:
-```
-ansible all -i /etc/ansible/demo -m ping
-```
-<br/>
 
 </details>
 

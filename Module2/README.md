@@ -875,7 +875,6 @@ docker-compose -f wiki.yaml up -d
 >### Разрешение трафика для HQ-SRV
 >|
 >sudo iptables -A FORWARD -p tcp -d 192.168.100.62 --dport 2024 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
->sudo iptables -t nat -A PREROUTING -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
 >sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.100.62 --dport 2024 -j MASQUERADE
 >sudo iptables -t nat -A OUTPUT -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
 >```

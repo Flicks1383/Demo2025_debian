@@ -635,7 +635,7 @@ Vlan-raw-device ens224:2
 
 <br/>
 
-## ✔️ Задание 5 [SSH]
+## ✔️ Задание 5 `[SSH]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -697,7 +697,7 @@ systemctl restart sshd
 
 <br/>
 
-## ✔️ Задание 6 [GRE-TUNNEL]
+## ✔️ Задание 6 `[GRE-TUNNEL]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -769,7 +769,7 @@ echo gre_ip >> /etc/modules
 <br/>
 
 
-## ✔️ Задание 7 [OSPF]
+## ✔️ Задание 7 `[OSPF]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -960,7 +960,7 @@ systemctl start iproute.service
 
 <br/>
 
-## ✔️ Задание 8 [NAT на HQ-rtr и BR-rtr]
+## ✔️ Задание 8 `[NAT на HQ-rtr и BR-rtr]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -1008,7 +1008,7 @@ systemctl restart netfilter-persistent
 
 </br>
 
-## ✔️ Задание 9 [DHCP]
+## ✔️ Задание 9 `[DHCP]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -1080,7 +1080,7 @@ systemctl enable isc-dhcp-server
 
 </br>
 
-## ✔️ Задание 10 [DNS]
+## ✔️ Задание 10 `[DNS]`
 
 <details>
 <summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
@@ -1436,7 +1436,7 @@ nameserver 192.168.100.62
   
 <br/>
 
-## ✔️ Задание 11 [ВРЕМЯ/ДАТА]
+## ✔️ Задание 11 `[ВРЕМЯ/ДАТА]`
 
 ### Настройте часовой пояс на всех устройствах, согласно месту проведения экзамена
 

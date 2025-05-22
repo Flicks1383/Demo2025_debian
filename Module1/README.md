@@ -9,15 +9,38 @@
 
 <br/>
 
-> [!NOTE]
-> **Для удобства проверки адресации можно использовать:**
+> [!WARNING]
+> ## ПРЕДНАСТРОЙКА
 >
 > ```
-> ip -c -br a \\\ кратко - четко
+> systemctl stop NetworkManager
+> systemctl disable NetworkManager
+> systemctl mask NetworkManager
 > 
-> ip -c a \\\ где мой серый мир
 > ```
-
+></br>
+>
+> На всех устройствах, кроме **ISP**:
+>```
+>nano /etc/resolv.conf
+>nameserver 77.88.8.8
+>nameserver 1.1.1.1
+>```
+></br>
+>
+> Сурс листы везде, кроме **ISP**:
+> ```
+>nano /etc/apt/sources.list
+>```
+>```
+> # deb cdrom:.......
+>  ↑
+>  Ставим комментарий
+>```
+>```
+>apt update
+>```
+</br>
 <table>
   <thead>
     <tr>
@@ -52,14 +75,18 @@
 
 </br>
 
-## ✔️ Задание 1
-### Произведите `базовую` настройку устройств
+## ✔️ Задание 1 <code>[ Адрессация + Имя устройства]</code>
 
 > [!WARNING]
 > В инструкции по сетевой настройке используется редактирование: <strong>`etc/network/interfaces`</strong>
 
 > [!NOTE]
 > **Используй редактор файлов: `nano`**
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+
+### Произведите `базовую` настройку устройств
 
 - Настройте имена устройств согласно топологии. Используйте полное доменное имя
 - На всех устройствах необходимо сконфигурировать IPv4
@@ -70,28 +97,7 @@
 - Локальная сеть для управления(VLAN999) должна вмещать не более 8 адресов
 - Сведения об адресах занесите в отчёт, в качестве примера используйте Таблицу 3
 
-## <code>Преднастройка на ВСЕХ устройствах кроме ISP (ВАЖНО!!!)</code>
-```
-systemctl stop NetworkManager
-systemctl disable NetworkManager
-systemctl mask NetworkManager
-```
-
-```
-nano /etc/resolv.conf
-
-nameserver 77.88.8.8
-nameserver 1.1.1.1
-```
-```
-nano /etc/apt/sources.list
-
-  # deb cdrom:.......
-  ↑
-  Ставим комментарий
-
-apt update
-```
+</details>
 
 <br/>
 

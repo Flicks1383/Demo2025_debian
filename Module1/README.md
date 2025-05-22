@@ -154,9 +154,85 @@ bash
 </details>
 
 <details>
+<summary><strong>Настройка адрессации в файле <code>etc/network/interfaces</code></strong></summary>
+<br/>
+
+### Настройка адресации (кроме HQ-CLI(он позже))
+##
+### ISP:
+```
+auto ens224
+iface ens224 inet static
+address 172.16.4.1/28
+auto ens256
+iface ens256 inet static
+address 172.16.5.1/28
+```
+
+### HQ-RTR: (в 4 и 6 задании продолжение)
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 172.16.4.2/28
+gateway 172.16.4.1
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.1
+netmask 255.255.255.252
+mode gre
+local 172.16.4.2
+endpoint 172.16.5.2
+ttl 64
+```
+
+### BR-RTR: (в 6 задании продолжение)
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 172.16.5.2/28
+gateway 172.16.5.1
+
+auto ens224
+iface ens224 inet static
+address 192.168.0.1/27
+
+auto gre1
+iface gre1 inet tunnel
+address 172.16.0.2
+netmask 255.255.255.252
+mode gre
+local 172.16.5.2
+endpoint 172.16.4.2
+ttl 64
+```
+
+### BR-SRV:
+
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 192.168.0.2/27
+gateway 192.168.0.1
+dns-nameservers 192.168.100.62 192.168.0.2
+dns-search au-team.irpo
+```
+
+### HQ-SRV:
+
+```
+allow-hotplug ens192
+iface ens192 inet static
+address 192.168.100.62/26
+gateway 192.168.100.1
+```
+
+</details>
+
+<details>
 <summary><strong>Таблицы сетей</strong></summary>
 
-<br/>
+</br>
 
 <table align="center">
   <tr>
@@ -294,87 +370,15 @@ bash
 </table>
 <p align="center"><strong>Таблица адресации</strong></p>
 
-</br>
 </details>
+</br>
+
+## ✔️ Задание 2 <code>[NAT на ISP]</code>
+
+<br/>
 
 <details>
-<summary><strong>Настройка адрессации в файле <code>etc/network/interfaces</code></strong></summary>
-<br/>
-
-### Настройка адресации (кроме HQ-CLI(он позже))
-##
-### ISP:
-```
-auto ens224
-iface ens224 inet static
-address 172.16.4.1/28
-auto ens256
-iface ens256 inet static
-address 172.16.5.1/28
-```
-
-### HQ-RTR: (в 4 и 6 задании продолжение)
-```
-allow-hotplug ens192
-iface ens192 inet static
-address 172.16.4.2/28
-gateway 172.16.4.1
-
-auto gre1
-iface gre1 inet tunnel
-address 172.16.0.1
-netmask 255.255.255.252
-mode gre
-local 172.16.4.2
-endpoint 172.16.5.2
-ttl 64
-```
-
-### BR-RTR: (в 6 задании продолжение)
-```
-allow-hotplug ens192
-iface ens192 inet static
-address 172.16.5.2/28
-gateway 172.16.5.1
-
-auto ens224
-iface ens224 inet static
-address 192.168.0.1/27
-
-auto gre1
-iface gre1 inet tunnel
-address 172.16.0.2
-netmask 255.255.255.252
-mode gre
-local 172.16.5.2
-endpoint 172.16.4.2
-ttl 64
-```
-
-### BR-SRV:
-
-```
-allow-hotplug ens192
-iface ens192 inet static
-address 192.168.0.2/27
-gateway 192.168.0.1
-dns-nameservers 192.168.100.62 192.168.0.2
-dns-search au-team.irpo
-```
-
-### HQ-SRV:
-
-```
-allow-hotplug ens192
-iface ens192 inet static
-address 192.168.100.62/26
-gateway 192.168.100.1
-```
-
-</details>
-<br/>
-
-## ✔️ Задание 2
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройка `ISP`
 
@@ -389,6 +393,8 @@ gateway 192.168.100.1
   - Интерфейс, к которому подключен BR-RTR, подключен к сети 172.16.5.0/28 **[Выполнено в задании 1]**
 
   - На ISP настройте динамическую сетевую трансляцию в сторону HQ-RTR и BR-RTR для доступа к сети Интернет
+
+</details>
 
 <br/>
 
@@ -435,7 +441,10 @@ iptables-save > /etc/iptables/rules.v4
 
 <br/>
 
-## ✔️ Задание 3
+## ✔️ Задание 3 `[Создание учетных записей]` 
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 > [!WARNING]
 > Обратите внимание, что группа <code><strong>WHEEL</strong></code> не используется!
@@ -457,6 +466,8 @@ iptables-save > /etc/iptables/rules.v4
   - При настройке на EcoRouter пользователь net_admin должен обладать максимальными привилегиями
 
   - При настройке ОС на базе Linux, запускать sudo без дополнительной аутентификации
+ 
+</details>
 
 <br/>
 
@@ -544,7 +555,10 @@ chmod 700 /home/net_admin
 
 <br/>
 
-## ✔️ Задание 4
+## ✔️ Задание 4 `[VLAN]`
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройте на интерфейсе `HQ-RTR` в сторону офиса `HQ` виртуальный коммутатор
 
@@ -552,6 +566,8 @@ chmod 700 /home/net_admin
 - Клиент HQ-CLI в ID VLAN 200
 - Создайте подсеть управления с ID VLAN 999
 - Основные сведения о настройке коммутатора и выбора реализации разделения на VLAN занесите в отчёт
+
+</details>
 <br/>
 
 <details>
@@ -619,7 +635,10 @@ Vlan-raw-device ens224:2
 
 <br/>
 
-## ✔️ Задание 5
+## ✔️ Задание 5 [SSH]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройка безопасного удаленного доступа на серверах `HQ-SRV` и `BR-SRV`
 
@@ -628,6 +647,7 @@ Vlan-raw-device ens224:2
 - Ограничьте количество попыток входа до двух
 - Настройте баннер «Authorized access only»
 
+</details>
 <br/>
 
 <details>
@@ -677,7 +697,10 @@ systemctl restart sshd
 
 <br/>
 
-## ✔️ Задание 6
+## ✔️ Задание 6 [GRE-TUNNEL]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Между офисами `HQ` и `BR` необходимо сконфигурировать _`IP-туннель`_
 
@@ -686,7 +709,7 @@ systemctl restart sshd
 
 - Сведения о туннеле занесите в отчёт  
 - На выбор технологии GRE или IP in IP
-
+</details>
 <br/>
 
 <details>
@@ -745,7 +768,11 @@ echo gre_ip >> /etc/modules
 </details>
 <br/>
 
-## ✔️ Задание 7
+
+## ✔️ Задание 7 [OSPF]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Обеспечьте динамическую маршрутизацию: ресурсы одного офиса должны быть доступны из другого офиса. Для обеспечения динамической маршрутизации используйте `link state` протокол на ваше усмотрение
 
@@ -754,6 +781,7 @@ echo gre_ip >> /etc/modules
 - Обеспечьте защиту выбранного протокола посредством парольной защиты  
 - Сведения о настройке и защите протокола занесите в отчёт
 
+</details>
 <br/>
 
 <details>
@@ -932,7 +960,10 @@ systemctl start iproute.service
 
 <br/>
 
-## ✔️ Задание 8
+## ✔️ Задание 8 [NAT на HQ-rtr и BR-rtr]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройка динамической трансляции адресов
 
@@ -942,6 +973,7 @@ systemctl start iproute.service
 - Настройте динамическую трансляцию адресов для обоих офисов.  
 - Все устройства в офисах должны иметь доступ к сети Интернет
 
+</details>
 <br/>
 
 <details>
@@ -976,7 +1008,10 @@ systemctl restart netfilter-persistent
 
 </br>
 
-## ✔️ Задание 9
+## ✔️ Задание 9 [DHCP]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройка протокола динамической конфигурации хостов
 
@@ -989,6 +1024,7 @@ systemctl restart netfilter-persistent
 - DNS-суффикс для офисов HQ – au-team.irpo  
 - Сведения о настройке протокола занесите в отчёт
 
+</details>
 <br/>
 
 <details>
@@ -1044,13 +1080,17 @@ systemctl enable isc-dhcp-server
 
 </br>
 
-## ✔️ Задание 10
+## ✔️ Задание 10 [DNS]
+
+<details>
+<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
 
 ### Настройка DNS для офисов HQ и BR  
 - Основной DNS-сервер реализован на HQ-SRV.  
 - Сервер должен обеспечивать разрешение имён в сетевые адреса устройств и обратно в соответствии с таблицей 2  
 - В качестве DNS сервера пересылки используйте любой общедоступный DNS сервер  
 
+</details>
 <br/>
 
 <table align="center">
@@ -1334,7 +1374,7 @@ nslookup **IP-адрес/DNS-имя**
 <br/>
 
 <details>
-<summary>Настройка при помощи <code>dnsmasq</code></summary>
+<summary><strong>Настройка при помощи <code>dnsmasq</code></strong></summary>
 <br/>
 
 Для начала устанавливаются необходимые пакеты:
@@ -1396,7 +1436,7 @@ nameserver 192.168.100.62
   
 <br/>
 
-## ✔️ Задание 11
+## ✔️ Задание 11 [ВРЕМЯ/ДАТА]
 
 ### Настройте часовой пояс на всех устройствах, согласно месту проведения экзамена
 

@@ -860,6 +860,12 @@ docker-compose -f wiki.yaml up -d
 > 
 > ```
 
+## Сохраняем:
+```
+netfilter-persistent save
+systemctl restart netfilter-persistent
+```
+
 <br/>
 
 ## HQ-RTR
@@ -878,6 +884,13 @@ docker-compose -f wiki.yaml up -d
 >sudo iptables -t nat -A POSTROUTING -p tcp -d 192.168.100.62 --dport 2024 -j MASQUERADE
 >sudo iptables -t nat -A OUTPUT -p tcp --dport 2024 -j DNAT --to-destination 192.168.100.62:2024
 >```
+
+## Сохраняем:
+```
+netfilter-persistent save
+systemctl restart netfilter-persistent
+```
+
 <br/>
 
 </details>

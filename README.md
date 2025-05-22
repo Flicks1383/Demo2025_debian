@@ -161,4 +161,3 @@ sysctl -p net.ipv4.ip_forward=1
 
 # Временно не решеные проблемы:
 ❌ SAMBA;
-❌ Ansible

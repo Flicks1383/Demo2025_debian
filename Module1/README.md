@@ -738,6 +738,9 @@ ttl 64
 ```
 echo gre_ip >> /etc/modules
 ```
+```
+systemctl restart networking
+```
 </details>
 
 <details>

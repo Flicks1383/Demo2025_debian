@@ -1147,7 +1147,7 @@ systemctl enable isc-dhcp-server
 <br/>
 
 <details>
-<summary><strong>Настройка при помощи <code>bind9</code></strong></summary>
+<summary><strong>Настройка при помощи <code>bind9</code></strong>[Дольше]</summary>
 
 <br/>
 
@@ -1380,7 +1380,7 @@ nslookup **IP-адрес/DNS-имя**
 <br/>
 
 <details>
-<summary><strong>Настройка при помощи <code>dnsmasq</code></strong></summary>
+<summary><strong>Настройка при помощи <code>dnsmasq</code></strong>[Быстрее]</summary>
 <br/>
 
 Для начала устанавливаются необходимые пакеты:

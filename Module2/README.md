@@ -161,7 +161,7 @@ lsblk
 **3.** Для начала требуется **установить утилиту**: 
 
 ```
-apt-get install mdadm
+apt-get install mdadm -y
 ```
 
 <br/>

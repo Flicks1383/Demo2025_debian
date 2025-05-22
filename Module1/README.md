@@ -722,7 +722,7 @@ systemctl restart sshd
 nano /etc/network/interfaces
 ```
 
-И приводим добавляем следующий текст:
+И убеждаемся в наличии этих строк:
 ```
 auto gre1
 iface gre1 inet tunnel
@@ -749,7 +749,7 @@ echo gre_ip >> /etc/modules
 nano /etc/network/interfaces
 ```
 
-И приводим добавляем следующий текст:
+И убеждаемся в наличии этих строк:
 ```
 auto gre1
 iface gre1 inet tunnel
@@ -764,6 +764,9 @@ ttl 64
 Для работы туннеля необходимо добавить строчку в файл `/etc/modules`
 ```
 echo gre_ip >> /etc/modules
+```
+```
+systemctl restart networking
 ```
 </details>
 <br/>

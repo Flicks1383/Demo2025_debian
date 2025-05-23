@@ -17,7 +17,7 @@
 
 [//]: # (---------------------------------------------------------------------------------------------------)
 
-## ❌Задание 1 `[SAMBA]`
+## ✔️ Задание 1 `[SAMBA]`
 
 >[!WARNING]
 >#### Перед началом должен работать <code>DNS</code>
@@ -41,7 +41,7 @@
 <br/>
 
 <details>
-<summary><strong>[В процессе]</strong></summary>
+<summary><strong>[Как настроить SAMBA]</strong></summary>
 <br/>
 
 ## BR-SRV
@@ -68,10 +68,12 @@ rm /etc/samba/smb.conf
 ```
 </br>
 
-**3.** После вводим команду для инциализации домена | В качестве **`Forwarders`** адреса пишем ip **`HQ-SRV`**
+**3.** После вводим команду для инциализации домена | В качестве **`Forwarders`** адреса должен быть ip **`HQ-SRV`**
 ```
 sudo samba-tool domain provision --use-rfc2307 --interactive
 ```
+> **В качестве пароля админа ставим:  P@ssw0rd**
+
 </br>
 
 **4.** Далее копируем конфиги `**krb**` для дальнейшего редактирования
@@ -132,21 +134,68 @@ samba-tool group addmembers hq user1.hq,user2.hq,user3.hq,user4.hq,user5.hq
 </br>
 
 ## HQ-CLI
-**1.** Установка пакетов на **клиенте**:
+`От рута` **1.** Установка пакетов на **клиенте**:
 ```
 apt install realmd sssd-tools sssd libnss-sss libpam-sss adcli packagekit -y
 ```
 </br>
 
-**2.** Тестируем **соединение**:
+`От рута` **2.** Тестируем **соединение**:
 ```
 su
 ```
 ```
 sudo realm discover au-team.irpo --verbose
 ```
+>По итогу должны получить:
+><p align="left">
+>  <img src="https://github.com/Flicks1383/Demo2025_debian/blob/main/Module2/image.png" width="500" />
+></p>
+</br>
 
+`От рута` **3.** Подключение к **домену**:
+```
+realm join -U Administrator br-srv.au-team.irpo
+```
+</br>
 
+`От рута` **4.** Устанавливаем доп. пакет:
+```
+sudo apt install krb5-user -y
+```
+</br>
+
+`От рута` **5.** Редачим конфиг. файл `common-session` для автоматического создания каталога юзеров:
+```
+sudo nano /etc/pam.d/common-session
+```
+```
+session required        pam_mkhomedir.so umask=0022 skel=/etc/skel
+```
+
+`От рута` **6.** Редачим доступ к компу  только для группы **`hq`**:
+```
+sudo nano /etc/sssd/sssd.conf
+```
+```
+ad_access_filter = (memberOf=CN=hq,CN=Users,DC=au-team,DC=irpo)
+```
+
+`От рута` **7.** Перезагружаем **`sssd`**:
+```
+systemctl restart sssd
+sudo sss_cache -E 
+```
+
+**8.** **Логинимся:**
+
+  **`--1.`** Сочетанием клавиш **`CTRL` + `ALT` + `F1`** вводим устройство в окно логина;
+  
+  **`--2.`** Находим и жмём - мелким шрифтом под учеткой: **`Not listed?`**
+  
+  **`--3.`** 
+  **Вводим логин:** user2.hq@au-team.irpo
+  **Пароль:** P@ssw0rd 
 
 </br>
 

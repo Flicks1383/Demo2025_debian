@@ -41,7 +41,7 @@
 <br/>
 
 <details>
-<summary><strong>[Как настроить SAMBA]</strong></summary>
+<summary><strong>Как настроить <code>SAMBA</code></strong></summary>
 <br/>
 
 ## BR-SRV

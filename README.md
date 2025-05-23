@@ -57,27 +57,27 @@
 <details>
   <summary><strong>[Содержание]</strong></summary> 
   
-  1. [_**`БАЗОВАЯ`**_ настройка](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-1)
+  1. [_**`БАЗОВАЯ`**_ настройка](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-1--адрессация--имя-устройства)
   
-  2. [Настройка _**`NAT`**_ на _**`ISP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-2)
+  2. [Настройка _**`NAT`**_ на _**`ISP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-2-nat-на-isp)
   
-  3. [Как создать _**`SSHUSER`**_ и _**`NET_ADMIN`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-3)
+  3. [Как создать _**`SSHUSER`**_ и _**`NET_ADMIN`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-3-создание-учетных-записей)
   
-  4. [Создание _**`VLAN`**_ на **`HQ-RTR`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#-задание-4)
+  4. [Создание _**`VLAN`**_ на **`HQ-RTR`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-4-vlan)
    
-  5. [Настройка _**`SSH`**_  **`HQ-SRV`** и **`BR-SRV`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5)
+  5. [Настройка _**`SSH`**_  **`HQ-SRV`** и **`BR-SRV`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-5-ssh)
   
-  6. [_**`IP-туннель`**_ между офисами _**`HQ`**_ и _**`BR`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-6)
+  6. [_**`IP-туннель`**_ между офисами _**`HQ`**_ и _**`BR`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-6-gre-tunnel)
 
-  7. [Настройка _**`OSPF`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-7)
+  7. [Настройка _**`OSPF`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-7-ospf)
 
-  8. [Настройка __**`NAT`**_ на **`HQ-rtr`** и **`BR-rtr`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-8)
+  8. [Настройка __**`NAT`**_ на **`HQ-rtr`** и **`BR-rtr`**](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-8-nat-на-hq-rtr-и-br-rtr)
 
-  9. [Настройка _**`DHCP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-9)
+  9. [Настройка _**`DHCP`**_](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-9-dhcp)
 
-  10. [Настройка _**`DNS`**_ для офисов HQ и BR](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-10)
+  10. [Настройка _**`DNS`**_ для офисов HQ и BR](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-10-dns)
 
-  11. [Настройка _**`ЧАСОВОГО ПОЯСЯ`**_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-11)
+  11. [Настройка _**`ЧАСОВОГО ПОЯСЯ`**_ на всех устройствах, согласно месту проведения экзамена](https://github.com/Flicks1383/Demo2025_debian/blob/main/Module1/README.md#%EF%B8%8F-задание-11-времядата)
     
   </details>
 

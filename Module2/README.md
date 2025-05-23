@@ -44,9 +44,6 @@
 <summary><strong>[В процессе]</strong></summary>
 <br/>
 
-**0.** ДЕЛАЙ ЕСЛИ НАСТРОИЛ DNS!!!
-<br/>
-
 ## BR-SRV
 **1.** Установка пакетов:
 ```
@@ -139,6 +136,17 @@ samba-tool group addmembers hq user1.hq,user2.hq,user3.hq,user4.hq,user5.hq
 ```
 apt install realmd sssd-tools sssd libnss-sss libpam-sss adcli packagekit -y
 ```
+</br>
+
+**2.** Тестируем **соединение**:
+```
+su
+```
+```
+sudo realm discover au-team.irpo --verbose
+```
+
+
 
 </br>
 

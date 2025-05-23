@@ -483,7 +483,7 @@ mount -a
 ## ✔️ Задание 3 `[CHRONY]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Настройте службу сетевого времени на базе сервиса chrony
 

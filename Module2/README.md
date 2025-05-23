@@ -172,6 +172,7 @@ sudo nano /etc/pam.d/common-session
 ```
 session required        pam_mkhomedir.so umask=0022 skel=/etc/skel
 ```
+<br/>
 
 **`От рута`** **6.** Редачим доступ к компу  только для группы **`hq`**:
 ```
@@ -180,12 +181,14 @@ sudo nano /etc/sssd/sssd.conf
 ```
 ad_access_filter = (memberOf=CN=hq,CN=Users,DC=au-team,DC=irpo)
 ```
+<br/>
 
 **`От рута`** **7.** Перезагружаем **`sssd`**:
 ```
 systemctl restart sssd
 sudo sss_cache -E 
 ```
+<br/>
 
 **8.** **Логинимся:**
 
@@ -206,7 +209,6 @@ Sudo visudo
 ```
 %hq@au-team.irpo ALL=(ALL) PASSWD:/usr/bin/cat,/usr/bin/grep,/usr/bin/id
 ```
-
 </br>
 
 </details>

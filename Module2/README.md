@@ -44,10 +44,13 @@
 <summary><strong>[В процессе]</strong></summary>
 <br/>
 
+**0.** ДЕЛАЙ ЕСЛИ НАСТРОИЛ DNS!!!
+<br/>
+
 ## BR-SRV
-Установка пакетов:
+**1.** Установка пакетов:
 ```
-apt install samba krb5-config krb5-user winbind smbclient
+apt install samba krb5-config krb5-user winbind smbclient -y
 ```
 
   **`--1.`** **В первом открывшемся окне пишем:**
@@ -61,25 +64,26 @@ br-srv.au-team.irpo
 </br>
 </br>
 
-Далее копируем конфиг **`Samba`** и удаляем **`smb.conf`**
+**2.** Далее копируем конфиг **`Samba`** и удаляем **`smb.conf`**
 ```
 cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
 rm /etc/samba/smb.conf
 ```
 </br>
 
-После вводим команду для инциализации домена | В качестве **`Forwarders`** адреса пишем ip **`HQ-SRV`**
+**3.** После вводим команду для инциализации домена | В качестве **`Forwarders`** адреса пишем ip **`HQ-SRV`**
 ```
 sudo samba-tool domain provision --use-rfc2307 --interactive
 ```
 </br>
 
-Далее копируем конфиги `**krb**` для дальнейшего редактирования
+**4.** Далее копируем конфиги `**krb**` для дальнейшего редактирования
 ```
 cp /etc/krb5.conf /etc/krb5.conf.bak
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
 ```
-**`---`** Конфиг должен выглядеть так:
+
+**`|`** Конфиг должен выглядеть так:
 ```
 [libdefaults]
   default_realm = AU-TEAM.IRPO
@@ -94,6 +98,49 @@ AU-TEAM.IRPO = {
 [domain_realm]
   br-srv = AU-TEAM.IRPO
 ```
+</br>
+
+**5.** После, останавливаем ненужные службы:
+```
+systemctl stop smbd nmbd winbind
+systemctl disable smbd nmbd winbind
+```
+</br>
+
+**6.** Рестарт **самбы**:
+```
+systemc restart samba-ad-dc
+```
+</br>
+
+**7.** Добавляем **USER'ов**:
+```
+samba-tool user create user1.hq P@ssw0rd
+samba-tool user create user2.hq P@ssw0rd
+samba-tool user create user3.hq P@ssw0rd
+samba-tool user create user4.hq P@ssw0rd
+samba-tool user create user5.hq P@ssw0rd
+```
+</br>
+
+**8.** Создаём группу и кидаем юзеров в **ГРУППУ** hq:
+```
+samba-tool group add hq
+samba-tool group addmembers hq user1.hq,user2.hq,user3.hq,user4.hq,user5.hq
+```
+>**Просмотр юзеров домена:**
+>```
+>samba-tool user list
+>```
+</br>
+
+## HQ-CLI
+**1.** Установка пакетов на **клиенте**:
+```
+apt install realmd sssd-tools sssd libnss-sss libpam-sss adcli packagekit -y
+```
+
+</br>
 
 </details>
 

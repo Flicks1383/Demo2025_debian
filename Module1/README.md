@@ -1263,10 +1263,14 @@ $TTL    1D
 hq-rtr  IN      A       192.168.100.1
 br-rtr  IN      A       192.168.0.1
 hq-srv  IN      A       192.168.100.62
-hq-cli  IN      A       192.168.200.2
+hq-cli  IN      A       192.168.200.3
 br-srv  IN      A       192.168.0.2
 moodle  IN      CNAME   hq-rtr
 wiki    IN      CNAME   br-rtr
+_ldap._tcp.au-team.irpo. IN SRV 0 5 389 br-srv.au-team.irpo.
+_kerberos._tcp.au-team.irpo.        IN      SRV     0 100 88  br-srv.au-team.irpo.
+_kdc._tcp.au-team.irpo.             IN      SRV     0 100 88  br-srv.au-team.irpo.
+_kpasswd._tcp.au-team.irpo.         IN      SRV     0 100 464 br-srv.au-team.irpo.
 ```
 </br>
 

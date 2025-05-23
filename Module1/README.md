@@ -16,7 +16,6 @@
 > systemctl stop NetworkManager
 > systemctl disable NetworkManager
 > systemctl mask NetworkManager
-> 
 > ```
 ></br>
 >
@@ -28,7 +27,13 @@
 >```
 ></br>
 >
-> Сурс листы везде, кроме **ISP**:
+> На **РОУТЕРАХ** sysctl -p:
+>```
+> echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
+>```
+></br> 
+>
+> **Сурс** листы везде:
 > ```
 >nano /etc/apt/sources.list
 >```
@@ -41,6 +46,7 @@
 >apt update
 >```
 </br>
+
 <table>
   <thead>
     <tr>

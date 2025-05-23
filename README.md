@@ -114,6 +114,7 @@
 + **>[abdurrah1m](https://github.com/abdurrah1m/DEMO2025/blob/main/README.md)**
 + **>[doughboyjaba](https://github.com/doughboyjaba/demo25)**
 + **>[каб-220](http://каб-220.рф/ru/demo-2025/modul-1/modul-1-1)**
++ **>[Markiz-De-Generatie](https://github.com/Markiz-De-Generatie/Demka/tree/main/module1)**
 
 ## Решения проблем
 
@@ -159,5 +160,3 @@ sysctl -p net.ipv4.ip_forward=1
   
 </details>
 
-# Временно не решеные проблемы:
-❌ SAMBA;

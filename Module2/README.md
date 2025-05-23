@@ -134,13 +134,13 @@ samba-tool group addmembers hq user1.hq,user2.hq,user3.hq,user4.hq,user5.hq
 </br>
 
 ## HQ-CLI
-`От рута` **1.** Установка пакетов на **клиенте**:
+**`От рута`** **1.** Установка пакетов на **клиенте**:
 ```
 apt install realmd sssd-tools sssd libnss-sss libpam-sss adcli packagekit -y
 ```
 </br>
 
-`От рута` **2.** Тестируем **соединение**:
+**`От рута`** **2.** Тестируем **соединение**:
 ```
 su
 ```
@@ -153,19 +153,19 @@ sudo realm discover au-team.irpo --verbose
 ></p>
 </br>
 
-`От рута` **3.** Подключение к **домену**:
+**`От рута`** **3.** Подключение к **домену**:
 ```
 realm join -U Administrator br-srv.au-team.irpo
 ```
 </br>
 
-`От рута` **4.** Устанавливаем доп. пакет:
+**`От рута`** **4.** Устанавливаем доп. пакет:
 ```
 sudo apt install krb5-user -y
 ```
 </br>
 
-`От рута` **5.** Редачим конфиг. файл `common-session` для автоматического создания каталога юзеров:
+**`От рута`** **5.** Редачим конфиг. файл `common-session` для автоматического создания каталога юзеров:
 ```
 sudo nano /etc/pam.d/common-session
 ```
@@ -173,7 +173,7 @@ sudo nano /etc/pam.d/common-session
 session required        pam_mkhomedir.so umask=0022 skel=/etc/skel
 ```
 
-`От рута` **6.** Редачим доступ к компу  только для группы **`hq`**:
+**`От рута`** **6.** Редачим доступ к компу  только для группы **`hq`**:
 ```
 sudo nano /etc/sssd/sssd.conf
 ```
@@ -181,7 +181,7 @@ sudo nano /etc/sssd/sssd.conf
 ad_access_filter = (memberOf=CN=hq,CN=Users,DC=au-team,DC=irpo)
 ```
 
-`От рута` **7.** Перезагружаем **`sssd`**:
+**`От рута`** **7.** Перезагружаем **`sssd`**:
 ```
 systemctl restart sssd
 sudo sss_cache -E 
@@ -196,6 +196,16 @@ sudo sss_cache -E
   **`--3.`** 
   **Вводим логин:** user2.hq@au-team.irpo
   **Пароль:** P@ssw0rd 
+</br>
+
+**`От рута`** **9.** Ограничеваем доступ к командам для группы `HQ`:
+```
+Sudo visudo
+```
+  **`--1.`** **Добавляем** после %root:
+```
+%hq@au-team.irpo ALL=(ALL) PASSWD:/usr/bin/cat,/usr/bin/grep,/usr/bin/id
+```
 
 </br>
 

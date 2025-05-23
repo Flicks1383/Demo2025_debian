@@ -23,7 +23,7 @@
 >#### Перед началом должен работать <code>DNS</code>
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Настройте доменный контроллер Samba на машине BR-SRV
 
@@ -213,7 +213,7 @@ sudo sss_cache -E
 >#### Перед началом настройки создайте <code>СНАПШОТ</code> устройства!!!
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 - При помощи трех дополнительных дисков, размером 1Гб каждый, на HQ-SRV сконфигурируйте дисковый массив уровня 5
 
@@ -637,7 +637,7 @@ chronyc tracking | grep Stratum
 ## ✔️ Задание 4 `[ANSIBLE - PING_PONG]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Сконфигурируйте ansible на сервере BR-SRV
 
@@ -766,7 +766,7 @@ interpreter_python=auto_silent
 ## ✔️ Задание 5 `[DOCKER + WIKI]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Развертывание приложений в Docker на сервере BR-SRV
 
@@ -942,7 +942,7 @@ docker-compose -f wiki.yaml up -d
 ## ✔️ Задание 6 `[ПРОБРОС ПОРТОВ]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### На маршрутизаторах сконфигурируйте статическую трансляцию портов
 
@@ -1034,7 +1034,7 @@ systemctl restart netfilter-persistent
 ## ✔️ Задание 7 `[MOODLE]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Запустите сервис moodle на сервере HQ-SRV:
 
@@ -1260,7 +1260,7 @@ sudo systemctl restart apache2
 ## ✔️ Задание 8 `[NGINX - PROXY]`
 
 <details>
-<summary><strong>[ОПИСАНИЕ ЗАДАНИЙ]</strong></summary>
+<summary>[ОПИСАНИЕ ЗАДАНИЙ]</summary>
 
 ### Настройте веб-сервер nginx как обратный прокси-сервер на HQ-RTR
 
